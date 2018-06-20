@@ -154,6 +154,72 @@ function apeinsvier_check_for_input_required($process_instance_id) {
 	}
 }
 
+
+//TODO J&C
+function apeinsvier_answer_input_required_resources($task_id, $process_definition_id, 
+$resName, $resDescription, $resSerNumber, $resInvNumber,$resComment,$resStatus,$resAmount,$resType,$resMainCategory,$resSubCategory) {
+	global $formsApiInstance;
+
+	$formArray = array(
+		action => "submit",
+		task_id => $task_id,
+		process_definition_id => $process_definition_id,
+		properties => array(
+			array(
+				id => name,
+				value => $resName
+			),
+			array(
+				id => description,
+				value => $resDescription
+			),
+			array(
+				id => serialnumber,
+				value => $resSerNumber
+			),
+			array(
+				id => inventorynumber,
+				value => $resInvNumber
+			),
+			array(
+				id => comment,
+				value => $resComment
+			),
+			array(
+				id => status,
+				value => $resStatus
+			),
+			array(
+				id => amount,
+				value => $resAmount
+			),
+			array(
+				id => type,
+				value => $resType
+			),
+			array(
+				id => maincategory,
+				value => $resMainCategory
+			),
+			array(
+				id => subcategory,
+				value => $resSubCategory
+			)
+		)
+	);
+
+	$body = new \Swagger\Client\Model\SubmitFormRequest($formArray); // \Swagger\Client\Model\SubmitFormRequest | 
+
+	try {
+		$result = $formsApiInstance->submitForm($body);
+		print_r($result);
+		return $result;
+	} catch (Exception $e) {
+		echo 'Exception when calling FormsApi->submitForm: ', $e->getMessage(), PHP_EOL;
+		return null;
+	}
+}
+
 function apeinsvier_answer_input_required($task_id, $process_definition_id, $value1, $value2) {
 	global $formsApiInstance;
 

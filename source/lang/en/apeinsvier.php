@@ -40,3 +40,4 @@ $string['apeinsviername_help'] = 'This is the content of the help tooltip associ
 $string['apeinsvier'] = 'apeinsvier';
 $string['pluginadministration'] = 'apeinsvier administration';
 $string['pluginname'] = 'apeinsvier';
+$string['maincategory'] ='maincategory';

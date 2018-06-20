@@ -113,7 +113,7 @@ if ($apeinsvier->intro) {
 }
 
 // Replace the following lines with you own code.
-$strName = $resource->name;
+$strName = "Ressourcen-Übersicht";
 echo $OUTPUT->heading($strName);
 //$renderable = new \tool_demo\output\index_page('Some text');
 //echo $output->render($renderable);
@@ -169,12 +169,12 @@ if ($mform->is_cancelled()) {
   error_log("TEST FROM AFTER DISPLAY");
 }
 
-$test = "gib mal was aus";
+//$test = "gib mal was aus";
 $attributes = array();
 
-p($test, $strip=false);
-echo html_writer::link(new moodle_url('/grade/report/user/index.php', array('id' => $course->id)), $test, $attributes=null);
-echo($test."\n");
+//p($test, $strip=false);
+//echo html_writer::link(new moodle_url('/grade/report/user/index.php', array('id' => $course->id)), $test, $attributes=null);
+//echo($test."\n");
 
 $resource = $DB->get_records('resources');
 $table = new html_table();
@@ -192,8 +192,8 @@ $amount = $res->amount;
 $type = $res->type;
 $maincategory = $res->maincategory;
 $subcategory = $res->subcategory;
-$htmlLink = html_writer::link(new moodle_url('../apeinsvier/edit.php', array('id' => $course->id, 'resourceid' => $res->id)), 'Edit', $attributes=null);
-$htmlLinkDelete = html_writer::link(new moodle_url('/grade/report/user/index.php', array('id' => $course->id)), 'Delete', $attributes=null);
+$htmlLink = html_writer::link(new moodle_url('../apeinsvier/edit.php', array('id' => $cm->id, 'resourceid' => $res->id)), 'Edit', $attributes=null);
+$htmlLinkDelete = html_writer::link(new moodle_url('../apeinsvier/delete.php', array('id' => $cm->id, 'resourceid' => $res->id)), 'Delete', $attributes=null);
 
 $table->data[] = array($id, $name, $description, $serialnumber, $inventorynumber, $comment, $status, $amount, $type, $maincategory, $subcategory, $htmlLink, $htmlLinkDelete);
 }
