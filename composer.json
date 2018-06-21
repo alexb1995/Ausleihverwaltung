@@ -28,8 +28,9 @@
         }
     },
     "scripts": {
-        "lint": "vendor/bin/phpcs --ignore=vendor --standard=vendor/moodlerooms/moodle-coding-standard/moodle ./source",
-        "autofix": "vendor/bin/phpcbf --ignore=vendor --standard=vendor/moodlerooms/moodle-coding-standard/moodle ./source",
+        "lint": "vendor/bin/phpcs --ignore=vendor,**/lib/ --standard=vendor/moodlerooms/moodle-coding-standard/moodle ./source",
+        "autofix": "vendor/bin/phpcbf --ignore=vendor,**/lib/ --standard=vendor/moodlerooms/moodle-coding-standard/moodle ./source",
+        "build": "composer install --no-dev",
         "unit": "phpunit",
         "behat": "behat",
         "test": [
@@ -38,8 +39,5 @@
             "@unit",
             "@behat"
         ]
-    },
-    "require": {
-        "trahloff/activiti": "^1.0"
     }
 }
