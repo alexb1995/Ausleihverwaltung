@@ -35,3 +35,8 @@ script:
   - "moodle-plugin-ci phpunit"
   - "moodle-plugin-ci behat"
 sudo: false
+
+notifications:
+  slack:
+    rooms:
+      - wwi15scb:GL6zGn42jLxtsCd5TAm4M2x6#mdl_ops
