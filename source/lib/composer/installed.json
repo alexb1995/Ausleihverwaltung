@@ -240,12 +240,18 @@
     },
     {
         "name": "trahloff/activiti",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
+        "version": "1.0.1",
+        "version_normalized": "1.0.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/DHBW-sWIm/ActivitiApiDefinition.git",
-            "reference": "43c5f11c5b652eb7933c9f19ed9467918db89f68"
+            "reference": "9a73d2c0ca553f93477b6fc6a70bc1bc81ff09a8"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/DHBW-sWIm/ActivitiApiDefinition/zipball/9a73d2c0ca553f93477b6fc6a70bc1bc81ff09a8",
+            "reference": "9a73d2c0ca553f93477b6fc6a70bc1bc81ff09a8",
+            "shasum": ""
         },
         "require": {
             "ext-curl": "*",
@@ -259,19 +265,15 @@
             "phpunit/phpunit": "^4.8",
             "squizlabs/php_codesniffer": "~2.6"
         },
-        "time": "2018-06-06T21:59:25+00:00",
+        "time": "2018-06-18T14:56:28+00:00",
         "type": "library",
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "psr-4": {
                 "Swagger\\Client\\": "lib/"
             }
         },
-        "autoload-dev": {
-            "psr-4": {
-                "Swagger\\Client\\": "test/"
-            }
-        },
+        "notification-url": "https://packagist.org/downloads/",
         "license": [
             "Apache-2.0"
         ],
@@ -281,6 +283,7 @@
                 "homepage": "https://tobiasrahloff.com"
             }
         ],
+        "description": "Activiti PHP Lib",
         "homepage": "https://moodle.ganymed.me",
         "keywords": [
             "api",
