@@ -478,3 +478,4 @@ function apeinsvier_extend_navigation(navigation_node $navref, stdClass $course,
 function apeinsvier_extend_settings_navigation(settings_navigation $settingsnav, navigation_node $apeinsviernode=null) {
     // TODO Delete this function and its docblock, or implement it.
 }
+

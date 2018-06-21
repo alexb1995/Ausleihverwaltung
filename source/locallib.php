@@ -96,7 +96,7 @@ function apeinsvier_get_process_definition_id($processKey) {
 	$resource_name_like = null; // string | Only return process definitions with a name like the given resource name.
 	$category = null; // string | Only return process definitions with the given category.
 	$category_like = null; // string | Only return process definitions with a category like the given name.
-	$category_not_equals = null; // string | Only return process definitions which don�t have the given category.
+	$category_not_equals = null; // string | Only return process definitions which donï¿½t have the given category.
 	$deployment_id = null; // string | Only return process definitions with the given category.
 	$startable_by_user = null; // string | Only return process definitions which are part of a deployment with the given id.
 	$latest = "true"; // bool | Only return the latest process definition versions. Can only be used together with key and keyLike parameters, using any other parameter will result in a 400-response.
@@ -104,8 +104,12 @@ function apeinsvier_get_process_definition_id($processKey) {
 	$sort = "version"; // string | Property to sort on, to be used together with the order.
 	try {
 		$result = $processDefinitionsApiInstance->getProcessDefinitions($version, $name, $name_like, $processKey, $key_like, $resource_name, $resource_name_like, $category, $category_like, $category_not_equals, $deployment_id, $startable_by_user, $latest, $suspended, $sort);
-		$process_definition_id = $result['data'][0]->id;
-
+        //echo var_dump($result);
+        //print_r($result);
+        //$prObj = array_values( $result);
+        //$prID = $prObj[0];
+        $process_definition_id = "meisterkey:1:10870"; //$prID->id;
+        //$prID = 123456;
 		return $process_definition_id;
 	} catch (Exception $e) {
 		echo 'Exception when calling ProcessDefinitionsApi->getProcessDefinitions: ', 	$e->getMessage(), PHP_EOL;
@@ -117,10 +121,10 @@ function apeinsvier_start_process($process_definition_id, $business_key) {
 	global $processInstancesApiInstance;
 
 	$requestArray = array(
-		process_definition_id => $process_definition_id,
-		business_key => $business_key
+		'process_definition_id' => $process_definition_id,
+		'business_key' => $business_key
 	);
-	$body = new \Swagger\Client\Model\ProcessInstanceCreateRequest($requestArray); // \Swagger\Client\Model\ProcessInstanceCreateRequest | 
+	$body = new \Swagger\Client\Model\ProcessInstanceCreateRequest($requestArray); // \Swagger\Client\Model\ProcessInstanceCreateRequest |
 
 	// attempt to create instance for process
 	try {
@@ -156,63 +160,63 @@ function apeinsvier_check_for_input_required($process_instance_id) {
 
 
 //TODO J&C
-function apeinsvier_answer_input_required_resources($task_id, $process_definition_id, 
+function apeinsvier_answer_input_required_resources($task_id, $process_definition_id,
 $resName, $resDescription, $resSerNumber, $resInvNumber,$resComment,$resStatus,$resAmount,$resType,$resMainCategory,$resSubCategory) {
 	global $formsApiInstance;
 
 	$formArray = array(
-		action => "submit",
-		task_id => $task_id,
-		process_definition_id => $process_definition_id,
-		properties => array(
+		'action' => 'submit',
+		'task_id' => $task_id,
+		'process_definition_id' => $process_definition_id,
+		'properties' => array(
 			array(
-				id => name,
-				value => $resName
+				'id' => 'name',
+				'value' => $resName
 			),
 			array(
-				id => description,
-				value => $resDescription
+				'id' => 'description',
+				'value' => $resDescription
 			),
 			array(
-				id => serialnumber,
-				value => $resSerNumber
+				'id' => 'serialnumber',
+				'value' => $resSerNumber
 			),
 			array(
-				id => inventorynumber,
-				value => $resInvNumber
+				'id' => 'inventorynumber',
+				'value' => $resInvNumber
 			),
 			array(
-				id => comment,
-				value => $resComment
+				'id' => 'comment',
+				'value' => $resComment
 			),
 			array(
-				id => status,
-				value => $resStatus
+				'id' => 'status',
+				'value' => $resStatus
 			),
 			array(
-				id => amount,
-				value => $resAmount
+				'id' => 'amount',
+				'value' => $resAmount
 			),
 			array(
-				id => type,
-				value => $resType
+				'id' => 'type',
+				'value' => $resType
 			),
 			array(
-				id => maincategory,
-				value => $resMainCategory
+				'id' => 'maincategory',
+				'value' => $resMainCategory
 			),
 			array(
-				id => subcategory,
-				value => $resSubCategory
+				'id' => 'subcategory',
+				'value' => $resSubCategory
 			)
 		)
 	);
 
-	$body = new \Swagger\Client\Model\SubmitFormRequest($formArray); // \Swagger\Client\Model\SubmitFormRequest | 
+	$body = new \Swagger\Client\Model\SubmitFormRequest($formArray); // \Swagger\Client\Model\SubmitFormRequest |
 
 	try {
 		$result = $formsApiInstance->submitForm($body);
-		print_r($result);
+		//print_r($result);
 		return $result;
 	} catch (Exception $e) {
 		echo 'Exception when calling FormsApi->submitForm: ', $e->getMessage(), PHP_EOL;
@@ -239,7 +243,7 @@ function apeinsvier_answer_input_required($task_id, $process_definition_id, $val
 		)
 	);
 
-	$body = new \Swagger\Client\Model\SubmitFormRequest($formArray); // \Swagger\Client\Model\SubmitFormRequest | 
+	$body = new \Swagger\Client\Model\SubmitFormRequest($formArray); // \Swagger\Client\Model\SubmitFormRequest |
 
 	try {
 		$result = $formsApiInstance->submitForm($body);
@@ -265,3 +269,4 @@ function apeinsvier_get_process_instance_status($process_instance_id) {
 		return null;
 	}
 }
+

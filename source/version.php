@@ -28,9 +28,10 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'mod_apeinsvier';
-$plugin->version = 2018062051;
-$plugin->release = '2018062051';
+$plugin->version = 2018062121;
+$plugin->release = '2018062121';
 $plugin->requires = 2014051200;
 $plugin->maturity = MATURITY_ALPHA;
 $plugin->cron = 0;
 $plugin->dependencies = array();
+
