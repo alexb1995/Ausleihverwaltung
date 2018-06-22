@@ -57,7 +57,7 @@ $event->add_record_snapshot($PAGE->cm->modname, $apeinsvier);
 $event->trigger();
 
 
-// DB INSERT -> Tabellen anlegen
+// Um Tabelle >>resources<< zu belegen
 /*
 $record = new stdClass();
 $record->name         = 'handy';
@@ -84,15 +84,10 @@ $record1->amount         = 4;
 $record1->type = 1;
 $record1->maincategory    = "Apple";
 $record1->subcategory = "phone";
-
 $DB->insert_record('resources', $record1, $returnid=false, $bulk=false)
 */
 
-$resource = $DB->get_record_sql('SELECT name FROM {resources} WHERE id = ?', array(1));
-//$resource = (string)$resource;
-
-// Print the page header.
-
+/* PAGE belegen*/
 $PAGE->set_url('/mod/apeinsvier/view.php', array('id' => $cm->id));
 $PAGE->set_title(format_string($apeinsvier->name));
 $PAGE->set_heading(format_string($course->fullname));
@@ -104,7 +99,7 @@ $PAGE->set_heading(format_string($course->fullname));
  * $PAGE->add_body_class('apeinsvier-'.$somevar);
  */
 
-// Output starts here.
+// Hier beginnt die Ausgabe
 echo $OUTPUT->header();
 
 // Conditions to show the intro can change to look for own settings or whatever.
@@ -112,74 +107,17 @@ if ($apeinsvier->intro) {
     echo $OUTPUT->box(format_module_intro('apeinsvier', $apeinsvier, $cm->id), 'generalbox mod_introbox', 'apeinsvierintro');
 }
 
-// Replace the following lines with you own code.
 $strName = "Ressourcen-Übersicht";
 echo $OUTPUT->heading($strName);
-//$renderable = new \tool_demo\output\index_page('Some text');
-//echo $output->render($renderable);
 
-// Implement form for user
-require_once(dirname(__FILE__).'/forms/simpleform.php');
-
-$mform = new simplehtml_form();
-// $mform->render();
-
-error_log("TEST FROM BEFORE DISPLAY");
-
-//Form processing and displaying is done here
-if ($mform->is_cancelled()) {
-    //Handle form cancel operation, if cancel button is present on form
-} else if ($fromform = $mform->get_data()) {
-    error_log("TEST FROM DIRECTLY AFTER SUBMIT");
-    $value1 = $fromform->email;
-    $value2 = $fromform->name;
-
-    echo $value1;
-    error_log($value1);
-
-  //In this case you process validated data. $mform->get_data() returns data posted in form.
-  //Creating instance of relevant API modules
-  create_api_instances();
-  $process_definition_id = apeinsvier_get_process_definition_id("myProcess");
-  error_log("PROCESS DEFINITION ID IS: " . $process_definition_id);
-  $process_instance_id = apeinsvier_start_process($process_definition_id, "test_key");
-  error_log("PROCESS INSTANCE ID IS: " . $process_instance_id);
-  sleep(2);
-  error_log("WAKEY WAKEY, BOYS AND GIRLS");
-  $taskid = apeinsvier_check_for_input_required($process_instance_id);
-  error_log("TASK ID IS: " . $taskid);
-  if ($taskid != null) {
-    error_log("EXECUTION OF TASK RESPONSE");
-    $value1 = $fromform->email;
-    $value2 = $fromform->name;
-    $result = apeinsvier_answer_input_required($task_id, $process_definition_id, $value1, $value2);
-    error_log("INPUT SEND RESULT IS: " . $result);
-  }
-} else {
-  // this branch is executed if the form is submitted but the data doesn't validate and the form should be redisplayed
-  // or on the first display of the form.
-
-  // Set default data (if any)
-  // Required for module not to crash as a course id is always needed
-  $formdata = array('id' => $id);
-  $mform->set_data($formdata);
-  //displays the form
-  $mform->display();
-
-  error_log("TEST FROM AFTER DISPLAY");
-}
-
-//$test = "gib mal was aus";
 $attributes = array();
-
-//p($test, $strip=false);
-//echo html_writer::link(new moodle_url('/grade/report/user/index.php', array('id' => $course->id)), $test, $attributes=null);
-//echo($test."\n");
-
+// Alle Datensätze aus der DB-Tabelle >>resources<< abfragen.
 $resource = $DB->get_records('resources');
+
 $table = new html_table();
 $table->head = array('ID','Name', 'Description', 'Serialnumber', 'Inventorynumber', 'Comment', 'Status', 'Amount', 'Type', 'Maincategory', 'Subcategory', 'Edit', 'Delete');
 
+//Für jeden Datensatz
 foreach ($resource as $res) {
 $id = $res->id;
 $name = $res->name;
@@ -192,11 +130,14 @@ $amount = $res->amount;
 $type = $res->type;
 $maincategory = $res->maincategory;
 $subcategory = $res->subcategory;
+//Link zum Bearbeiten der aktuellen Ressource in foreach-Schleife setzen
 $htmlLink = html_writer::link(new moodle_url('../apeinsvier/edit.php', array('id' => $cm->id, 'resourceid' => $res->id)), 'Edit', $attributes=null);
+//Analog: Link zum Löschen...
 $htmlLinkDelete = html_writer::link(new moodle_url('../apeinsvier/delete.php', array('id' => $cm->id, 'resourceid' => $res->id)), 'Delete', $attributes=null);
-
+//Daten zuweisen an HTML-Tabelle
 $table->data[] = array($id, $name, $description, $serialnumber, $inventorynumber, $comment, $status, $amount, $type, $maincategory, $subcategory, $htmlLink, $htmlLinkDelete);
 }
+//Tabelle ausgeben
 echo html_writer::table($table);
 
 // Finish the page.

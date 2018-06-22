@@ -104,12 +104,7 @@ function apeinsvier_get_process_definition_id($processKey) {
 	$sort = "version"; // string | Property to sort on, to be used together with the order.
 	try {
 		$result = $processDefinitionsApiInstance->getProcessDefinitions($version, $name, $name_like, $processKey, $key_like, $resource_name, $resource_name_like, $category, $category_like, $category_not_equals, $deployment_id, $startable_by_user, $latest, $suspended, $sort);
-        //echo var_dump($result);
-        //print_r($result);
-        //$prObj = array_values( $result);
-        //$prID = $prObj[0];
-        $process_definition_id = "meisterkey:1:10870"; //$prID->id;
-        //$prID = 123456;
+        $process_definition_id = "meisterkey:1:10870"; //fix gesetzt, sollte bei Activit-Integration dynamisch aufgebaut werden
 		return $process_definition_id;
 	} catch (Exception $e) {
 		echo 'Exception when calling ProcessDefinitionsApi->getProcessDefinitions: ', 	$e->getMessage(), PHP_EOL;
