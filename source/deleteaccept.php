@@ -1,6 +1,5 @@
 <?php
 
-/* ALLES FÜR DEN PAGE STYLE*/
 /*LOGIN*/
 require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 require_once(dirname(__FILE__).'/lib.php');
@@ -32,50 +31,35 @@ $event->add_record_snapshot($PAGE->cm->modname, $apeinsvier);
 $event->trigger();
 $resID = $_GET['resourceid'];
 $resName = $_GET['resname'];
-/*PAGE SETZEN*/
+
+/*PAGE Setzen*/
 $PAGE->set_url('/mod/apeinsvier/deleteaccept.php', array('id' => $cm->id,'resourceid' => $resID));
 $PAGE->set_title(format_string($apeinsvier->name));
 echo nl2br("\n");
 $PAGE->set_heading(format_string($course->fullname));
 
-// Output starts here.
+// Hier beginnt die Ausgabe
 echo $OUTPUT->header();
 echo nl2br("\n");
 $strName = "Löschen erfolgreich";
 echo $OUTPUT->heading($strName);
 echo nl2br("\n");
-//$sql= 'SELECT name FROM {resources} WHERE id ='.$resID.';';
-//$resource = $DB->get_record_sql($sql, array($resID));
-//$delete = $DB->delete_records('resources', array('id'=$resID));
-//$DB->delete_records('resources', array('id'>=28));
 
 $resourcestable = 'resources';
-/*
-$select1 = ;
-$params = array();
-*/
-//$boolean = 
+// Datensatz mit übergebener ID löschen
 $DB->delete_records_select($resourcestable,"id ='".$resID."'", $params=null);
-//$resName = $resource->name;
 
-
-
-//$outputstring = "Willst du die Ressource mit dem Namen".$resName." und der ID ".$resID." löschen?";
-
-//echo "Willst du die Ressource mit dem Namen ".$resName." und der ID ".$resID." löschen?";
-//echo nl2br("\n");
-//echo html_writer:: empty_tag('input',array('type'=>'button','name'=>'reject','value'=>'abbrechen', 'class'=>"button"));
-//echo html_writer:: empty_tag('input',array('type'=>'submit','name'=>'accept','value'=>'bestaetigen', 'class'=>"button"));
-
+//Erfolgsmeldung
 $message = "Ressource mit dem Namen ".$resName." und der ID ".$resID." ist gelöscht.";
+
 echo $message;
 echo nl2br("\n");
 echo nl2br("\n");
 echo nl2br("\n");
-//echo $OUTPUT->confirm($message,new moodle_url('../apeinsvier/edit.php', array('id' => $cm->id)),new moodle_url('../apeinsvier/view.php', array('id' => $cm->id)));
-//echo $OUTPUT->continue_button(new moodle_url('../apeinsvier/view.php', array('id' => $cm->id)));
+
+//Funktionstaste zum Fortfahren definieren
 echo $OUTPUT->single_button(new moodle_url('../apeinsvier/view.php', array('id' => $cm->id)), 'ok');
 
+//Finish
 echo $OUTPUT->footer();
-
 ?>

@@ -3,19 +3,6 @@
 require_once("$CFG->libdir/formslib.php");
 
 class resourcehtml_form extends moodleform {
-    //Add elements to form
-    /*
-    $r = new stdClass();
-    $r->name         = 'iPhone';
-    $r->description = 'beschde';
-    $r->serialnumber        = 'serial14';
-    $r->inventorynumber = 'invent567';
-    $r->comment        = 'Comment that';
-    $r->status = 3;
-    $r->amount         = 4;
-    $r->type = 1;
-    $r->maincategory    = "Apple";
-    $r->subcategory = "phone";*/
 
     public function definition() {
         global $CFG;
@@ -86,10 +73,7 @@ class resourcehtml_form extends moodleform {
     }
     //Custom validation should be added here
     function validation($data, $files) {
-        echo "Validation HERE";
-
-
-
+   
         return array();
     }
 }
