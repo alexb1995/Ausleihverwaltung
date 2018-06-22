@@ -19,6 +19,7 @@ cache:
 env: 
   global: 
     - MOODLE_BRANCH=MOODLE_32_STABLE
+    - IGNORE_PATHS=source/lib,vendor/,**/lib/
   matrix: 
     - DB=pgsql
 install: 
@@ -28,7 +29,7 @@ php:
   - 7.1
 script: 
   - "moodle-plugin-ci phplint"
-  - "moodle-plugin-ci phpmd --exclude ./source/lib/"
+  - "moodle-plugin-ci phpmd"
   - "moodle-plugin-ci validate"
   - "moodle-plugin-ci savepoints"
   - "moodle-plugin-ci grunt"
