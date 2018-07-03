@@ -16,28 +16,27 @@
 
 
 /**
- * English strings for apeinsvier
+ * English strings for apsechseins
  *
  * You can have a rather longer description of the file as well,
  * if you like, and it can span multiple lines.
  *
- * @package    mod_apeinsvier
+ * @package    mod_apsechseins
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['modulename'] = 'apeinsvier';
-$string['modulenameplural'] = 'apeinsviers';
-$string['modulename_help'] = 'Use the apeinsvier module for... | The apeinsvier module allows...';
-$string['apeinsvier:addinstance'] = 'Add a new apeinsvier';
-$string['apeinsvier:submit'] = 'Submit apeinsvier';
-$string['apeinsvier:view'] = 'View apeinsvier';
-$string['apeinsvierfieldset'] = 'Custom example fieldset';
-$string['apeinsviername'] = 'apeinsvier name';
-$string['apeinsviername_help'] = 'This is the content of the help tooltip associated with the apeinsviername field. Markdown syntax is supported.';
-$string['apeinsvier'] = 'apeinsvier';
-$string['pluginadministration'] = 'apeinsvier administration';
-$string['pluginname'] = 'apeinsvier';
-$string['maincategory'] ='maincategory';
+$string['modulename'] = 'apsechseins';
+$string['modulenameplural'] = 'apsechseinss';
+$string['modulename_help'] = 'Use the apsechseins module for... | The apsechseins module allows...';
+$string['apsechseins:addinstance'] = 'Add a new apsechseins';
+$string['apsechseins:submit'] = 'Submit apsechseins';
+$string['apsechseins:view'] = 'View apsechseins';
+$string['apsechseinsfieldset'] = 'Custom example fieldset';
+$string['apsechseinsname'] = 'apsechseins name';
+$string['apsechseinsname_help'] = 'This is the content of the help tooltip associated with the apsechseinsname field. Markdown syntax is supported.';
+$string['apsechseins'] = 'apsechseins';
+$string['pluginadministration'] = 'apsechseins administration';
+$string['pluginname'] = 'apsechseins';

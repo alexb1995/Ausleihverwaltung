@@ -15,23 +15,23 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Define all the restore steps that will be used by the restore_apeinsvier_activity_task
+ * Define all the restore steps that will be used by the restore_apsechseins_activity_task
  *
- * @package   mod_apeinsvier
+ * @package   mod_apsechseins
  * @category  backup
  * @copyright 2016 Your Name <your@email.address>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 /**
- * Structure step to restore one apeinsvier activity
+ * Structure step to restore one apsechseins activity
  *
- * @package   mod_apeinsvier
+ * @package   mod_apsechseins
  * @category  backup
  * @copyright 2016 Your Name <your@email.address>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class restore_apeinsvier_activity_structure_step extends restore_activity_structure_step {
+class restore_apsechseins_activity_structure_step extends restore_activity_structure_step {
 
     /**
      * Defines structure of path elements to be processed during the restore
@@ -41,7 +41,7 @@ class restore_apeinsvier_activity_structure_step extends restore_activity_struct
     protected function define_structure() {
 
         $paths = array();
-        $paths[] = new restore_path_element('apeinsvier', '/activity/apeinsvier');
+        $paths[] = new restore_path_element('apsechseins', '/activity/apsechseins');
 
         // Return the paths wrapped into standard activity structure.
         return $this->prepare_activity_structure($paths);
@@ -52,7 +52,7 @@ class restore_apeinsvier_activity_structure_step extends restore_activity_struct
      *
      * @param array $data parsed element data
      */
-    protected function process_apeinsvier($data) {
+    protected function process_apsechseins($data) {
         global $DB;
 
         $data = (object)$data;
@@ -72,8 +72,8 @@ class restore_apeinsvier_activity_structure_step extends restore_activity_struct
             $data->grade = -($this->get_mappingid('scale', abs($data->grade)));
         }
 
-        // Create the apeinsvier instance.
-        $newitemid = $DB->insert_record('apeinsvier', $data);
+        // Create the apsechseins instance.
+        $newitemid = $DB->insert_record('apsechseins', $data);
         $this->apply_activity_instance($newitemid);
     }
 
@@ -81,7 +81,7 @@ class restore_apeinsvier_activity_structure_step extends restore_activity_struct
      * Post-execution actions
      */
     protected function after_execute() {
-        // Add apeinsvier related files, no need to match by itemname (just internally handled context).
-        $this->add_related_files('mod_apeinsvier', 'intro', null);
+        // Add apsechseins related files, no need to match by itemname (just internally handled context).
+        $this->add_related_files('mod_apsechseins', 'intro', null);
     }
 }

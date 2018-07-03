@@ -15,12 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The main apeinsvier configuration form
+ * The main apsechseins configuration form
  *
  * It uses the standard core Moodle formslib. For more info about them, please
  * visit: http://docs.moodle.org/en/Development:lib/formslib.php
  *
- * @package    mod_apeinsvier
+ * @package    mod_apsechseins
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -32,11 +32,11 @@ require_once($CFG->dirroot.'/course/moodleform_mod.php');
 /**
  * Module instance settings form
  *
- * @package    mod_apeinsvier
+ * @package    mod_apsechseins
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_apeinsvier_mod_form extends moodleform_mod {
+class mod_apsechseins_mod_form extends moodleform_mod {
 
     /**
      * Defines forms elements
@@ -50,7 +50,7 @@ class mod_apeinsvier_mod_form extends moodleform_mod {
         $mform->addElement('header', 'general', get_string('general', 'form'));
 
         // Adding the standard "name" field.
-        $mform->addElement('text', 'name', get_string('apeinsviername', 'apeinsvier'), array('size' => '64'));
+        $mform->addElement('text', 'name', get_string('apsechseinsname', 'apsechseins'), array('size' => '64'));
         if (!empty($CFG->formatstringstriptags)) {
             $mform->setType('name', PARAM_TEXT);
         } else {
@@ -58,7 +58,7 @@ class mod_apeinsvier_mod_form extends moodleform_mod {
         }
         $mform->addRule('name', null, 'required', null, 'client');
         $mform->addRule('name', get_string('maximumchars', '', 255), 'maxlength', 255, 'client');
-        $mform->addHelpButton('name', 'apeinsviername', 'apeinsvier');
+        $mform->addHelpButton('name', 'apsechseinsname', 'apsechseins');
 
         // Adding the standard "intro" and "introformat" fields.
         if ($CFG->branch >= 29) {
@@ -67,12 +67,12 @@ class mod_apeinsvier_mod_form extends moodleform_mod {
             $this->add_intro_editor();
         }
 
-        // Adding the rest of apeinsvier settings, spreading all them into this fieldset
+        // Adding the rest of apsechseins settings, spreading all them into this fieldset
         // ... or adding more fieldsets ('header' elements) if needed for better logic.
-        $mform->addElement('static', 'label1', 'apeinsviersetting1', 'Your apeinsvier fields go here. Replace me!');
+        $mform->addElement('static', 'label1', 'apsechseinssetting1', 'Your apsechseins fields go here. Replace me!');
 
-        $mform->addElement('header', 'apeinsvierfieldset', get_string('apeinsvierfieldset', 'apeinsvier'));
-        $mform->addElement('static', 'label2', 'apeinsviersetting2', 'Your apeinsvier fields go here. Replace me!');
+        $mform->addElement('header', 'apsechseinsfieldset', get_string('apsechseinsfieldset', 'apsechseins'));
+        $mform->addElement('static', 'label2', 'apsechseinssetting2', 'Your apsechseins fields go here. Replace me!');
 
         // Add standard grading elements.
         $this->standard_grading_coursemodule_elements();

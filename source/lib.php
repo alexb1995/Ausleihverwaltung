@@ -15,16 +15,16 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Library of interface functions and constants for module apeinsvier
+ * Library of interface functions and constants for module apsechseins
  *
  * All the core Moodle functions, neeeded to allow the module to work
  * integrated in Moodle should be placed here.
  *
- * All the apeinsvier specific functions, needed to implement all the module
+ * All the apsechseins specific functions, needed to implement all the module
  * logic, should go to locallib.php. This will help to save some memory when
  * Moodle is performing actions across all modules.
  *
- * @package    mod_apeinsvier
+ * @package    mod_apsechseins
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -34,7 +34,7 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Example constant, you probably want to remove this :-)
  */
-define('apeinsvier_ULTIMATE_ANSWER', 42);
+define('APSECHSEINS_ULTIMATE_ANSWER', 42);
 
 /* Moodle core API */
 
@@ -46,7 +46,7 @@ define('apeinsvier_ULTIMATE_ANSWER', 42);
  * @param string $feature FEATURE_xx constant for requested feature
  * @return mixed true if the feature is supported, null if unknown
  */
-function apeinsvier_supports($feature) {
+function apsechseins_supports($feature) {
 
     switch($feature) {
         case FEATURE_MOD_INTRO:
@@ -63,53 +63,53 @@ function apeinsvier_supports($feature) {
 }
 
 /**
- * Saves a new instance of the apeinsvier into the database
+ * Saves a new instance of the apsechseins into the database
  *
  * Given an object containing all the necessary data,
  * (defined by the form in mod_form.php) this function
  * will create a new instance and return the id number
  * of the new instance.
  *
- * @param stdClass $apeinsvier Submitted data from the form in mod_form.php
- * @param mod_apeinsvier_mod_form $mform The form instance itself (if needed)
- * @return int The id of the newly inserted apeinsvier record
+ * @param stdClass $apsechseins Submitted data from the form in mod_form.php
+ * @param mod_apsechseins_mod_form $mform The form instance itself (if needed)
+ * @return int The id of the newly inserted apsechseins record
  */
-function apeinsvier_add_instance(stdClass $apeinsvier, mod_apeinsvier_mod_form $mform = null) {
+function apsechseins_add_instance(stdClass $apsechseins, mod_apsechseins_mod_form $mform = null) {
     global $DB;
 
-    $apeinsvier->timecreated = time();
+    $apsechseins->timecreated = time();
 
     // You may have to add extra stuff in here.
 
-    $apeinsvier->id = $DB->insert_record('apeinsvier', $apeinsvier);
+    $apsechseins->id = $DB->insert_record('apsechseins', $apsechseins);
 
-    apeinsvier_grade_item_update($apeinsvier);
+    apsechseins_grade_item_update($apsechseins);
 
-    return $apeinsvier->id;
+    return $apsechseins->id;
 }
 
 /**
- * Updates an instance of the apeinsvier in the database
+ * Updates an instance of the apsechseins in the database
  *
  * Given an object containing all the necessary data,
  * (defined by the form in mod_form.php) this function
  * will update an existing instance with new data.
  *
- * @param stdClass $apeinsvier An object from the form in mod_form.php
- * @param mod_apeinsvier_mod_form $mform The form instance itself (if needed)
+ * @param stdClass $apsechseins An object from the form in mod_form.php
+ * @param mod_apsechseins_mod_form $mform The form instance itself (if needed)
  * @return boolean Success/Fail
  */
-function apeinsvier_update_instance(stdClass $apeinsvier, mod_apeinsvier_mod_form $mform = null) {
+function apsechseins_update_instance(stdClass $apsechseins, mod_apsechseins_mod_form $mform = null) {
     global $DB;
 
-    $apeinsvier->timemodified = time();
-    $apeinsvier->id = $apeinsvier->instance;
+    $apsechseins->timemodified = time();
+    $apsechseins->id = $apsechseins->instance;
 
     // You may have to add extra stuff in here.
 
-    $result = $DB->update_record('apeinsvier', $apeinsvier);
+    $result = $DB->update_record('apsechseins', $apsechseins);
 
-    apeinsvier_grade_item_update($apeinsvier);
+    apsechseins_grade_item_update($apsechseins);
 
     return $result;
 }
@@ -117,36 +117,36 @@ function apeinsvier_update_instance(stdClass $apeinsvier, mod_apeinsvier_mod_for
 /**
  * This standard function will check all instances of this module
  * and make sure there are up-to-date events created for each of them.
- * If courseid = 0, then every apeinsvier event in the site is checked, else
- * only apeinsvier events belonging to the course specified are checked.
+ * If courseid = 0, then every apsechseins event in the site is checked, else
+ * only apsechseins events belonging to the course specified are checked.
  * This is only required if the module is generating calendar events.
  *
  * @param int $courseid Course ID
  * @return bool
  */
-function apeinsvier_refresh_events($courseid = 0) {
+function apsechseins_refresh_events($courseid = 0) {
     global $DB;
 
     if ($courseid == 0) {
-        if (!$apeinsviers = $DB->get_records('apeinsvier')) {
+        if (!$apsechseinss = $DB->get_records('apsechseins')) {
             return true;
         }
     } else {
-        if (!$apeinsviers = $DB->get_records('apeinsvier', array('course' => $courseid))) {
+        if (!$apsechseinss = $DB->get_records('apsechseins', array('course' => $courseid))) {
             return true;
         }
     }
 
-    foreach ($apeinsviers as $apeinsvier) {
+    foreach ($apsechseinss as $apsechseins) {
         // Create a function such as the one below to deal with updating calendar events.
-        // apeinsvier_update_events($apeinsvier);
+        // apsechseins_update_events($apsechseins);
     }
 
     return true;
 }
 
 /**
- * Removes an instance of the apeinsvier from the database
+ * Removes an instance of the apsechseins from the database
  *
  * Given an ID of an instance of this module,
  * this function will permanently delete the instance
@@ -155,18 +155,18 @@ function apeinsvier_refresh_events($courseid = 0) {
  * @param int $id Id of the module instance
  * @return boolean Success/Failure
  */
-function apeinsvier_delete_instance($id) {
+function apsechseins_delete_instance($id) {
     global $DB;
 
-    if (! $apeinsvier = $DB->get_record('apeinsvier', array('id' => $id))) {
+    if (! $apsechseins = $DB->get_record('apsechseins', array('id' => $id))) {
         return false;
     }
 
     // Delete any dependent records here.
 
-    $DB->delete_records('apeinsvier', array('id' => $apeinsvier->id));
+    $DB->delete_records('apsechseins', array('id' => $apsechseins->id));
 
-    apeinsvier_grade_item_delete($apeinsvier);
+    apsechseins_grade_item_delete($apsechseins);
 
     return true;
 }
@@ -182,10 +182,10 @@ function apeinsvier_delete_instance($id) {
  * @param stdClass $course The course record
  * @param stdClass $user The user record
  * @param cm_info|stdClass $mod The course module info object or record
- * @param stdClass $apeinsvier The apeinsvier instance record
+ * @param stdClass $apsechseins The apsechseins instance record
  * @return stdClass|null
  */
-function apeinsvier_user_outline($course, $user, $mod, $apeinsvier) {
+function apsechseins_user_outline($course, $user, $mod, $apsechseins) {
 
     $return = new stdClass();
     $return->time = 0;
@@ -202,21 +202,21 @@ function apeinsvier_user_outline($course, $user, $mod, $apeinsvier) {
  * @param stdClass $course the current course record
  * @param stdClass $user the record of the user we are generating report for
  * @param cm_info $mod course module info
- * @param stdClass $apeinsvier the module instance record
+ * @param stdClass $apsechseins the module instance record
  */
-function apeinsvier_user_complete($course, $user, $mod, $apeinsvier) {
+function apsechseins_user_complete($course, $user, $mod, $apsechseins) {
 }
 
 /**
  * Given a course and a time, this module should find recent activity
- * that has occurred in apeinsvier activities and print it out.
+ * that has occurred in apsechseins activities and print it out.
  *
  * @param stdClass $course The course record
  * @param bool $viewfullnames Should we display full names
  * @param int $timestart Print activity since this timestamp
  * @return boolean True if anything was printed, otherwise false
  */
-function apeinsvier_print_recent_activity($course, $viewfullnames, $timestart) {
+function apsechseins_print_recent_activity($course, $viewfullnames, $timestart) {
     return false;
 }
 
@@ -225,7 +225,7 @@ function apeinsvier_print_recent_activity($course, $viewfullnames, $timestart) {
  *
  * This callback function is supposed to populate the passed array with
  * custom activity records. These records are then rendered into HTML via
- * {@link apeinsvier_print_recent_mod_activity()}.
+ * {@link apsechseins_print_recent_mod_activity()}.
  *
  * Returns void, it adds items into $activities and increases $index.
  *
@@ -237,11 +237,11 @@ function apeinsvier_print_recent_activity($course, $viewfullnames, $timestart) {
  * @param int $userid check for a particular user's activity only, defaults to 0 (all users)
  * @param int $groupid check for a particular group's activity only, defaults to 0 (all groups)
  */
-function apeinsvier_get_recent_mod_activity(&$activities, &$index, $timestart, $courseid, $cmid, $userid=0, $groupid=0) {
+function apsechseins_get_recent_mod_activity(&$activities, &$index, $timestart, $courseid, $cmid, $userid=0, $groupid=0) {
 }
 
 /**
- * Prints single activity item prepared by {@link apeinsvier_get_recent_mod_activity()}
+ * Prints single activity item prepared by {@link apsechseins_get_recent_mod_activity()}
  *
  * @param stdClass $activity activity record with added 'cmid' property
  * @param int $courseid the id of the course we produce the report for
@@ -249,7 +249,7 @@ function apeinsvier_get_recent_mod_activity(&$activities, &$index, $timestart, $
  * @param array $modnames as returned by {@link get_module_types_names()}
  * @param bool $viewfullnames display users' full names
  */
-function apeinsvier_print_recent_mod_activity($activity, $courseid, $detail, $modnames, $viewfullnames) {
+function apsechseins_print_recent_mod_activity($activity, $courseid, $detail, $modnames, $viewfullnames) {
 }
 
 /**
@@ -262,7 +262,7 @@ function apeinsvier_print_recent_mod_activity($activity, $courseid, $detail, $mo
  *
  * @return boolean
  */
-function apeinsvier_cron () {
+function apsechseins_cron () {
     return true;
 }
 
@@ -274,26 +274,26 @@ function apeinsvier_cron () {
  *
  * @return array
  */
-function apeinsvier_get_extra_capabilities() {
+function apsechseins_get_extra_capabilities() {
     return array();
 }
 
 /* Gradebook API */
 
 /**
- * Is a given scale used by the instance of apeinsvier?
+ * Is a given scale used by the instance of apsechseins?
  *
- * This function returns if a scale is being used by one apeinsvier
+ * This function returns if a scale is being used by one apsechseins
  * if it has support for grading and scales.
  *
- * @param int $apeinsvierid ID of an instance of this module
+ * @param int $apsechseinsid ID of an instance of this module
  * @param int $scaleid ID of the scale
- * @return bool true if the scale is used by the given apeinsvier instance
+ * @return bool true if the scale is used by the given apsechseins instance
  */
-function apeinsvier_scale_used($apeinsvierid, $scaleid) {
+function apsechseins_scale_used($apsechseinsid, $scaleid) {
     global $DB;
 
-    if ($scaleid and $DB->record_exists('apeinsvier', array('id' => $apeinsvierid, 'grade' => -$scaleid))) {
+    if ($scaleid and $DB->record_exists('apsechseins', array('id' => $apsechseinsid, 'grade' => -$scaleid))) {
         return true;
     } else {
         return false;
@@ -301,17 +301,17 @@ function apeinsvier_scale_used($apeinsvierid, $scaleid) {
 }
 
 /**
- * Checks if scale is being used by any instance of apeinsvier.
+ * Checks if scale is being used by any instance of apsechseins.
  *
  * This is used to find out if scale used anywhere.
  *
  * @param int $scaleid ID of the scale
- * @return boolean true if the scale is used by any apeinsvier instance
+ * @return boolean true if the scale is used by any apsechseins instance
  */
-function apeinsvier_scale_used_anywhere($scaleid) {
+function apsechseins_scale_used_anywhere($scaleid) {
     global $DB;
 
-    if ($scaleid and $DB->record_exists('apeinsvier', array('grade' => -$scaleid))) {
+    if ($scaleid and $DB->record_exists('apsechseins', array('grade' => -$scaleid))) {
         return true;
     } else {
         return false;
@@ -319,29 +319,29 @@ function apeinsvier_scale_used_anywhere($scaleid) {
 }
 
 /**
- * Creates or updates grade item for the given apeinsvier instance
+ * Creates or updates grade item for the given apsechseins instance
  *
  * Needed by {@link grade_update_mod_grades()}.
  *
- * @param stdClass $apeinsvier instance object with extra cmidnumber and modname property
+ * @param stdClass $apsechseins instance object with extra cmidnumber and modname property
  * @param bool $reset reset grades in the gradebook
  * @return void
  */
-function apeinsvier_grade_item_update(stdClass $apeinsvier, $reset=false) {
+function apsechseins_grade_item_update(stdClass $apsechseins, $reset=false) {
     global $CFG;
     require_once($CFG->libdir.'/gradelib.php');
 
     $item = array();
-    $item['itemname'] = clean_param($apeinsvier->name, PARAM_NOTAGS);
+    $item['itemname'] = clean_param($apsechseins->name, PARAM_NOTAGS);
     $item['gradetype'] = GRADE_TYPE_VALUE;
 
-    if ($apeinsvier->grade > 0) {
+    if ($apsechseins->grade > 0) {
         $item['gradetype'] = GRADE_TYPE_VALUE;
-        $item['grademax']  = $apeinsvier->grade;
+        $item['grademax']  = $apsechseins->grade;
         $item['grademin']  = 0;
-    } else if ($apeinsvier->grade < 0) {
+    } else if ($apsechseins->grade < 0) {
         $item['gradetype'] = GRADE_TYPE_SCALE;
-        $item['scaleid']   = -$apeinsvier->grade;
+        $item['scaleid']   = -$apsechseins->grade;
     } else {
         $item['gradetype'] = GRADE_TYPE_NONE;
     }
@@ -350,40 +350,40 @@ function apeinsvier_grade_item_update(stdClass $apeinsvier, $reset=false) {
         $item['reset'] = true;
     }
 
-    grade_update('mod/apeinsvier', $apeinsvier->course, 'mod', 'apeinsvier',
-            $apeinsvier->id, 0, null, $item);
+    grade_update('mod/apsechseins', $apsechseins->course, 'mod', 'apsechseins',
+            $apsechseins->id, 0, null, $item);
 }
 
 /**
- * Delete grade item for given apeinsvier instance
+ * Delete grade item for given apsechseins instance
  *
- * @param stdClass $apeinsvier instance object
+ * @param stdClass $apsechseins instance object
  * @return grade_item
  */
-function apeinsvier_grade_item_delete($apeinsvier) {
+function apsechseins_grade_item_delete($apsechseins) {
     global $CFG;
     require_once($CFG->libdir.'/gradelib.php');
 
-    return grade_update('mod/apeinsvier', $apeinsvier->course, 'mod', 'apeinsvier',
-            $apeinsvier->id, 0, null, array('deleted' => 1));
+    return grade_update('mod/apsechseins', $apsechseins->course, 'mod', 'apsechseins',
+            $apsechseins->id, 0, null, array('deleted' => 1));
 }
 
 /**
- * Update apeinsvier grades in the gradebook
+ * Update apsechseins grades in the gradebook
  *
  * Needed by {@link grade_update_mod_grades()}.
  *
- * @param stdClass $apeinsvier instance object with extra cmidnumber and modname property
+ * @param stdClass $apsechseins instance object with extra cmidnumber and modname property
  * @param int $userid update grade of specific user only, 0 means all participants
  */
-function apeinsvier_update_grades(stdClass $apeinsvier, $userid = 0) {
+function apsechseins_update_grades(stdClass $apsechseins, $userid = 0) {
     global $CFG, $DB;
     require_once($CFG->libdir.'/gradelib.php');
 
     // Populate array of grade objects indexed by userid.
     $grades = array();
 
-    grade_update('mod/apeinsvier', $apeinsvier->course, 'mod', 'apeinsvier', $apeinsvier->id, 0, $grades);
+    grade_update('mod/apsechseins', $apsechseins->course, 'mod', 'apsechseins', $apsechseins->id, 0, $grades);
 }
 
 /* File API */
@@ -399,14 +399,14 @@ function apeinsvier_update_grades(stdClass $apeinsvier, $userid = 0) {
  * @param stdClass $context
  * @return array of [(string)filearea] => (string)description
  */
-function apeinsvier_get_file_areas($course, $cm, $context) {
+function apsechseins_get_file_areas($course, $cm, $context) {
     return array();
 }
 
 /**
- * File browsing support for apeinsvier file areas
+ * File browsing support for apsechseins file areas
  *
- * @package mod_apeinsvier
+ * @package mod_apsechseins
  * @category files
  *
  * @param file_browser $browser
@@ -420,25 +420,25 @@ function apeinsvier_get_file_areas($course, $cm, $context) {
  * @param string $filename
  * @return file_info instance or null if not found
  */
-function apeinsvier_get_file_info($browser, $areas, $course, $cm, $context, $filearea, $itemid, $filepath, $filename) {
+function apsechseins_get_file_info($browser, $areas, $course, $cm, $context, $filearea, $itemid, $filepath, $filename) {
     return null;
 }
 
 /**
- * Serves the files from the apeinsvier file areas
+ * Serves the files from the apsechseins file areas
  *
- * @package mod_apeinsvier
+ * @package mod_apsechseins
  * @category files
  *
  * @param stdClass $course the course object
  * @param stdClass $cm the course module object
- * @param stdClass $context the apeinsvier's context
+ * @param stdClass $context the apsechseins's context
  * @param string $filearea the name of the file area
  * @param array $args extra arguments (itemid, path)
  * @param bool $forcedownload whether or not force download
  * @param array $options additional options affecting the file serving
  */
-function apeinsvier_pluginfile($course, $cm, $context, $filearea, array $args, $forcedownload, array $options=array()) {
+function apsechseins_pluginfile($course, $cm, $context, $filearea, array $args, $forcedownload, array $options=array()) {
     global $DB, $CFG;
 
     if ($context->contextlevel != CONTEXT_MODULE) {
@@ -453,29 +453,28 @@ function apeinsvier_pluginfile($course, $cm, $context, $filearea, array $args, $
 /* Navigation API */
 
 /**
- * Extends the global navigation tree by adding apeinsvier nodes if there is a relevant content
+ * Extends the global navigation tree by adding apsechseins nodes if there is a relevant content
  *
  * This can be called by an AJAX request so do not rely on $PAGE as it might not be set up properly.
  *
- * @param navigation_node $navref An object representing the navigation tree node of the apeinsvier module instance
+ * @param navigation_node $navref An object representing the navigation tree node of the apsechseins module instance
  * @param stdClass $course current course record
- * @param stdClass $module current apeinsvier instance record
+ * @param stdClass $module current apsechseins instance record
  * @param cm_info $cm course module information
  */
-function apeinsvier_extend_navigation(navigation_node $navref, stdClass $course, stdClass $module, cm_info $cm) {
+function apsechseins_extend_navigation(navigation_node $navref, stdClass $course, stdClass $module, cm_info $cm) {
     // TODO Delete this function and its docblock, or implement it.
 }
 
 /**
- * Extends the settings navigation with the apeinsvier settings
+ * Extends the settings navigation with the apsechseins settings
  *
- * This function is called when the context for the page is a apeinsvier module. This is not called by AJAX
+ * This function is called when the context for the page is a apsechseins module. This is not called by AJAX
  * so it is safe to rely on the $PAGE.
  *
  * @param settings_navigation $settingsnav complete settings navigation tree
- * @param navigation_node $apeinsviernode apeinsvier administration node
+ * @param navigation_node $apsechseinsnode apsechseins administration node
  */
-function apeinsvier_extend_settings_navigation(settings_navigation $settingsnav, navigation_node $apeinsviernode=null) {
+function apsechseins_extend_settings_navigation(settings_navigation $settingsnav, navigation_node $apsechseinsnode=null) {
     // TODO Delete this function and its docblock, or implement it.
 }
-

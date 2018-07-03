@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Defines backup_apeinsvier_activity_task class
+ * Defines backup_apsechseins_activity_task class
  *
- * @package   mod_apeinsvier
+ * @package   mod_apsechseins
  * @category  backup
  * @copyright 2016 Your Name <your@email.address>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -25,17 +25,17 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-require_once($CFG->dirroot . '/mod/apeinsvier/backup/moodle2/backup_apeinsvier_stepslib.php');
+require_once($CFG->dirroot . '/mod/apsechseins/backup/moodle2/backup_apsechseins_stepslib.php');
 
 /**
- * Provides the steps to perform one complete backup of the apeinsvier instance
+ * Provides the steps to perform one complete backup of the apsechseins instance
  *
- * @package   mod_apeinsvier
+ * @package   mod_apsechseins
  * @category  backup
  * @copyright 2016 Your Name <your@email.address>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class backup_apeinsvier_activity_task extends backup_activity_task {
+class backup_apsechseins_activity_task extends backup_activity_task {
 
     /**
      * No specific settings for this activity
@@ -44,10 +44,10 @@ class backup_apeinsvier_activity_task extends backup_activity_task {
     }
 
     /**
-     * Defines a backup step to store the instance data in the apeinsvier.xml file
+     * Defines a backup step to store the instance data in the apsechseins.xml file
      */
     protected function define_my_steps() {
-        $this->add_step(new backup_apeinsvier_activity_structure_step('apeinsvier_structure', 'apeinsvier.xml'));
+        $this->add_step(new backup_apsechseins_activity_structure_step('apsechseins_structure', 'apsechseins.xml'));
     }
 
     /**
@@ -61,13 +61,13 @@ class backup_apeinsvier_activity_task extends backup_activity_task {
 
         $base = preg_quote($CFG->wwwroot, '/');
 
-        // Link to the list of apeinsviers.
-        $search = '/('.$base.'\/mod\/apeinsvier\/index.php\?id\=)([0-9]+)/';
-        $content = preg_replace($search, '$@apeinsvierINDEX*$2@$', $content);
+        // Link to the list of apsechseinss.
+        $search = '/('.$base.'\/mod\/apsechseins\/index.php\?id\=)([0-9]+)/';
+        $content = preg_replace($search, '$@APSECHSEINSINDEX*$2@$', $content);
 
-        // Link to apeinsvier view by moduleid.
-        $search = '/('.$base.'\/mod\/apeinsvier\/view.php\?id\=)([0-9]+)/';
-        $content = preg_replace($search, '$@apeinsvierVIEWBYID*$2@$', $content);
+        // Link to apsechseins view by moduleid.
+        $search = '/('.$base.'\/mod\/apsechseins\/view.php\?id\=)([0-9]+)/';
+        $content = preg_replace($search, '$@APSECHSEINSVIEWBYID*$2@$', $content);
 
         return $content;
     }
