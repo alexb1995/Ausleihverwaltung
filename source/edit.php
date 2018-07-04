@@ -56,7 +56,7 @@ $event->trigger();
 
 // Print the page header.
 
-$PAGE->set_url('/mod/apsechseins/view.php', array('id' => $cm->id));
+$PAGE->set_url('/mod/apsechseins/edit.php', array('id' => $cm->id, 'resourceid' => $_GET['resourceid']));
 $PAGE->set_title(format_string($apsechseins->name));
 $PAGE->set_heading(format_string($course->fullname));
 
@@ -102,7 +102,7 @@ if ($mform->is_cancelled()) {
 } else {
 	// $resourceid for testing
 	$resourceid = 1;
-	$id = $cm->id;
+
 	$resource = $DB->get_record('schaeden', array('resourceid'=>$resourceid));
 	$schaden = $resource->schaden;
 	if(empty($schaden)) {
@@ -113,9 +113,10 @@ if ($mform->is_cancelled()) {
 		echo 'Es wurde bereits ein Schaden für diese Ressource vermerkt:';
 		$table = new html_table();
 		$table->head = array('Ressourcen-ID', 'Schaden');
-		$htmlLink = html_writer::link(new moodle_url('../apsechseins/edit.php', array('id' => $id, 'resourceid' => $resourceid)), 'Edit', $attributes=null);
-		$table->data[] = array($resourceid, $schaden, $htmlLink);
+		$table->data[] = array($resourceid, $schaden);
 		echo html_writer::table($table);
+		$htmlLink = html_writer::link(new moodle_url('../apsechseins.edit.php', array('id'=>$cm->id, 'resourceid'=>$resourceid)), 'Edit' $attributes=null);
+
 	};
 };
 
