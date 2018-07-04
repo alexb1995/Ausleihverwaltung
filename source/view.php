@@ -121,7 +121,12 @@ if ($mform->is_cancelled()) {
 // Code for Ausleihverwaltung - Schadensdokumentation
 // ResourceID for testing
 $resourceid = '1';
-$mform->setConstant('resourceid', $resourceid);
+
+/* PLAN: 
+    ResourceID in Input-Feld, standardmäßig deaktiviert
+    Feld "Schäden" ausgefüllt, deaktiviert
+    Über Button aktivierbar
+*/
 
 // Get currently selected resource from DB
 $resource = $DB->get_record('schaeden', array('resourceid'=>$resourceid));
