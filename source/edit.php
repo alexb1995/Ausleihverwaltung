@@ -136,7 +136,7 @@ if(strpos($strUrl, 'resourceid=')==true){
         $mform->display();
         //error_log("TEST FROM AFTER DISPLAY");
     }
-    echo $OUTPUT->single_button(new moodle_url('../apeinsvier/view.php', array('id' => $cm->id)), 'abbrechen');
+    echo $OUTPUT->single_button(new moodle_url('../apeinsvier/view.php', array('id' => $cm->id)), 'Abbrechen');
 
 }
 

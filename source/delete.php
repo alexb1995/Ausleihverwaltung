@@ -53,8 +53,8 @@ echo nl2br("\n");
 echo nl2br("\n");
 
 //Funktionstasten zum Abbrechen und Fortfahren
-echo $OUTPUT->single_button(new moodle_url('../apeinsvier/view.php', array('id' => $cm->id)), 'abbrechen');
-echo html_writer::link(new moodle_url('../apeinsvier/deleteaccept.php', array('id' => $cm->id, 'resourceid' => $resID, 'resname'=> $resName)), 'bestätigen', array('class' => 'btn btn-secondary'));
+echo $OUTPUT->single_button(new moodle_url('../apeinsvier/view.php', array('id' => $cm->id)), 'Abbrechen');
+echo html_writer::link(new moodle_url('../apeinsvier/deleteaccept.php', array('id' => $cm->id, 'resourceid' => $resID, 'resname'=> $resName)), 'Bestätigen', array('class' => 'btn btn-secondary'));
 
 //FINISH
 echo $OUTPUT->footer();
