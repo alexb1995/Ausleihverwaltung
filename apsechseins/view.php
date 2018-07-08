@@ -42,7 +42,7 @@ if ($id) {
     $cm           = get_coursemodule_from_instance('apsechseins', $apsechseins->id, $course->id, false, MUST_EXIST);
 } else {
     error('You must specify a course_module ID or an instance ID');
-}
+};
 
 require_login($course, true, $cm);
 
@@ -55,8 +55,7 @@ $event->add_record_snapshot($PAGE->cm->modname, $apsechseins);
 $event->trigger();
 
 // Print the page header.
-
-$PAGE->set_url('/mod/apsechseins/view.php', array('id' => $cm->id));
+$PAGE->set_url('/mod/apsechseins/view.php', array('id'=>$cm->id));
 $PAGE->set_title(format_string($apsechseins->name));
 $PAGE->set_heading(format_string($course->fullname));
 
@@ -71,29 +70,57 @@ if ($apsechseins->intro) {
 // Replace the following lines with you own code.
 echo $OUTPUT->heading('Schadensdokumentation');
 
-// Implement form for user
-require_once(dirname(__FILE__).'/forms/viewform.php');
-require_once(dirname(__FILE__).'/forms/newform.php');
+/************************* CODE FOR SCHADENSDOKUMENTATION *************************/
 
-// CODE FOR SCHADENSDOKUMENTATION
-
-// $resourceid for testing
-$resourceid = 2;
-$resource = $DB->get_record('schaeden', array('resourceid'=>$resourceid));
-$schaden = $resource->schaden;
-if(empty($schaden)) {
-	echo 'Bitte legen Sie einen Schadensvermerk für die ausgewählte Ressource an:';
-	$mform = new newhtml_form(null, array('resourceid'=>$resourceid, 'schaden'=>$schaden));
-	$mform->display();
+// First or second load of website?
+if (isset($_GET['resourceid'])) {
+	$resourceid = $_GET['resourceid'];
+	$durchlauf = 1;
 } else {
-	// Use a table for displaying the defect of the currently selected resource and the option to edit the record
-	// Information that a record for this resource already exists
-	echo 'Es existiert bereits ein Schadensvermerk für die ausgewählte Ressource:';
-	$mform = new viewhtml_form(null, array('resourceid'=>$resourceid, 'schaden'=>$schaden));
-	$mform->display();
+	$durchlauf = 2;
 };
 
-
+$url = $PAGE->url;
+$strUrl = $url.'';
+// Catch error: resourceid not available
+switch ($durchlauf) {
+	case 1:
+		// If first load of the site
+		$resource = $DB->get_record('schaeden', array('id'=>$resourceid));	
+		$defect = $resource->defect;
+		// If no defect notice exists for the selected resource
+		if (empty($defect)) {
+			echo 'Bitte legen Sie einen Schadensvermerk für die ausgewählte Ressource an:';
+		// If a defect notice already exists for the selected resource
+		} else {
+			echo 'Es existiert ein Schadensvermerk für die ausgewählte Ressource. Sie können ihn nun bearbeiten:';
+		};
+		require_once(dirname(__FILE__).'/forms/editform.php');
+		$editform = new edithtml_form(null,array('resourceid'=>$resourceid, 'defect'=>$defect));
+		$editform->display();
+		break;
+	case 2:
+		echo 'zweiter Durchlauf';
+		/*/$resource = $DB->get_record('schaeden', array('id'=>$resourceid));
+        if ($fromform = $mform->get_data()) {
+	        $record = new stdClass();
+	        $record->id 				= $fromform->resourceid;
+	        $record->name 				= $resource->name;
+	        $record->description  		= $resource->description;
+	        $record->serialnumber 		= $resource->serialnumber;
+	        $record->inventorynumber	= $resource->inventorynumber;
+	        $record->comment 			= $resource->comment;
+	        $record->status 			= $resource->status;
+	        $record->amount 			= $resource->amount;
+	        $record->type 				= $resource->type;
+	        $record->maincategory 		= $resource->maincategory;
+	        $record->subcategory 		= $resource->subcategory;
+	        $record->defect 			= $fromfort->defect;
+	    };
+	    $DB->update_record('schaeden', $record, $bulk = false); 
+        echo "Die Ressource wurde mit der ID ".$resourceid." wurde erfolgreich aktualisiert.";
+		break;*/
+};
 
 // TESTING ONLY
 // Create table
@@ -102,14 +129,13 @@ $table = new html_table();
 $table->head = array('Ressourcen-ID', 'Schaden');
 foreach ($resources as $resource) {
 	$resourceid = $resource->resourceid;
-	$schaden = $resource->schaden;
-	$htmlEdit = html_writer::link(new moodle_url('../apsechseins/edit.php', array('id' => $cm->id, 'resourceid' => $resourceid)), 'Eintrag bearbeiten', $attributes=null);
-	$htmlDelete = html_writer::link(new moodle_url('../apsechseins/delete.php', array('id' => $cm->id, 'resourceid' => $resourceid)), 'Eintrag löschen', $attributes=null);
-	$table->data[] = array($resourceid, $schaden, $htmlEdit, $htmlDelete);
+	$defect = $resource->defect;
+	$htmlEdit = html_writer::link(new moodle_url('../apsechseins/edit.php', array('id'=>$cm->id,'resourceid' =>$resourceid)), 'Eintrag bearbeiten', $attributes=null);
+	$htmlDelete = html_writer::link(new moodle_url('../apsechseins/delete.php', array('id'=>$cm->id, 'resourceid'=>$resourceid)), 'Eintrag löschen', $attributes=null);
+	$table->data[] = array($resourceid, $defect, $htmlEdit, $htmlDelete);
 };
 echo html_writer::table($table);
-
-
+// END TESTING ONLY
 
 
 // End code for Ausleihverwaltung - Schadensdokumentation

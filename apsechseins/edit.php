@@ -55,7 +55,7 @@ $event->add_record_snapshot($PAGE->cm->modname, $apsechseins);
 $event->trigger();
 
 // Print the page header.
-$PAGE->set_url('/mod/apsechseins/edit.php', array('id' => $cm->id, 'resourceid' => $_GET['resourceid']));
+$PAGE->set_url('/mod/apsechseins/edit.php', array('id'=>$cm->id, 'resourceid'=>$_GET['resourceid']));
 $PAGE->set_title(format_string($apsechseins->name));
 $PAGE->set_heading(format_string($course->fullname));
 
@@ -68,11 +68,15 @@ require_once(dirname(__FILE__).'/forms/editform.php');
 
 // CODE FOR AUSLEIHVERWALTUNG - SCHADENSDOKUMENTATION - EDIT SCREEN
 $resourceid = $_GET['resourceid'];
-$resource = $DB->get_record('schaeden', array('resourceid'=>$resourceid));
-$schaden = $resource->schaden;
+$resource = $DB->get_record('schaeden', array('id'=>$resourceid));
+$defect = $resource->defect;
 echo 'Aktuellen Schadensvermerk für die Ressource bearbeiten:';
-$mform = new edithtml_form(null, array('resourceid'=>$resourceid, 'schaden'=>$schaden));
+$mform = new edithtml_form(null, array('resourceid'=>$resourceid, 'defect'=>$defect));
 $mform->display();
+echo $OUTPUT->single_button(new moodle_url('../apsechseins/view.php', array('id'=>$cm->id, 'resourceid'=>$resourceid, 'defect'=>$defect, 'lastAction'=>'edit')), 'abbrechen', $attributes=null);
+echo $OUTPUT->single_button(new moodle_url('../apsechseins/view.php', array('id'=>$cm->id, 'saveResourceid'=>$resourceid, 'saveDefect'=>$defect)), 'speichern');
+
+
 
 // END CODE FOR AUSLEIHVERWALTUNG - SCHADENSDOKUMENTATION - EDIT SCREEN
 

@@ -1,5 +1,5 @@
 <?php
-//moodleform is defined in formslib.php
+// moodleform is defined in formslib.php
 require_once("$CFG->libdir/formslib.php");
 
 class edithtml_form extends moodleform {
@@ -11,13 +11,13 @@ class edithtml_form extends moodleform {
         // Resource ID (static)
         $mform->addElement('static', 'resourceid', 'Ressourcen-ID', $this->_customdata['resourceid']);
         // Defect (can be edited)
-        $mform->addElement('textarea', 'schaden', 'Schaden');
-        $mform->setType('schaden', PARAM_NOTAGS);                
-        $mform->setDefault('schaden', $this->_customdata['schaden']);      
+        $mform->addElement('textarea', 'defect', 'Schaden');
+        $mform->setType('defect', PARAM_NOTAGS);                
+        $mform->setDefault('defect', $this->_customdata['defect']);      
         // Buttongroup to save or cancel the changes
         $btn = array();
-        $btn[] =& $mform->createElement('submit', 'btnSave', 'Änderungen speichern');
-        $btn[] =& $mform->createElement('cancel', 'btnCancel', 'Änderungen verwerfen');
+       // $btn[] =& $mform->createElement('submit', 'btnSave', 'Änderungen speichern');
+       // $btn[] =& $mform->createElement('cancel', 'btnCancel', 'Änderungen verwerfen');
         $mform->addGroup($btn, 'btn', '', array(' '), false);
     }
 

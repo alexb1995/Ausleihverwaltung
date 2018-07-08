@@ -4,7 +4,7 @@
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
   <TABLES>
-    <TABLE NAME="apsechseins" COMMENT="">
+    <TABLE NAME="apsechseins" COMMENT="Default comment for firmenzulassung, please edit me">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"/>
         <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Course apsechseins activity belongs to"/>
@@ -24,11 +24,11 @@
     </TABLE>
     <TABLE NAME="schaeden" COMMENT="Schadensdokumentation">
       <FIELDS>
-        <FIELD NAME="resourceid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Ressourcen-ID"/>
-        <FIELD NAME="schaden" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Mögliche Schäden an der Ressource"/>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Ressourcen-ID"/>
+        <FIELD NAME="defect" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Mögliche Schäden an der Ressource"/>
       </FIELDS>
       <KEYS>
-        <KEY NAME="primary" TYPE="primary" FIELDS="resourceid"/>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
       </KEYS>
     </TABLE>
   </TABLES>

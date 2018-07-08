@@ -8,16 +8,12 @@ class viewhtml_form extends moodleform {
         global $CFG;
  
         $mform = $this->_form;
-        // Resource ID
+        // Resource ID (static)
         $mform->addElement('static', 'resourceid', 'Ressourcen-ID', $this->_customdata['resourceid']);
-        // Input field for defect
-		$mform->addElement('static', 'schaden', 'Schaden', $this->_customdata['schaden']);
-        // Button to edit or delete the entry
-        $btn = array();
-        $btn[] =& $mform->createElement('submit', 'btnEdit', 'Vermerk bearbeiten');
-        $btn[] =& $mform->createElement('submit', 'btnDelete', 'Vermerk löschen');
-        $mform->addGroup($btn, 'btn', '', array(' '), false);
+        // Defect (static)
+		$mform->addElement('static', 'defect', 'Schaden', $this->_customdata['defect']);
     }
+
     //Custom validation should be added here
     function validation($data, $files) {
         return array();
