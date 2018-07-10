@@ -265,3 +265,45 @@ function apeinsvier_get_process_instance_status($process_instance_id) {
 	}
 }
 
+function mail_to($email, $name, $subject, $message) {
+
+	global $DB;
+
+	$from = new stdClass();
+	$from->firstname = 'sWIm15';
+	$from->lastname  = '';
+	$from->email     = 'swim15.noreply@gmail.com';
+	$from->maildisplay = 1;
+	
+	$emailsubject = $subject;
+	$emailmessage = $message;
+	
+	$user = $DB->get_record('user', ['email' => $email]);
+
+	if (!isset($user) or empty($user['email'])) {
+		$user = generate_dummy_user($email, $name);
+	}
+	
+	$success = email_to_user($to, $from, $emailsubject, $emailmessage);
+}
+
+function generate_dummy_user($email, $name = '', $id = -99) {
+	$emailuser = new stdClass();
+	$emailuser->email = trim(filter_var($email, FILTER_SANITIZE_EMAIL));
+		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+			$emailuser->email = '';
+		}
+	$name = format_text($name, FORMAT_HTML, array('trusted' => false, 'noclean' => false));
+	$emailuser->firstname = trim(filter_var($name, FILTER_SANITIZE_STRING));
+	$emailuser->lastname = '';
+	$emailuser->maildisplay = true;
+	$emailuser->mailformat = 1; // 0 (zero) text-only emails, 1 (one) for HTML emails.
+	$emailuser->id = $id;
+	$emailuser->firstnamephonetic = '';
+	$emailuser->lastnamephonetic = '';
+	$emailuser->middlename = '';
+	$emailuser->alternatename = '';
+
+	return $emailuser;
+	}
+
