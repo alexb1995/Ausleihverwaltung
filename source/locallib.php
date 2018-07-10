@@ -265,6 +265,9 @@ function apeinsvier_get_process_instance_status($process_instance_id) {
 	}
 }
 
+require_once($CFG->dirroot.'/lib/moodlelib.php');
+require_once($CFG->dirroot.'/config.php');
+
 function mail_to($email, $name, $subject, $message) {
 
 	global $DB;
@@ -285,6 +288,8 @@ function mail_to($email, $name, $subject, $message) {
 	}
 	
 	$success = email_to_user($to, $from, $emailsubject, $emailmessage);
+
+	return $success;
 }
 
 function generate_dummy_user($email, $name = '', $id = -99) {
