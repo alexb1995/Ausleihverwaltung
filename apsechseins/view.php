@@ -72,74 +72,100 @@ echo $OUTPUT->heading('Schadensdokumentation');
 
 /************************* CODE FOR SCHADENSDOKUMENTATION *************************/
 
-// First or second load of website?
-if (isset($_GET['resourceid'])) {
-	$resourceid = $_GET['resourceid'];
-	$durchlauf = 1;
-} else {
-	$durchlauf = 2;
-};
-
 $url = $PAGE->url;
 $strUrl = $url.'';
-// Catch error: resourceid not available
-switch ($durchlauf) {
-	case 1:
-		// If first load of the site
-		$resource = $DB->get_record('schaeden', array('id'=>$resourceid));	
-		$defect = $resource->defect;
-		// If no defect notice exists for the selected resource
-		if (empty($defect)) {
-			echo 'Bitte legen Sie einen Schadensvermerk für die ausgewählte Ressource an:';
-		// If a defect notice already exists for the selected resource
-		} else {
-			echo 'Es existiert ein Schadensvermerk für die ausgewählte Ressource. Sie können ihn nun bearbeiten:';
-		};
-		require_once(dirname(__FILE__).'/forms/editform.php');
-		$editform = new edithtml_form(null,array('resourceid'=>$resourceid, 'defect'=>$defect));
-		$editform->display();
-		break;
-	case 2:
-		echo 'zweiter Durchlauf';
-		/*/$resource = $DB->get_record('schaeden', array('id'=>$resourceid));
-        if ($fromform = $mform->get_data()) {
-	        $record = new stdClass();
-	        $record->id 				= $fromform->resourceid;
-	        $record->name 				= $resource->name;
-	        $record->description  		= $resource->description;
-	        $record->serialnumber 		= $resource->serialnumber;
-	        $record->inventorynumber	= $resource->inventorynumber;
-	        $record->comment 			= $resource->comment;
-	        $record->status 			= $resource->status;
-	        $record->amount 			= $resource->amount;
-	        $record->type 				= $resource->type;
-	        $record->maincategory 		= $resource->maincategory;
-	        $record->subcategory 		= $resource->subcategory;
-	        $record->defect 			= $fromfort->defect;
-	    };
-	    $DB->update_record('schaeden', $record, $bulk = false); 
-        echo "Die Ressource wurde mit der ID ".$resourceid." wurde erfolgreich aktualisiert.";
-		break;*/
+require_once(dirname(__FILE__).'/forms/schadensdokumentation_form.php');
+
+if(strpos($strUrl, 'resourceid=')){
+	// First run
+    $resourceid = $_GET['resourceid'];
+    $resource = $DB->get_record('resources', array('id'=>$resourceid));
+    $resourcename = $resource->name;
+    $resourcedefect = $resource->defect;
+
+    if ($resourcedefect == '') {
+    	echo 'Bitte legen Sie einen Schadensvermerk für die Ressource mit dem Namen ' . $resourcename . ' und der Ressourcen-ID ' . $resourceid . ' an:';
+    } else {
+    	echo 'Es ist bereits ein Schadensvermerk für die Ressource mit dem Namen ' . $resourcename . ' und der Ressourcen-ID ' . $resourceid . ' vorhanden. Sie können ihn nun bearbeiten:';
+    };
+   
+    // Initialize form and preallocate values
+    require_once(dirname(__FILE__).'/forms/schadensdokumentation_form.php');
+    $mform = new schadensdokumentation_form (null, array('resourceid'=>$resourceid, 'name'=>$resourcename, 'defect'=>$resourcedefect));
+
+    if ($fromform = $mform->get_data()) {
+    	$fm_resourceid = $fromform->resourceid;
+    	$fm_resourcedefect = $fromform->defect;
+
+    	$record = new stdClass();
+    	$record->id 				= $fm_resourceid;
+    	$record->name 				= $resource->name;
+        $record->description 		= $resource->description;
+        $record->serialnumber 		= $resource->serialnumber;
+        $record->inventorynumber 	= $resource->inventorynumber ;
+        $record->comment 			= $resource->comment;
+        $record->status 			= $resource->status;
+        $record->amount 			= $resource->amount;
+        $record->type 				= $resource->type;
+        $record->maincategory 		= $resource->maincategory;
+        $record->subcategory 		= $resource->subcategory;
+    	$record->defect 			= $fm_resourcedefect;
+
+    } else {
+    	$formdata = array('id'=>$id, 'resourceid'=>$resourceid);
+        $mform->set_data($formdata);
+        $mform->display();
+    };
+    // ZURÜCK ZU RESOURCEEDIT
+	echo $OUTPUT->single_button(new moodle_url('../apsechseins/view.php', array('id'=>$cm->id)), 'Zurück: Ressource bearbeiten');
+	echo $OUTPUT->single_button(new moodle_url('../apsechseins/view.php', array('id'=>$cm->id, 'resourceid'=>$resourceid)), 'Weiter: Ressource bearbeiten');
+	echo nl2br("\n");
+    // ZURÜCK ZU AUSLEIHANTRAG
+	echo $OUTPUT->single_button(new moodle_url('../apsechseins/view.php', array('id'=>$cm->id)), 'Zurück: Ressource zurückgeben');
+	echo $OUTPUT->single_button(new moodle_url('../apsechseins/returnResource.php', array('id'=>$cm->id, 'resourceid'=>$resourceid)), 'Weiter: Ressource zurückgeben');
+} else {
+	// Second run
+    require_once(dirname(__FILE__).'/forms/schadensdokumentation_form.php');
+    $mform = new schadensdokumentation_form ();
+    if ($fromform = $mform->get_data()) {
+    	$fm_resourceid = $fromform->resourceid;
+    	$fm_resourcedefect = $fromform->defect;
+
+    	$resource = $DB->get_record('resources', array('id'=>$fm_resourceid));
+
+    	$record = new stdClass();
+    	$record->id 				= $fm_resourceid;
+    	$record->name 				= $resource->name;
+        $record->description 		= $resource->description;
+        $record->serialnumber 		= $resource->serialnumber;
+        $record->inventorynumber 	= $resource->inventorynumber ;
+        $record->comment 			= $resource->comment;
+        $record->status 			= $resource->status;
+        $record->amount 			= $resource->amount;
+        $record->type 				= $resource->type;
+        $record->maincategory 		= $resource->maincategory;
+        $record->subcategory 		= $resource->subcategory;
+    	$record->defect 			= $fm_resourcedefect;
+
+    	$DB->update_record('resources', $record, $bulk=false);
+    	echo 'Der Schadensvermerk zur Ressource ' . $resource->name . ' mit der ID ' . $fm_resourceid . ' wurde erfolgreich gespeichert.';
+    } else {
+    	$formdata = array('id'=>$id);
+    	$mform->set_data($formdata);
+    	$mform->display();
+    };
+    echo nl2br("\n");
+    echo nl2br("\n");
+	// ZURÜCK ZU RESOURCEEDIT
+	echo $OUTPUT->single_button(new moodle_url('../apsechseins/view.php', array('id'=>$cm->id)), 'Zurück: Ressource bearbeiten');
+	echo $OUTPUT->single_button(new moodle_url('../apsechseins/view.php', array('id'=>$cm->id, 'resourceid'=>$fm_resourceid)), 'Weiter: Ressource bearbeiten');
+	echo nl2br("\n");
+    // ZURÜCK ZU AUSLEIHANTRAG
+	echo $OUTPUT->single_button(new moodle_url('../apsechseins/view.php', array('id'=>$cm->id)), 'Zurück: Ressource zurückgeben');
+	echo $OUTPUT->single_button(new moodle_url('../apsechseins/returnResource.php', array('id'=>$cm->id, 'resourceid'=>$fm_resourceid)), 'Weiter: Ressource zurückgeben');
 };
 
-// TESTING ONLY
-// Create table
-$resources = $DB->get_records('schaeden');
-$table = new html_table();
-$table->head = array('Ressourcen-ID', 'Schaden');
-foreach ($resources as $resource) {
-	$resourceid = $resource->resourceid;
-	$defect = $resource->defect;
-	$htmlEdit = html_writer::link(new moodle_url('../apsechseins/edit.php', array('id'=>$cm->id,'resourceid' =>$resourceid)), 'Eintrag bearbeiten', $attributes=null);
-	$htmlDelete = html_writer::link(new moodle_url('../apsechseins/delete.php', array('id'=>$cm->id, 'resourceid'=>$resourceid)), 'Eintrag löschen', $attributes=null);
-	$table->data[] = array($resourceid, $defect, $htmlEdit, $htmlDelete);
-};
-echo html_writer::table($table);
-// END TESTING ONLY
+/*********************** END CODE FOR SCHADENSDOKUMENTATION ***********************/
 
-
-// End code for Ausleihverwaltung - Schadensdokumentation
-
-
-// Finish the page.
+// Finish the page
 echo $OUTPUT->footer();
