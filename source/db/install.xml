@@ -18,7 +18,7 @@
         <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
       </INDEXES>
     </TABLE>
-    <TABLE NAME="resources" COMMENT="Table for capturing resources to lend and rent">
+    <TABLE NAME="apeinsvier_resources" COMMENT="Table for capturing resources to lend and rent">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Name der Ressource"/>
@@ -31,7 +31,7 @@
         <FIELD NAME="type" TYPE="int" LENGTH="2" NOTNULL="true" SEQUENCE="false" COMMENT="Art der Ressource: Stückgut (z.B. Smartphone) - 0; Schüttgut (z.B. Kullis) - 1"/>
         <FIELD NAME="maincategory" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Kategorie"/>
         <FIELD NAME="subcategory" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Subkategorie"/>
-        <FIELD NAME="damage" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Schadensinformationen können hier eingetragen werden"/>
+        <FIELD NAME="defect" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Schadensinformationen können hier eingetragen werden"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>

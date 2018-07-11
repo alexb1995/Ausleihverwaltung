@@ -47,7 +47,7 @@ $strUrl = $url.'';
 if(strpos($strUrl, 'resourceid=')==true){
     //Erster Durchlauf
     $resID = $_GET['resourceid'];
-    $sql= 'SELECT * FROM {resources} WHERE id ='.$resID.';';
+    $sql= 'SELECT * FROM {apeinsvier_resources} WHERE id ='.$resID.';';
     $resource = $DB->get_record_sql($sql, array($resID));
     $resName = $resource->name;
     $resDescription = $resource->description;
@@ -59,6 +59,7 @@ if(strpos($strUrl, 'resourceid=')==true){
     $resType = $resource->type;
     $resMainCategory = $resource->maincategory;
     $resSubCategory = $resource->subcategory;
+    $resDefect = $resource->defect;
     echo $message = "Bitte gebe die neuen Daten für die Ressource mit dem Namen ".$resName." und der ID ".$resID." ein oder kehre mit 'abbrechen' zurück";
     echo nl2br("\n");
     echo nl2br("\n");
@@ -68,7 +69,7 @@ if(strpos($strUrl, 'resourceid=')==true){
     require_once(dirname(__FILE__).'/forms/resourceform.php');
     $mform = new resourcehtml_form ( null, array('name'=>$resName, 'description'=>$resDescription,'serialnumber'=>$resSerNumber,
     'inventorynumber'=>$resInvNumber,'comment'=>$resComment, 'status'=>$resStatus, 'amount'=>$resAmount, 'type'=>$resType,
-    'maincategory'=>$resMainCategory, 'subcategory'=>$resSubCategory) );
+    'maincategory'=>$resMainCategory, 'subcategory'=>$resSubCategory, 'defect'=>$resDefect) );
     //Formulardaten verarbeiten
     if ($fromform = $mform->get_data()) {
         error_log("TEST FROM DIRECTLY AFTER SUBMIT");
@@ -83,6 +84,7 @@ if(strpos($strUrl, 'resourceid=')==true){
         $fm_type = $fromform->type;
         $fm_maincategory = $fromform->maincategory;
         $fm_subcategory = $fromform->subcategory;
+        $fm_defect = $fromform->defect;
 
         /* Hier koennte man Activiti einbinden
         //Creating instance of relevant API modules
@@ -109,6 +111,7 @@ if(strpos($strUrl, 'resourceid=')==true){
         $fm_type = $fromform->type;
         $fm_maincategory = $fromform->maincategory;
         $fm_subcategory = $fromform->subcategory;
+        $fm_defect = $fromform->defect;
 
         /*Activit*/
         //$result = apeinsvier_answer_input_required_resources($taskid, $process_definition_id, $fm_name, $fm_description, $fm_serialnumber, $fm_inventorynumber,$fm_comment,$fm_status,$fm_amount,$fm_type,$fm_maincategory,$fm_subcategory);
@@ -125,7 +128,7 @@ if(strpos($strUrl, 'resourceid=')==true){
         $record->type=$fm_type;
         $record->maincategory=$fm_maincategory;
         $record->subcategory=$fm_subcategory;
-        
+        $record->defect=$fm_defect;
     } 
     else {
         // falls die Daten des Formulars nicht validiert wurden oder für die erste Anzeige des Formulars
@@ -160,6 +163,7 @@ else{
         $fm_type = $fromform->type;
         $fm_maincategory = $fromform->maincategory;
         $fm_subcategory = $fromform->subcategory;
+        $fm_defect = $fromform->defect;
 
         /* Hier koennte man Activiti einbinden
         //Creating instance of relevant API modules
@@ -186,7 +190,7 @@ else{
         $fm_type = $fromform->type;
         $fm_maincategory = $fromform->maincategory;
         $fm_subcategory = $fromform->subcategory;
-
+        $fm_defect = $fromform->defect;
         /*Activiti*/
         // $result = apeinsvier_answer_input_required_resources($taskid, $process_definition_id, $fm_name, $fm_description, $fm_serialnumber, $fm_inventorynumber,$fm_comment,$fm_status,$fm_amount,$fm_type,$fm_maincategory,$fm_subcategory);
         
@@ -202,9 +206,9 @@ else{
         $record->type=$fm_type;
         $record->maincategory=$fm_maincategory;
         $record->subcategory=$fm_subcategory;
-
+        $record->defect=$fm_defect;
         //DB-Update: Tabelle: >>resources<<, Record-Objekt, kein Bulk Update
-        $DB->update_record('resources',$record,$bulk=false); 
+        $DB->update_record('apeinsvier_resources',$record,$bulk=false); 
         echo "Die Ressource wurde mit der ID ".$fm_resid." wurde erfolgreich aktualisiert.";
     }
 

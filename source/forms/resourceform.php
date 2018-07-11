@@ -58,6 +58,13 @@ class resourcehtml_form extends moodleform {
         $mform->setType('subcategory', PARAM_NOTAGS);                   //Set type of element
         $mform->setDefault('subcategory', $this->_customdata['subcategory']);        //Default value
 
+         /* ****************** DEFECT *************/
+         $mform->addElement('text', 'defect', 'Schaden'); // Add elements to your form
+         $mform->setType('defect', PARAM_NOTAGS);                   //Set type of element
+         $mform->setDefault('defect', $this->_customdata['defect']);        //Default value
+
+
+
         error_log("TEST FROM INSIDE FORM");
 
         $mform->addElement('hidden', 'id');

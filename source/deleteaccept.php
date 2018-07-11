@@ -45,7 +45,7 @@ $strName = "Löschen erfolgreich";
 echo $OUTPUT->heading($strName);
 echo nl2br("\n");
 
-$resourcestable = 'resources';
+$resourcestable = 'apeinsvier_resources';
 // Datensatz mit übergebener ID löschen
 $DB->delete_records_select($resourcestable,"id ='".$resID."'", $params=null);
 

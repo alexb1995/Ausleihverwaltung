@@ -70,10 +70,11 @@ $record->amount         = 2;
 $record->type = 0;
 $record->maincategory    = "Handy";
 $record->subcategory = "sub";
+$record->defect = "damage is done";
 
-$DB->insert_record('resources', $record, $returnid=false, $bulk=false);
+$DB->insert_record('apeinsvier_resources', $record, $returnid=false, $bulk=false);
 
-
+/*
 $record1->name         = 'iPhone';
 $record1->description = 'beschde';
 $record1->serialnumber        = 'serial14';
@@ -84,7 +85,7 @@ $record1->amount         = 4;
 $record1->type = 1;
 $record1->maincategory    = "Apple";
 $record1->subcategory = "phone";
-$DB->insert_record('resources', $record1, $returnid=false, $bulk=false);
+$DB->insert_record('apeinsvier_resources', $record1, $returnid=false, $bulk=false);
 
 $record2->name         = 'Mein iPhone';
 $record2->description = 'beschde';
@@ -96,7 +97,7 @@ $record2->amount         = 4;
 $record2->type = 1;
 $record2->maincategory    = "Apple";
 $record2->subcategory = "phone";
-$DB->insert_record('resources', $record1, $returnid=false, $bulk=false);
+$DB->insert_record('apeinsvier_resources', $record1, $returnid=false, $bulk=false);
 */
 
 /* PAGE belegen*/
@@ -124,10 +125,10 @@ echo $OUTPUT->heading($strName);
 
 $attributes = array();
 // Alle Datensätze aus der DB-Tabelle >>resources<< abfragen.
-$resource = $DB->get_records('resources');
+$resource = $DB->get_records('apeinsvier_resources');
 
 $table = new html_table();
-$table->head = array('ID','Name', 'Beschreibung', 'Seriennummer', 'Inventarnummer', 'Kommentar', 'Status', 'Menge', 'Typ', 'Hauptkategorie', 'Subkategorie', 'Bearbeiten', 'Löschen');
+$table->head = array('ID','Name', 'Beschreibung', 'Seriennummer', 'Inventarnummer', 'Kommentar', 'Status', 'Menge', 'Typ', 'Hauptkategorie', 'Subkategorie', 'Schaden', 'Bearbeiten', 'Löschen');
 
 //Für jeden Datensatz
 foreach ($resource as $res) {
@@ -142,12 +143,13 @@ $amount = $res->amount;
 $type = $res->type;
 $maincategory = $res->maincategory;
 $subcategory = $res->subcategory;
+$defect = $res->defect;
 //Link zum Bearbeiten der aktuellen Ressource in foreach-Schleife setzen
 $htmlLink = html_writer::link(new moodle_url('../apeinsvier/edit.php', array('id' => $cm->id, 'resourceid' => $res->id)), 'Bearbeiten', $attributes=null);
 //Analog: Link zum Löschen...
 $htmlLinkDelete = html_writer::link(new moodle_url('../apeinsvier/delete.php', array('id' => $cm->id, 'resourceid' => $res->id)), 'Löschen', $attributes=null);
 //Daten zuweisen an HTML-Tabelle
-$table->data[] = array($id, $name, $description, $serialnumber, $inventorynumber, $comment, $status, $amount, $type, $maincategory, $subcategory, $htmlLink, $htmlLinkDelete);
+$table->data[] = array($id, $name, $description, $serialnumber, $inventorynumber, $comment, $status, $amount, $type, $maincategory, $subcategory, $defect, $htmlLink, $htmlLinkDelete);
 }
 //Tabelle ausgeben
 echo html_writer::table($table);

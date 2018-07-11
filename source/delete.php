@@ -43,7 +43,7 @@ echo nl2br("\n");
 echo nl2br("\n");
 
 $resID = $_GET['resourceid']; //Wird von View-PHP mit dem Delete-Link übergeben
-$sql= 'SELECT name FROM {resources} WHERE id ='.$resID.';';
+$sql= 'SELECT name FROM {apeinsvier_resources} WHERE id ='.$resID.';';
 $resource = $DB->get_record_sql($sql, array($resID));
 $resName = $resource->name;
 
