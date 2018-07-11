@@ -68,7 +68,7 @@ function xmldb_apeinsvier_upgrade($oldversion) {
      *
      * First example, some fields were added to install.xml on 2007/04/01
      */
-    if ($oldversion < 2018061900) { //IMPORTANT -> ALWAYS UPDATE THIS -> CURRENT DATE!!!!!!!!!
+    if ($oldversion < 2018071100) { //IMPORTANT -> ALWAYS UPDATE THIS -> CURRENT DATE!!!!!!!!!
 
         // Define field course to be added to apeinsvier.
         $table = new xmldb_table('resources');
