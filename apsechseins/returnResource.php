@@ -83,8 +83,8 @@ if(strpos($strUrl, 'resourceid=')){
     $resourcename = $resource->name;
     $resourcedefect = $resource->defect;
 
-    echo 'Möchten Sie die Rückgabe der folgenden Ressource vermerken?';
-
+    echo 'Möchten Sie die Rückgabe für die Ressource mit dem Namen ' . $resourcename . ' und der Ressourcen-ID ' . $resourceid . ' verbuchen?';
+   
     // Initialize form and preallocate values
     require_once(dirname(__FILE__).'/forms/returnResource_form.php');
     $mform = new returnResource_form (null, array('resourceid'=>$resourceid, 'name'=>$resourcename, 'defect'=>$resourcedefect));
@@ -94,7 +94,7 @@ if(strpos($strUrl, 'resourceid=')){
         $fm_resourcedefect = $fromform->defect;
 
         $record = new stdClass();
-        $record->id                 = $resourceid;
+        $record->id                 = $fm_resourceid;
         $record->name               = $resource->name;
         $record->description        = $resource->description;
         $record->serialnumber       = $resource->serialnumber;
@@ -105,13 +105,17 @@ if(strpos($strUrl, 'resourceid=')){
         $record->type               = $resource->type;
         $record->maincategory       = $resource->maincategory;
         $record->subcategory        = $resource->subcategory;
-        $record->defect             = $resource->defect;
+        $record->defect             = $fm_resourcedefect;
 
     } else {
         $formdata = array('id'=>$id, 'resourceid'=>$resourceid);
         $mform->set_data($formdata);
         $mform->display();
     };
+    echo nl2br("\n");
+    // Navigation
+    echo $OUTPUT->single_button(new moodle_url('../apsechseins/safeDefect.php', array('id'=>$cm->id, 'resourceid'=>$resourceid)), 'Zurück: Schaden vermerken');
+    echo $OUTPUT->single_button(new moodle_url('/course/view.php', array('id'=>2)), 'Weiter: Home');
 } else {
     // Second run
     require_once(dirname(__FILE__).'/forms/returnResource_form.php');
@@ -137,13 +141,16 @@ if(strpos($strUrl, 'resourceid=')){
         $record->defect             = $fm_resourcedefect;
 
         $DB->update_record('resources', $record, $bulk=false);
-        echo 'Der Schadensvermerk zur Ressource ' . $resource->name . ' mit der ID ' . $fm_resourceid . ' wurde erfolgreich gespeichert.';
+        echo 'Die Rückgabe der Ressource wurde verbucht.';
     } else {
         $formdata = array('id'=>$id);
         $mform->set_data($formdata);
         $mform->display();
     };
-    echo $OUTPUT->single_button(new moodle_url('../apsechseins/view.php', array('id'=>$cm->id)), 'ok');
+    echo nl2br("\n");
+    // Navigation
+    echo $OUTPUT->single_button(new moodle_url('../apsechseins/view.php', array('id'=>$cm->id)), 'Zurück: Ressource zurückgeben');
+    echo $OUTPUT->single_button(new moodle_url('/course/view.php', array('id'=>2)), 'Weiter: Home');
 };
 
 /*********************** END CODE FOR SCHADENSDOKUMENTATION ***********************/

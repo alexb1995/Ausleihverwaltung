@@ -152,14 +152,9 @@ if(strpos($strUrl, 'resourceid=')){
     	$mform->display();
     };
     echo nl2br("\n");
-    echo nl2br("\n");
-	// ZURÜCK ZU RESOURCEEDIT
-	echo $OUTPUT->single_button(new moodle_url('../apsechseins/view.php', array('id'=>$cm->id)), 'Zurück: Ressource bearbeiten');
-	echo $OUTPUT->single_button(new moodle_url('../apsechseins/view.php', array('id'=>$cm->id, 'resourceid'=>$fm_resourceid)), 'Weiter: Ressource bearbeiten');
-	echo nl2br("\n");
-    // ZURÜCK ZU AUSLEIHANTRAG
-	echo $OUTPUT->single_button(new moodle_url('../apsechseins/view.php', array('id'=>$cm->id)), 'Zurück: Ressource zurückgeben');
-	echo $OUTPUT->single_button(new moodle_url('../apsechseins/returnResource.php', array('id'=>$cm->id, 'resourceid'=>$fm_resourceid)), 'Weiter: Ressource zurückgeben');
+    // Navigation
+    echo $OUTPUT->single_button(new moodle_url('../apsechseins/view.php', array('id'=>$cm->id)), 'Zurück: Ressource zurückgeben');
+    echo $OUTPUT->single_button(new moodle_url('../apsechseins/returnResource.php', array('id'=>$cm->id, 'resourceid'=>$resourceid)), 'Weiter: Ressource zurückgeben');
 };
 
 /*********************** END CODE FOR SCHADENSDOKUMENTATION ***********************/
