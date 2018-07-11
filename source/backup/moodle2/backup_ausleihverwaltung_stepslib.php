@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Define all the backup steps that will be used by the backup_apsechseins_activity_task
+ * Define all the backup steps that will be used by the backup_ausleihverwaltung_activity_task
  *
- * @package   mod_apsechseins
+ * @package   mod_ausleihverwaltung
  * @category  backup
  * @copyright 2016 Your Name <your@email.address>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -26,14 +26,14 @@
 defined('MOODLE_INTERNAL') || die;
 
 /**
- * Define the complete apsechseins structure for backup, with file and id annotations
+ * Define the complete ausleihverwaltung structure for backup, with file and id annotations
  *
- * @package   mod_apsechseins
+ * @package   mod_ausleihverwaltung
  * @category  backup
  * @copyright 2016 Your Name <your@email.address>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class backup_apsechseins_activity_structure_step extends backup_activity_structure_step {
+class backup_ausleihverwaltung_activity_structure_step extends backup_activity_structure_step {
 
     /**
      * Defines the backup structure of the module
@@ -45,22 +45,22 @@ class backup_apsechseins_activity_structure_step extends backup_activity_structu
         // Get know if we are including userinfo.
         $userinfo = $this->get_setting_value('userinfo');
 
-        // Define the root element describing the apsechseins instance.
-        $apsechseins = new backup_nested_element('apsechseins', array('id'), array(
+        // Define the root element describing the ausleihverwaltung instance.
+        $ausleihverwaltung = new backup_nested_element('ausleihverwaltung', array('id'), array(
             'name', 'intro', 'introformat', 'grade'));
 
         // If we had more elements, we would build the tree here.
 
         // Define data sources.
-        $apsechseins->set_source_table('apsechseins', array('id' => backup::VAR_ACTIVITYID));
+        $ausleihverwaltung->set_source_table('ausleihverwaltung', array('id' => backup::VAR_ACTIVITYID));
 
         // If we were referring to other tables, we would annotate the relation
         // with the element's annotate_ids() method.
 
         // Define file annotations (we do not use itemid in this example).
-        $apsechseins->annotate_files('mod_apsechseins', 'intro', null);
+        $ausleihverwaltung->annotate_files('mod_ausleihverwaltung', 'intro', null);
 
-        // Return the root element (apsechseins), wrapped into standard activity structure.
-        return $this->prepare_activity_structure($apsechseins);
+        // Return the root element (ausleihverwaltung), wrapped into standard activity structure.
+        return $this->prepare_activity_structure($ausleihverwaltung);
     }
 }
