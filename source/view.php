@@ -84,7 +84,19 @@ $record1->amount         = 4;
 $record1->type = 1;
 $record1->maincategory    = "Apple";
 $record1->subcategory = "phone";
-$DB->insert_record('resources', $record1, $returnid=false, $bulk=false)
+$DB->insert_record('resources', $record1, $returnid=false, $bulk=false);
+
+$record2->name         = 'Mein iPhone';
+$record2->description = 'beschde';
+$record2->serialnumber        = 'blablub';
+$record2->inventorynumber = 'invent567';
+$record2->comment        = 'Comment that';
+$record2->status = 3;
+$record2->amount         = 4;
+$record2->type = 1;
+$record2->maincategory    = "Apple";
+$record2->subcategory = "phone";
+$DB->insert_record('resources', $record1, $returnid=false, $bulk=false);
 */
 
 /* PAGE belegen*/
@@ -115,7 +127,7 @@ $attributes = array();
 $resource = $DB->get_records('resources');
 
 $table = new html_table();
-$table->head = array('ID','Name', 'Description', 'Serialnumber', 'Inventorynumber', 'Comment', 'Status', 'Amount', 'Type', 'Maincategory', 'Subcategory', 'Edit', 'Delete');
+$table->head = array('ID','Name', 'Beschreibung', 'Seriennummer', 'Inventarnummer', 'Kommentar', 'Status', 'Menge', 'Typ', 'Hauptkategorie', 'Subkategorie', 'Bearbeiten', 'Löschen');
 
 //Für jeden Datensatz
 foreach ($resource as $res) {

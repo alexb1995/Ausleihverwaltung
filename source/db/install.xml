@@ -31,6 +31,7 @@
         <FIELD NAME="type" TYPE="int" LENGTH="2" NOTNULL="true" SEQUENCE="false" COMMENT="Art der Ressource: Stückgut (z.B. Smartphone) - 0; Schüttgut (z.B. Kullis) - 1"/>
         <FIELD NAME="maincategory" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Kategorie"/>
         <FIELD NAME="subcategory" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Subkategorie"/>
+        <FIELD NAME="damage" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Schadensinformationen können hier eingetragen werden"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
