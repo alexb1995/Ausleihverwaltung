@@ -67,32 +67,32 @@ Code lines beginning with `$` are commands to bre run in a shell like bash. If y
   * Keep in mind Moodle does not like numbers or special characters like `.` or `,` in names or paths. Name your plugin accordingly.
 
 * Edit all the files in this directory and its subdirectories and change
-  all the instances of the string "ausleihverwaltung" to your module name
+  all the instances of the string "apsechseins" to your module name
   (eg "mysupercoolmodname"). If you are using Linux, you can use the following command:  
-  `$ find . -type f -exec sed -i 's/ausleihverwaltung/mysupercoolmodname/g' {} \;`  
-  `$ find . -type f -exec sed -i 's/AUSLEIHVERWALTUNG/MYSUPERCOOLMODNAME/g' {} \;`  
+  `$ find . -type f -exec sed -i 's/apsechseins/mysupercoolmodname/g' {} \;`  
+  `$ find . -type f -exec sed -i 's/APSECHSEINS/MYSUPERCOOLMODNAME/g' {} \;`  
 
   On a mac, use:  
-  `$ find . -type f -exec sed -i '' 's/ausleihverwaltung/mysupercoolmodname/g' {} \;`  
-  `$ find . -type f -exec sed -i '' 's/AUSLEIHVERWALTUNG/MYSUPERCOOLMODNAME/g' {} \;`  
+  `$ find . -type f -exec sed -i '' 's/apsechseins/mysupercoolmodname/g' {} \;`  
+  `$ find . -type f -exec sed -i '' 's/APSECHSEINS/MYSUPERCOOLMODNAME/g' {} \;`  
 
   On a Windows system, you can use the following PowerShell commands. Use the command `cd` to change into the directory of your code.  
-  `PS> $files = Get-ChildItem . -recurse -include *.* ; foreach ($file in $files) { (Get-Content $file.PSPath) | ForEach-Object { $_ -replace "ausleihverwaltung", "mysupercoolmodname" } | Set-Content $file.PSPath }`  
-  `PS> $files = Get-ChildItem . -recurse -include *.* ; foreach ($file in $files) { (Get-Content $file.PSPath) | ForEach-Object { $_ -replace "AUSLEIHVERWALTUNG", "MYSUPERCOOLMODNAME" } | Set-Content $file.PSPath }`  
+  `PS> $files = Get-ChildItem . -recurse -include *.* ; foreach ($file in $files) { (Get-Content $file.PSPath) | ForEach-Object { $_ -replace "apsechseins", "mysupercoolmodname" } | Set-Content $file.PSPath }`  
+  `PS> $files = Get-ChildItem . -recurse -include *.* ; foreach ($file in $files) { (Get-Content $file.PSPath) | ForEach-Object { $_ -replace "APSECHSEINS", "MYSUPERCOOLMODNAME" } | Set-Content $file.PSPath }`  
 
   Replace "mysupercoolmodname" in the commands above with your module name.
 
-* Rename the file `/source/lang/en/ausleihverwaltung.php` to lang/en/mysupercoolmodname.php
+* Rename the file `/source/lang/en/apsechseins.php` to lang/en/mysupercoolmodname.php
   where "mysupercoolmodname" is the name of your module
 
-* Rename all files in `/source/backup/moodle2/` folder by replacing "ausleihverwaltung" with
+* Rename all files in `/source/backup/moodle2/` folder by replacing "apsechseins" with
   the name of your module
 
   On Linux (and Mac) you can perform this and previous steps by calling:  
-  `$ find . -depth -name '*ausleihverwaltung*' -execdir bash -c 'mv -i "$1" "${1//ausleihverwaltung/mysupercoolmodname}"' bash {} \;`
+  `$ find . -depth -name '*apsechseins*' -execdir bash -c 'mv -i "$1" "${1//apsechseins/mysupercoolmodname}"' bash {} \;`
 
   On a Windows system, you can use the following command to perfrom this and the previous step:  
-  `PS> $files = Get-ChildItem . -recurse -include *.* | Where-Object {$_.Name -like "*ausleihverwaltung*"}; foreach ($file in $files) { $newname = ([String]$file).Replace("ausleihverwaltung", "mysupercoolmodname"); Rename-Item -Path $file $newname }`
+  `PS> $files = Get-ChildItem . -recurse -include *.* | Where-Object {$_.Name -like "*apsechseins*"}; foreach ($file in $files) { $newname = ([String]$file).Replace("apsechseins", "mysupercoolmodname"); Rename-Item -Path $file $newname }`
 
 * Implement new functionality in `view.php` and `locallib.php`. In `locallib.php`, most functions are not specific and just require input as a parameter to work with any given process definition.
 

@@ -15,17 +15,17 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Prints a particular instance of ausleihverwaltung
+ * Prints a particular instance of apsechseins
  *
  * You can have a rather longer description of the file as well,
  * if you like, and it can span multiple lines.
  *
- * @package    mod_ausleihverwaltung
+ * @package    mod_apsechseins
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// Replace ausleihverwaltung with the name of your module and remove this line.
+// Replace apsechseins with the name of your module and remove this line.
 
 require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 require_once(dirname(__FILE__).'/lib.php');
@@ -91,49 +91,49 @@ $taskDefinitionKey = null;
 
 
 $id = optional_param('id', 0, PARAM_INT); // Course_module ID, or
-$n  = optional_param('n', 0, PARAM_INT);  // ... ausleihverwaltung instance ID - it should be named as the first character of the module.
+$n  = optional_param('n', 0, PARAM_INT);  // ... apsechseins instance ID - it should be named as the first character of the module.
 
 if ($id) {
-    $cm         = get_coursemodule_from_id('ausleihverwaltung', $id, 0, false, MUST_EXIST);
+    $cm         = get_coursemodule_from_id('apsechseins', $id, 0, false, MUST_EXIST);
     $course     = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
-    $ausleihverwaltung  = $DB->get_record('ausleihverwaltung', array('id' => $cm->instance), '*', MUST_EXIST);
+    $apsechseins  = $DB->get_record('apsechseins', array('id' => $cm->instance), '*', MUST_EXIST);
 } else if ($n) {
-    $ausleihverwaltung  = $DB->get_record('ausleihverwaltung', array('id' => $n), '*', MUST_EXIST);
-    $course     = $DB->get_record('course', array('id' => $ausleihverwaltung->course), '*', MUST_EXIST);
-    $cm         = get_coursemodule_from_instance('ausleihverwaltung', $ausleihverwaltung->id, $course->id, false, MUST_EXIST);
+    $apsechseins  = $DB->get_record('apsechseins', array('id' => $n), '*', MUST_EXIST);
+    $course     = $DB->get_record('course', array('id' => $apsechseins->course), '*', MUST_EXIST);
+    $cm         = get_coursemodule_from_instance('apsechseins', $apsechseins->id, $course->id, false, MUST_EXIST);
 } else {
     error('You must specify a course_module ID or an instance ID');
 }
 
 require_login($course, true, $cm);
 
-$event = \mod_ausleihverwaltung\event\course_module_viewed::create(array(
+$event = \mod_apsechseins\event\course_module_viewed::create(array(
     'objectid' => $PAGE->cm->instance,
     'context' => $PAGE->context,
 ));
 $event->add_record_snapshot('course', $PAGE->course);
-$event->add_record_snapshot($PAGE->cm->modname, $ausleihverwaltung);
+$event->add_record_snapshot($PAGE->cm->modname, $apsechseins);
 $event->trigger();
 
 // Print the page header.
 
-$PAGE->set_url('/mod/ausleihverwaltung/view.php', array('id' => $cm->id));
-$PAGE->set_title(format_string($ausleihverwaltung->name));
+$PAGE->set_url('/mod/apsechseins/view.php', array('id' => $cm->id));
+$PAGE->set_title(format_string($apsechseins->name));
 $PAGE->set_heading(format_string($course->fullname));
 
 /*
  * Other things you may want to set - remove if not needed.
  * $PAGE->set_cacheable(false);
  * $PAGE->set_focuscontrol('some-html-id');
- * $PAGE->add_body_class('ausleihverwaltung-'.$somevar);
+ * $PAGE->add_body_class('apsechseins-'.$somevar);
  */
 
 // Output starts here.
 echo $OUTPUT->header();
 
 // Conditions to show the intro can change to look for own settings or whatever.
-if ($ausleihverwaltung->intro) {
-    echo $OUTPUT->box(format_module_intro('ausleihverwaltung', $ausleihverwaltung, $cm->id), 'generalbox mod_introbox', 'ausleihverwaltungintro');
+if ($apsechseins->intro) {
+    echo $OUTPUT->box(format_module_intro('apsechseins', $apsechseins, $cm->id), 'generalbox mod_introbox', 'apsechseinsintro');
 }
 
 // Replace the following lines with you own code.
