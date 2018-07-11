@@ -287,7 +287,7 @@ function mail_to($email, $name, $subject, $message) {
 		$user = generate_dummy_user($email, $name);
 	}
 	
-	$success = email_to_user($to, $from, $emailsubject, $emailmessage);
+	$success = email_to_user($user, $from, $emailsubject, $emailmessage);
 
 	return $success;
 }
