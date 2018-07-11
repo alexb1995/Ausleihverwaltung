@@ -19,7 +19,11 @@
  *
  * @see uninstall_plugin()
  *
- * @package    mod_apsechseins
+<<<<<<< HEAD:ausleihverwaltung/db/uninstall.php
+ * @package    mod_ausleihverwaltung
+=======
+ * @package    mod_ausleihverwaltung
+>>>>>>> ausleihverwaltung:source/db/uninstall.php
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -27,6 +31,10 @@
 /**
  * Custom uninstallation procedure
  */
-function xmldb_apsechseins_uninstall() {
+<<<<<<< HEAD:ausleihverwaltung/db/uninstall.php
+function xmldb_ausleihverwaltung_uninstall() {
+=======
+function xmldb_ausleihverwaltung_uninstall() {
+>>>>>>> ausleihverwaltung:source/db/uninstall.php
     return true;
 }

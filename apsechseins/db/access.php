@@ -15,7 +15,11 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Capability definitions for the apsechseins module
+<<<<<<< HEAD:ausleihverwaltung/db/access.php
+ * Capability definitions for the ausleihverwaltung module
+=======
+ * Capability definitions for the ausleihverwaltung module
+>>>>>>> ausleihverwaltung:source/db/access.php
  *
  * The capabilities are loaded into the database table when the module is
  * installed or updated. Whenever the capability definitions are updated,
@@ -39,7 +43,11 @@
  *
  * The variable name for the capability definitions array is $capabilities
  *
- * @package    mod_apsechseins
+<<<<<<< HEAD:ausleihverwaltung/db/access.php
+ * @package    mod_ausleihverwaltung
+=======
+ * @package    mod_ausleihverwaltung
+>>>>>>> ausleihverwaltung:source/db/access.php
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -48,7 +56,11 @@ defined('MOODLE_INTERNAL') || die();
 
 // Modify capabilities as needed and remove this comment.
 $capabilities = array(
-    'mod/apsechseins:addinstance' => array(
+<<<<<<< HEAD:ausleihverwaltung/db/access.php
+    'mod/ausleihverwaltung:addinstance' => array(
+=======
+    'mod/ausleihverwaltung:addinstance' => array(
+>>>>>>> ausleihverwaltung:source/db/access.php
         'riskbitmask' => RISK_XSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -59,7 +71,11 @@ $capabilities = array(
         'clonepermissionsfrom' => 'moodle/course:manageactivities'
     ),
 
-    'mod/apsechseins:view' => array(
+<<<<<<< HEAD:ausleihverwaltung/db/access.php
+    'mod/ausleihverwaltung:view' => array(
+=======
+    'mod/ausleihverwaltung:view' => array(
+>>>>>>> ausleihverwaltung:source/db/access.php
         'captype' => 'read',
         'contextlevel' => CONTEXT_MODULE,
         'archetypes' => array(
@@ -68,7 +84,11 @@ $capabilities = array(
         )
     ),
 
-    'mod/apsechseins:submit' => array(
+<<<<<<< HEAD:ausleihverwaltung/db/access.php
+    'mod/ausleihverwaltung:submit' => array(
+=======
+    'mod/ausleihverwaltung:submit' => array(
+>>>>>>> ausleihverwaltung:source/db/access.php
         'riskbitmask' => RISK_SPAM,
         'captype' => 'write',
         'contextlevel' => CONTEXT_MODULE,

@@ -15,12 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Internal library of functions for module apsechseins
+ * Internal library of functions for module ausleihverwaltung
  *
- * All the apsechseins specific functions, needed to implement the module
+ * All the ausleihverwaltung specific functions, needed to implement the module
  * logic, should go here. Never include this file from your lib.php!
  *
- * @package    mod_apsechseins
+ * @package    mod_ausleihverwaltung
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -81,11 +81,11 @@ function create_api_instances() {
 	);
 }
 
-function apsechseins_do_something_useful(array $things) {
+function ausleihverwaltung_do_something_useful(array $things) {
     return new stdClass();
 }
 
-function apsechseins_get_process_definition_id($processKey) {
+function ausleihverwaltung_get_process_definition_id($processKey) {
 	global $processDefinitionsApiInstance;
 
 	$version = null; // int | Only return process definitions with the given version.
@@ -113,7 +113,7 @@ function apsechseins_get_process_definition_id($processKey) {
 	}
 }
 
-function apsechseins_start_process($process_definition_id, $business_key) {
+function ausleihverwaltung_start_process($process_definition_id, $business_key) {
 	global $processInstancesApiInstance;
 
 	$requestArray = array(
@@ -136,7 +136,7 @@ function apsechseins_start_process($process_definition_id, $business_key) {
 	}
 }
 
-function apsechseins_check_for_input_required($process_instance_id) {
+function ausleihverwaltung_check_for_input_required($process_instance_id) {
 	global $tasksApiInstance;
 	try {
 		$result = $tasksApiInstance->getTasks(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, $process_instance_id, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
@@ -154,7 +154,7 @@ function apsechseins_check_for_input_required($process_instance_id) {
 	}
 }
 
-function apsechseins_answer_input_required($task_id, $process_definition_id, $value1, $value2) {
+function ausleihverwaltung_answer_input_required($task_id, $process_definition_id, $value1, $value2) {
 	global $formsApiInstance;
 
 	$formArray = array(
@@ -185,7 +185,7 @@ function apsechseins_answer_input_required($task_id, $process_definition_id, $va
 	}
 }
 
-function apsechseins_get_process_instance_status($process_instance_id) {
+function ausleihverwaltung_get_process_instance_status($process_instance_id) {
 	global $processInstancesApiInstance;
 
 	try {
