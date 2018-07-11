@@ -2,7 +2,7 @@
 // moodleform is defined in formslib.php
 require_once("$CFG->libdir/formslib.php");
 
-class schadensdokumentation_form extends moodleform {
+class saveDefect_form extends moodleform {
     public function definition() {
         global $CFG;
 

@@ -55,7 +55,7 @@ $event->add_record_snapshot($PAGE->cm->modname, $apsechseins);
 $event->trigger();
 
 // Print the page header.
-$PAGE->set_url('/mod/apsechseins/view.php', array('id'=>$cm->id));
+$PAGE->set_url('/mod/apsechseins/view.php', array('id'=>$cm->id, 'resourceid'=>$_GET['resourceid']));
 $PAGE->set_title(format_string($apsechseins->name));
 $PAGE->set_heading(format_string($course->fullname));
 
@@ -74,7 +74,7 @@ echo $OUTPUT->heading('Schadensdokumentation');
 
 $url = $PAGE->url;
 $strUrl = $url.'';
-require_once(dirname(__FILE__).'/forms/schadensdokumentation_form.php');
+require_once(dirname(__FILE__).'/forms/saveDefect_form.php');
 
 if(strpos($strUrl, 'resourceid=')){
 	// First run
@@ -90,8 +90,8 @@ if(strpos($strUrl, 'resourceid=')){
     };
    
     // Initialize form and preallocate values
-    require_once(dirname(__FILE__).'/forms/schadensdokumentation_form.php');
-    $mform = new schadensdokumentation_form (null, array('resourceid'=>$resourceid, 'name'=>$resourcename, 'defect'=>$resourcedefect));
+    require_once(dirname(__FILE__).'/forms/saveDefect_form.php');
+    $mform = new saveDefect_form (null, array('resourceid'=>$resourceid, 'name'=>$resourcename, 'defect'=>$resourcedefect));
 
     if ($fromform = $mform->get_data()) {
     	$fm_resourceid = $fromform->resourceid;
@@ -116,17 +116,14 @@ if(strpos($strUrl, 'resourceid=')){
         $mform->set_data($formdata);
         $mform->display();
     };
-    // ZURÜCK ZU RESOURCEEDIT
-	echo $OUTPUT->single_button(new moodle_url('../apsechseins/view.php', array('id'=>$cm->id)), 'Zurück: Ressource bearbeiten');
-	echo $OUTPUT->single_button(new moodle_url('../apsechseins/view.php', array('id'=>$cm->id, 'resourceid'=>$resourceid)), 'Weiter: Ressource bearbeiten');
 	echo nl2br("\n");
-    // ZURÜCK ZU AUSLEIHANTRAG
+    // Navigation
 	echo $OUTPUT->single_button(new moodle_url('../apsechseins/view.php', array('id'=>$cm->id)), 'Zurück: Ressource zurückgeben');
 	echo $OUTPUT->single_button(new moodle_url('../apsechseins/returnResource.php', array('id'=>$cm->id, 'resourceid'=>$resourceid)), 'Weiter: Ressource zurückgeben');
 } else {
 	// Second run
-    require_once(dirname(__FILE__).'/forms/schadensdokumentation_form.php');
-    $mform = new schadensdokumentation_form ();
+    require_once(dirname(__FILE__).'/forms/saveDefect_form.php');
+    $mform = new saveDefect_form ();
     if ($fromform = $mform->get_data()) {
     	$fm_resourceid = $fromform->resourceid;
     	$fm_resourcedefect = $fromform->defect;
