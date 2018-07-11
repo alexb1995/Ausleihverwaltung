@@ -15,23 +15,18 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Defines the version and other meta-info about the plugin
+ * Provides code to be executed during the module uninstallation
  *
- * Setting the $plugin->version to 0 prevents the plugin from being installed.
- * See https://docs.moodle.org/dev/version.php for more info.
+ * @see uninstall_plugin()
  *
  * @package    mod_apeinsdrei
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->component = 'mod_apeinsvier';
-$plugin->version = 2018071106;
-$plugin->release = '2018071106';
-$plugin->requires = 2014051200;
-$plugin->maturity = MATURITY_ALPHA;
-$plugin->cron = 0;
-$plugin->dependencies = array();
-
+/**
+ * Custom uninstallation procedure
+ */
+function xmldb_apeinsdrei_uninstall() {
+    return true;
+}
