@@ -16,28 +16,27 @@
 
 
 /**
- * English strings for apeinsvier
+ * English strings for ausleihverwaltung
  *
  * You can have a rather longer description of the file as well,
  * if you like, and it can span multiple lines.
  *
- * @package    mod_apeinsvier
+ * @package    mod_ausleihverwaltung
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['modulename'] = 'apeinsvier';
-$string['modulenameplural'] = 'apeinsviers';
-$string['modulename_help'] = 'Use the apeinsvier module for... | The apeinsvier module allows...';
-$string['apeinsvier:addinstance'] = 'Add a new apeinsvier';
-$string['apeinsvier:submit'] = 'Submit apeinsvier';
-$string['apeinsvier:view'] = 'View apeinsvier';
-$string['apeinsvierfieldset'] = 'Custom example fieldset';
-$string['apeinsviername'] = 'apeinsvier name';
-$string['apeinsviername_help'] = 'This is the content of the help tooltip associated with the apeinsviername field. Markdown syntax is supported.';
-$string['apeinsvier'] = 'apeinsvier';
-$string['pluginadministration'] = 'apeinsvier administration';
-$string['pluginname'] = 'apeinsvier';
-$string['maincategory'] ='maincategory';
+$string['modulename'] = 'ausleihverwaltung';
+$string['modulenameplural'] = 'ausleihverwaltungs';
+$string['modulename_help'] = 'Use the ausleihverwaltung module for... | The ausleihverwaltung module allows...';
+$string['ausleihverwaltung:addinstance'] = 'Add a new ausleihverwaltung';
+$string['ausleihverwaltung:submit'] = 'Submit ausleihverwaltung';
+$string['ausleihverwaltung:view'] = 'View ausleihverwaltung';
+$string['ausleihverwaltungfieldset'] = 'Custom example fieldset';
+$string['ausleihverwaltungname'] = 'ausleihverwaltung name';
+$string['ausleihverwaltungname_help'] = 'This is the content of the help tooltip associated with the ausleihverwaltungname field. Markdown syntax is supported.';
+$string['ausleihverwaltung'] = 'ausleihverwaltung';
+$string['pluginadministration'] = 'ausleihverwaltung administration';
+$string['pluginname'] = 'ausleihverwaltung';

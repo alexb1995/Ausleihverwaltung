@@ -7,6 +7,8 @@
 - [Moodle Plugin Template](#moodle-plugin-template)
 		- [IF IN DOUBT, READ THE DOCS!](#if-in-doubt-read-the-docs)
 	- [Autofix of all linter Errors](#autofix-of-all-linter-errors)
+			- [!UPDATE!](#update)
+			- [!UPDATE!](#update-1)
 	- [Moodle Instances](#moodle-instances)
 	- [Official Moodle Docs With Additional Comments](#official-moodle-docs-with-additional-comments)
 	- [Local testing](#local-testing)
@@ -16,6 +18,12 @@
 ### IF IN DOUBT, READ THE DOCS!
 
 ## Autofix of all linter Errors
+
+#### !UPDATE!  
+You no longer need to install and run composer, as the necessary libs are now included in the `/source/lib/` folder.  
+You can still install composer, if you like.
+#### !UPDATE!
+
 
 We are using `composer` for dependency paket management. This tool allows to automatically install necessary PHP pakets. It is vital that you follow the installation steps below to get `composer` up and running.
 
@@ -49,31 +57,42 @@ Code lines beginning with `$` are commands to bre run in a shell like bash. If y
 
 * Install composer as illustrated [here.](https://getcomposer.org/doc/00-intro.md)
 
-* Pick a name for your module (e.g. "widget").
+* The file `version.php` **does not need to be edited**.  
+  If a module with the same version number is installed, Moodle deletes the old version and installs the newly uploaded module.  
+  **This prevents databse errors and is the preferred way for development.**
+
+* Pick a name for your module (e.g. "mysupercoolmodname").
   The module name MUST be lower case and can't contain underscores. You should check the [CVS contrib](http://cvs.moodle.org/contrib/plugins/mod/) to make sure that your name is not already used by an other module. Registering the plugin name @ [http://moodle.org/plugins](http://moodle.org/plugins) will secure it for you.
 
   * Keep in mind Moodle does not like numbers or special characters like `.` or `,` in names or paths. Name your plugin accordingly.
 
 * Edit all the files in this directory and its subdirectories and change
-  all the instances of the string "newmodule" to your module name
-  (eg "widget"). If you are using Linux, you can use the following command:  
-  `$ find . -type f -exec sed -i 's/newmodule/widget/g' {} \;`  
-  `$ find . -type f -exec sed -i 's/NEWMODULE/WIDGET/g' {} \;`
+  all the instances of the string "apsechseins" to your module name
+  (eg "mysupercoolmodname"). If you are using Linux, you can use the following command:  
+  `$ find . -type f -exec sed -i 's/apsechseins/mysupercoolmodname/g' {} \;`  
+  `$ find . -type f -exec sed -i 's/APSECHSEINS/MYSUPERCOOLMODNAME/g' {} \;`  
 
   On a mac, use:  
-  `$ find . -type f -exec sed -i '' 's/newmodule/widget/g' {} \;`  
-  `$ find . -type f -exec sed -i '' 's/NEWMODULE/WIDGET/g' {} \;`
+  `$ find . -type f -exec sed -i '' 's/apsechseins/mysupercoolmodname/g' {} \;`  
+  `$ find . -type f -exec sed -i '' 's/APSECHSEINS/MYSUPERCOOLMODNAME/g' {} \;`  
 
-* Rename the file lang/en/newmodule.php to lang/en/widget.php
-  where "widget" is the name of your module
+  On a Windows system, you can use the following PowerShell commands. Use the command `cd` to change into the directory of your code.  
+  `PS> $files = Get-ChildItem . -recurse -include *.* ; foreach ($file in $files) { (Get-Content $file.PSPath) | ForEach-Object { $_ -replace "apsechseins", "mysupercoolmodname" } | Set-Content $file.PSPath }`  
+  `PS> $files = Get-ChildItem . -recurse -include *.* ; foreach ($file in $files) { (Get-Content $file.PSPath) | ForEach-Object { $_ -replace "APSECHSEINS", "MYSUPERCOOLMODNAME" } | Set-Content $file.PSPath }`  
 
-* Rename all files in backup/moodle2/ folder by replacing "newmodule" with
+  Replace "mysupercoolmodname" in the commands above with your module name.
+
+* Rename the file `/source/lang/en/apsechseins.php` to lang/en/mysupercoolmodname.php
+  where "mysupercoolmodname" is the name of your module
+
+* Rename all files in `/source/backup/moodle2/` folder by replacing "apsechseins" with
   the name of your module
 
-  On Linux you can perform this and previous steps by calling:  
-  `$ find . -depth -name '*newmodule*' -execdir bash -c 'mv -i "$1" "${1//newmodule/widget}"' bash {} \;`
+  On Linux (and Mac) you can perform this and previous steps by calling:  
+  `$ find . -depth -name '*apsechseins*' -execdir bash -c 'mv -i "$1" "${1//apsechseins/mysupercoolmodname}"' bash {} \;`
 
-* Move the folder `/vendor`, which was created by composer, in the folder `/source`, overwriting any existing files if asked.
+  On a Windows system, you can use the following command to perfrom this and the previous step:  
+  `PS> $files = Get-ChildItem . -recurse -include *.* | Where-Object {$_.Name -like "*apsechseins*"}; foreach ($file in $files) { $newname = ([String]$file).Replace("apsechseins", "mysupercoolmodname"); Rename-Item -Path $file $newname }`
 
 * Implement new functionality in `view.php` and `locallib.php`. In `locallib.php`, most functions are not specific and just require input as a parameter to work with any given process definition.
 
@@ -81,7 +100,7 @@ Code lines beginning with `$` are commands to bre run in a shell like bash. If y
 
 * If you encounter any problems while uploading, delete the whole folder `/source/vendor/trahloff/activiti/.git`. Deleting this folder is generally no bad idea.
 
-* Create a ZIP archive of the `/source` folder and name it according to your app (in this tutorial "widget").
+* Create a ZIP archive of the `/source` folder and name it according to your app (in this tutorial "mysupercoolmodname").
 
 * Login in to [our Moodle instance](https://moodle.ganymed.me), navigate to the Management of Moodle and select the Option to install a new plugin.
 

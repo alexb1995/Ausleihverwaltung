@@ -9,54 +9,61 @@ class resourcehtml_form extends moodleform {
         $mform = $this->_form; // Don't forget the underscore!
 
         /* ****************** NAME *************/
-		$mform->addElement('text', 'name', 'name');
+		$mform->addElement('text', 'name', 'Name');
 		$mform->setType('name', PARAM_NOTAGS);
         $mform->setDefault('name', $this->_customdata['name']);
 
         /* ****************** DESCRIPTION *************/
-        $mform->addElement('text', 'description', 'description'); // Add elements to your form
+        $mform->addElement('text', 'description', 'Beschreibung'); // Add elements to your form
         $mform->setType('description', PARAM_NOTAGS);                   //Set type of element
         $mform->setDefault('description', $this->_customdata['description']);        //Default value
 
         /* ****************** serialnumber *************/
-        $mform->addElement('text', 'serialnumber', 'serialnumber');
+        $mform->addElement('text', 'serialnumber', 'Seriennummer');
 		$mform->setType('serialnumber', PARAM_NOTAGS);
         $mform->setDefault('serialnumber', $this->_customdata['serialnumber']);
 
         /* ****************** INVENTORYNUMBER *************/
-        $mform->addElement('text', 'inventorynumber', 'inventorynumber'); // Add elements to your form
+        $mform->addElement('text', 'inventorynumber', 'Inventarnummer'); // Add elements to your form
         $mform->setType('inventorynumber', PARAM_NOTAGS);                   //Set type of element
         $mform->setDefault('inventorynumber', $this->_customdata['inventorynumber']);        //Default value
 
         /* ****************** COMMENT *************/
-        $mform->addElement('text', 'comment', 'comment');
+        $mform->addElement('text', 'comment', 'Kommentar');
 		$mform->setType('comment', PARAM_NOTAGS);
         $mform->setDefault('comment', $this->_customdata['comment']);
 
         /* ****************** STATUS *************/
-        $mform->addElement('text', 'status', 'status'); // Add elements to your form
+        $mform->addElement('text', 'status', 'Status'); // Add elements to your form
         $mform->setType('status', PARAM_INT);                   //Set type of element
         $mform->setDefault('status', $this->_customdata['status']);        //Default value
 
         /* ****************** AMOUNT *************/
-        $mform->addElement('text', 'amount','amount');
+        $mform->addElement('text', 'amount','Menge');
 		$mform->setType('amount', PARAM_INT);
         $mform->setDefault('amount', $this->_customdata['amount']);
 
         /* ****************** TYPE *************/
-        $mform->addElement('text', 'type', 'type'); // Add elements to your form
+        $mform->addElement('text', 'type', 'Typ'); // Add elements to your form
         $mform->setType('type', PARAM_INT);                   //Set type of element
         $mform->setDefault('type', $this->_customdata['type']);        //Default value
 
         /* ****************** MAINCATEGORY *************/
-        $mform->addElement('text', 'maincategory', 'maincategory');
+        $mform->addElement('text', 'maincategory', 'Hauptkategorie');
 		$mform->setType('maincategory', PARAM_NOTAGS);
         $mform->setDefault('maincategory', $this->_customdata['maincategory']);
 
         /* ****************** TYPE *************/
-        $mform->addElement('text', 'subcategory', 'subcategory'); // Add elements to your form
+        $mform->addElement('text', 'subcategory', 'Subkategorie'); // Add elements to your form
         $mform->setType('subcategory', PARAM_NOTAGS);                   //Set type of element
         $mform->setDefault('subcategory', $this->_customdata['subcategory']);        //Default value
+
+         /* ****************** DEFECT *************/
+         $mform->addElement('text', 'defect', 'Schaden'); // Add elements to your form
+         $mform->setType('defect', PARAM_NOTAGS);                   //Set type of element
+         $mform->setDefault('defect', $this->_customdata['defect']);        //Default value
+
+
 
         error_log("TEST FROM INSIDE FORM");
 

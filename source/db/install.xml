@@ -1,11 +1,11 @@
-<XMLDB xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" PATH="mod/apeinsvier/db" VERSION="20180619" COMMENT="XMLDB file for Moodle mod/apeinsvier" xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+<XMLDB xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" PATH="mod/ausleihverwaltung/db" VERSION="20180619" COMMENT="XMLDB file for Moodle mod/ausleihverwaltung" xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
   <TABLES>
-    <TABLE NAME="apeinsvier" COMMENT="Default comment for apeinsvier, please edit me">
+    <TABLE NAME="ausleihverwaltung" COMMENT="Default comment for ausleihverwaltung, please edit me">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Course apeinsvier activity belongs to"/>
+        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Course ausleihverwaltung activity belongs to"/>
         <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="name field for moodle instances"/>
-        <FIELD NAME="intro" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="General introduction of the apeinsvier activity"/>
+        <FIELD NAME="intro" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="General introduction of the ausleihverwaltung activity"/>
         <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Format of the intro field (MOODLE, HTML, MARKDOWN...)"/>
         <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
         <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
@@ -18,7 +18,7 @@
         <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
       </INDEXES>
     </TABLE>
-    <TABLE NAME="resources" COMMENT="Table for capturing resources to lend and rent">
+    <TABLE NAME="ausleihverwaltung_resources" COMMENT="Table for capturing resources to lend and rent">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
         <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Name der Ressource"/>
@@ -31,6 +31,16 @@
         <FIELD NAME="type" TYPE="int" LENGTH="2" NOTNULL="true" SEQUENCE="false" COMMENT="Art der Ressource: Stückgut (z.B. Smartphone) - 0; Schüttgut (z.B. Kullis) - 1"/>
         <FIELD NAME="maincategory" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Kategorie"/>
         <FIELD NAME="subcategory" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Subkategorie"/>
+        <FIELD NAME="defect" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Schadensinformationen können hier eingetragen werden"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="schaeden" COMMENT="Schadensdokumentation">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Ressourcen-ID"/>
+        <FIELD NAME="defect" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Mögliche Schäden an der Ressource"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
