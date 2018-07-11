@@ -17,7 +17,7 @@
 /**
  * Provides the restore activity task class
  *
- * @package   mod_apeinsvier
+ * @package   mod_apeinsdrei
  * @category  backup
  * @copyright 2016 Your Name <your@email.address>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -25,19 +25,19 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->dirroot . '/mod/apeinsvier/backup/moodle2/restore_apeinsvier_stepslib.php');
+require_once($CFG->dirroot . '/mod/apeinsdrei/backup/moodle2/restore_apeinsdrei_stepslib.php');
 
 /**
- * Restore task for the apeinsvier activity module
+ * Restore task for the apeinsdrei activity module
  *
  * Provides all the settings and steps to perform complete restore of the activity.
  *
- * @package   mod_apeinsvier
+ * @package   mod_apeinsdrei
  * @category  backup
  * @copyright 2016 Your Name <your@email.address>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class restore_apeinsvier_activity_task extends restore_activity_task {
+class restore_apeinsdrei_activity_task extends restore_activity_task {
 
     /**
      * Define (add) particular settings this activity can have
@@ -51,7 +51,7 @@ class restore_apeinsvier_activity_task extends restore_activity_task {
      */
     protected function define_my_steps() {
         // We have just one structure step here.
-        $this->add_step(new restore_apeinsvier_activity_structure_step('apeinsvier_structure', 'apeinsvier.xml'));
+        $this->add_step(new restore_apeinsdrei_activity_structure_step('apeinsdrei_structure', 'apeinsdrei.xml'));
     }
 
     /**
@@ -61,7 +61,7 @@ class restore_apeinsvier_activity_task extends restore_activity_task {
     static public function define_decode_contents() {
         $contents = array();
 
-        $contents[] = new restore_decode_content('apeinsvier', array('intro'), 'apeinsvier');
+        $contents[] = new restore_decode_content('apeinsdrei', array('intro'), 'apeinsdrei');
 
         return $contents;
     }
@@ -73,8 +73,8 @@ class restore_apeinsvier_activity_task extends restore_activity_task {
     static public function define_decode_rules() {
         $rules = array();
 
-        $rules[] = new restore_decode_rule('apeinsvierVIEWBYID', '/mod/apeinsvier/view.php?id=$1', 'course_module');
-        $rules[] = new restore_decode_rule('apeinsvierINDEX', '/mod/apeinsvier/index.php?id=$1', 'course');
+        $rules[] = new restore_decode_rule('apeinsdreiVIEWBYID', '/mod/apeinsdrei/view.php?id=$1', 'course_module');
+        $rules[] = new restore_decode_rule('apeinsdreiINDEX', '/mod/apeinsdrei/index.php?id=$1', 'course');
 
         return $rules;
 
@@ -83,15 +83,15 @@ class restore_apeinsvier_activity_task extends restore_activity_task {
     /**
      * Define the restore log rules that will be applied
      * by the {@link restore_logs_processor} when restoring
-     * apeinsvier logs. It must return one array
+     * apeinsdrei logs. It must return one array
      * of {@link restore_log_rule} objects
      */
     static public function define_restore_log_rules() {
         $rules = array();
 
-        $rules[] = new restore_log_rule('apeinsvier', 'add', 'view.php?id={course_module}', '{apeinsvier}');
-        $rules[] = new restore_log_rule('apeinsvier', 'update', 'view.php?id={course_module}', '{apeinsvier}');
-        $rules[] = new restore_log_rule('apeinsvier', 'view', 'view.php?id={course_module}', '{apeinsvier}');
+        $rules[] = new restore_log_rule('apeinsdrei', 'add', 'view.php?id={course_module}', '{apeinsdrei}');
+        $rules[] = new restore_log_rule('apeinsdrei', 'update', 'view.php?id={course_module}', '{apeinsdrei}');
+        $rules[] = new restore_log_rule('apeinsdrei', 'view', 'view.php?id={course_module}', '{apeinsdrei}');
 
         return $rules;
     }
@@ -109,7 +109,7 @@ class restore_apeinsvier_activity_task extends restore_activity_task {
     static public function define_restore_log_rules_for_course() {
         $rules = array();
 
-        $rules[] = new restore_log_rule('apeinsvier', 'view all', 'index.php?id={course}', null);
+        $rules[] = new restore_log_rule('apeinsdrei', 'view all', 'index.php?id={course}', null);
 
         return $rules;
     }

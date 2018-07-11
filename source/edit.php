@@ -5,30 +5,30 @@ require_once(dirname(__FILE__).'/lib.php');
 require_once(dirname(__FILE__).'/locallib.php');
 
 $id = optional_param('id', 0, PARAM_INT); // Course_module ID, or
-$n  = optional_param('n', 0, PARAM_INT);  // ... apeinsvier instance ID - it should be named as the first character of the module.
+$n  = optional_param('n', 0, PARAM_INT);  // ... apeinsdrei instance ID - it should be named as the first character of the module.
 if ($id) {
-$cm         = get_coursemodule_from_id('apeinsvier', $id, 0, false, MUST_EXIST);
+$cm         = get_coursemodule_from_id('apeinsdrei', $id, 0, false, MUST_EXIST);
 $course     = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
-$apeinsvier  = $DB->get_record('apeinsvier', array('id' => $cm->instance), '*', MUST_EXIST);
+$apeinsdrei  = $DB->get_record('apeinsdrei', array('id' => $cm->instance), '*', MUST_EXIST);
 } else if ($n) {
-$apeinsvier  = $DB->get_record('apeinsvier', array('id' => $n), '*', MUST_EXIST);
-$course     = $DB->get_record('course', array('id' => $apeinsvier->course), '*', MUST_EXIST);
-$cm         = get_coursemodule_from_instance('apeinsvier', $apeinsvier->id, $course->id, false, MUST_EXIST);
+$apeinsdrei  = $DB->get_record('apeinsdrei', array('id' => $n), '*', MUST_EXIST);
+$course     = $DB->get_record('course', array('id' => $apeinsdrei->course), '*', MUST_EXIST);
+$cm         = get_coursemodule_from_instance('apeinsdrei', $apeinsdrei->id, $course->id, false, MUST_EXIST);
 } else {
 error('You must specify a course_module ID or an instance ID');
 }
 require_login($course, true, $cm);
-$event = \mod_apeinsvier\event\course_module_viewed::create(array(
+$event = \mod_apeinsdrei\event\course_module_viewed::create(array(
 'objectid' => $PAGE->cm->instance,
 'context' => $PAGE->context,
 ));
 $event->add_record_snapshot('course', $PAGE->course);
-$event->add_record_snapshot($PAGE->cm->modname, $apeinsvier);
+$event->add_record_snapshot($PAGE->cm->modname, $apeinsdrei);
 $event->trigger();
 
 /*PAGE SETZEN*/
-$PAGE->set_url('/mod/apeinsvier/edit.php', array('id' => $cm->id,'resourceid' => $_GET['resourceid']));
-$PAGE->set_title(format_string($apeinsvier->name));
+$PAGE->set_url('/mod/apeinsdrei/edit.php', array('id' => $cm->id,'resourceid' => $_GET['resourceid']));
+$PAGE->set_title(format_string($apeinsdrei->name));
 $PAGE->set_heading(format_string($course->fullname));
 
 /* Ab hier beginnt der Output */
@@ -87,12 +87,12 @@ if(strpos($strUrl, 'resourceid=')==true){
         /* Hier koennte man Activiti einbinden
         //Creating instance of relevant API modules
         create_api_instances();
-        $process_definition_id = apeinsvier_get_process_definition_id("meisterkey"); //key aus dem Prozessmodel
+        $process_definition_id = apeinsdrei_get_process_definition_id("meisterkey"); //key aus dem Prozessmodel
         //error_log("PROCESS DEFINITION ID IS: " . $process_definition_id);
-        $process_instance_id = apeinsvier_start_process($process_definition_id, 'businesskey');
+        $process_instance_id = apeinsdrei_start_process($process_definition_id, 'businesskey');
         //error_log("PROCESS INSTANCE ID IS: " . $process_instance_id);
         sleep(3);
-        $taskid = apeinsvier_check_for_input_required($process_instance_id);
+        $taskid = apeinsdrei_check_for_input_required($process_instance_id);
         //error_log("TASK ID IS: " . $taskid);
         if ($taskid != null) {
             //error_log("EXECUTION OF TASK RESPONSE");
@@ -111,7 +111,7 @@ if(strpos($strUrl, 'resourceid=')==true){
         $fm_subcategory = $fromform->subcategory;
 
         /*Activit*/
-        //$result = apeinsvier_answer_input_required_resources($taskid, $process_definition_id, $fm_name, $fm_description, $fm_serialnumber, $fm_inventorynumber,$fm_comment,$fm_status,$fm_amount,$fm_type,$fm_maincategory,$fm_subcategory);
+        //$result = apeinsdrei_answer_input_required_resources($taskid, $process_definition_id, $fm_name, $fm_description, $fm_serialnumber, $fm_inventorynumber,$fm_comment,$fm_status,$fm_amount,$fm_type,$fm_maincategory,$fm_subcategory);
         //neue anonyme Klasse aufbauen und instanziieren, Formvariablen als Eigenschaften belegen
         $record = new stdClass();
         $record->id=$fm_resid;
@@ -136,7 +136,7 @@ if(strpos($strUrl, 'resourceid=')==true){
         $mform->display();
         //error_log("TEST FROM AFTER DISPLAY");
     }
-    echo $OUTPUT->single_button(new moodle_url('../apeinsvier/view.php', array('id' => $cm->id)), 'abbrechen');
+    echo $OUTPUT->single_button(new moodle_url('../apeinsdrei/view.php', array('id' => $cm->id)), 'abbrechen');
 
 }
 
@@ -164,12 +164,12 @@ else{
         /* Hier koennte man Activiti einbinden
         //Creating instance of relevant API modules
         create_api_instances();
-        $process_definition_id = apeinsvier_get_process_definition_id("meisterkey"); //key aus dem Prozessmodel
+        $process_definition_id = apeinsdrei_get_process_definition_id("meisterkey"); //key aus dem Prozessmodel
         //error_log("PROCESS DEFINITION ID IS: " . $process_definition_id);
-        $process_instance_id = apeinsvier_start_process($process_definition_id, 'businesskey');
+        $process_instance_id = apeinsdrei_start_process($process_definition_id, 'businesskey');
         //error_log("PROCESS INSTANCE ID IS: " . $process_instance_id);
         sleep(3);
-        $taskid = apeinsvier_check_for_input_required($process_instance_id);
+        $taskid = apeinsdrei_check_for_input_required($process_instance_id);
         //error_log("TASK ID IS: " . $taskid);
         if ($taskid != null) {
             //error_log("EXECUTION OF TASK RESPONSE");
@@ -188,7 +188,7 @@ else{
         $fm_subcategory = $fromform->subcategory;
 
         /*Activiti*/
-        // $result = apeinsvier_answer_input_required_resources($taskid, $process_definition_id, $fm_name, $fm_description, $fm_serialnumber, $fm_inventorynumber,$fm_comment,$fm_status,$fm_amount,$fm_type,$fm_maincategory,$fm_subcategory);
+        // $result = apeinsdrei_answer_input_required_resources($taskid, $process_definition_id, $fm_name, $fm_description, $fm_serialnumber, $fm_inventorynumber,$fm_comment,$fm_status,$fm_amount,$fm_type,$fm_maincategory,$fm_subcategory);
         
         $record = new stdClass();
         $record->id=$fm_resid;
@@ -218,7 +218,7 @@ else{
     //error_log("TEST FROM AFTER DISPLAY");
     }
     echo nl2br("\n");
-    echo $OUTPUT->single_button(new moodle_url('../apeinsvier/view.php', array('id' => $cm->id)), 'ok');
+    echo $OUTPUT->single_button(new moodle_url('../apeinsdrei/view.php', array('id' => $cm->id)), 'ok');
 }
 
 echo nl2br("\n");
