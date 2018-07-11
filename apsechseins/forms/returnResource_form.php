@@ -17,11 +17,11 @@ class returnResource_form extends moodleform {
         $mform->setType('name', PARAM_NOTAGS);
        
         /************* Schaden **************/
-        $mform->addElement('static', 'text', 'ID', $this->_customdata['defect']);
+        $mform->addElement('static', 'text', 'Schaden', $this->_customdata['defect']);
         $mform->setType('defect', PARAM_NOTAGS);
 
-        /************ Status ****************/
-
+        /************* Status **************/
+        $mform->addElement('select', 'available', 'Ressource wieder zur Ausleihe verfügbar', array('Ja', 'Nein'));
 
         $mform->addElement('hidden', 'id');
         $mform->setType('id', PARAM_INT);

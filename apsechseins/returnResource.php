@@ -87,11 +87,21 @@ if(strpos($strUrl, 'resourceid=')){
    
     // Initialize form and preallocate values
     require_once(dirname(__FILE__).'/forms/returnResource_form.php');
-    $mform = new returnResource_form (null, array('resourceid'=>$resourceid, 'name'=>$resourcename, 'defect'=>$resourcedefect));
+    $mform = new returnResource_form (null, array('resourceid'=>$resourceid, 'name'=>$resourcename, 'defect'=>$resourcedefect, 'status'=>''));
 
     if ($fromform = $mform->get_data()) {
         $fm_resourceid = $fromform->resourceid;
-        $fm_resourcedefect = $fromform->defect;
+
+        switch ($fromform->available) {
+            case 0:
+                // Verfügbar
+                $fm_status = 1;
+            break;
+            case 1:
+                // Nicht verfügbar
+                $fm_status = 2;
+            break;
+        };
 
         $record = new stdClass();
         $record->id                 = $fm_resourceid;
@@ -100,7 +110,7 @@ if(strpos($strUrl, 'resourceid=')){
         $record->serialnumber       = $resource->serialnumber;
         $record->inventorynumber    = $resource->inventorynumber ;
         $record->comment            = $resource->comment;
-        $record->status             = $resource->status;
+        $record->status             = $fm_status;
         $record->amount             = $resource->amount;
         $record->type               = $resource->type;
         $record->maincategory       = $resource->maincategory;
@@ -114,17 +124,27 @@ if(strpos($strUrl, 'resourceid=')){
     };
     echo nl2br("\n");
     // Navigation
-    echo $OUTPUT->single_button(new moodle_url('../apsechseins/safeDefect.php', array('id'=>$cm->id, 'resourceid'=>$resourceid)), 'Zurück: Schaden vermerken');
-    echo $OUTPUT->single_button(new moodle_url('/course/view.php', array('id'=>2)), 'Weiter: Home');
+    echo html_writer::link(new moodle_url('../apsechseins/saveDefect.php', array('id'=>$cm->id, 'resourceid'=>$resourceid)), 'Zurück: Schaden vermerken', array('class'=>'btn btn-secondary'));
+    echo html_writer::link(new moodle_url('/course/view.php', array('id'=>2)), 'Weiter: Home', array('class'=>'btn btn-secondary'));
 } else {
     // Second run
     require_once(dirname(__FILE__).'/forms/returnResource_form.php');
     $mform = new returnResource_form ();
     if ($fromform = $mform->get_data()) {
         $fm_resourceid = $fromform->resourceid;
-        $fm_resourcedefect = $fromform->defect;
 
         $resource = $DB->get_record('resources', array('id'=>$fm_resourceid));
+
+        switch ($fromform->available) {
+            case 0:
+                // Verfügbar
+                $fm_status = 1;
+            break;
+            case 1:
+                // Nicht verfügbar
+                $fm_status = 2;
+            break;
+        };
 
         $record = new stdClass();
         $record->id                 = $fm_resourceid;
@@ -133,12 +153,12 @@ if(strpos($strUrl, 'resourceid=')){
         $record->serialnumber       = $resource->serialnumber;
         $record->inventorynumber    = $resource->inventorynumber ;
         $record->comment            = $resource->comment;
-        $record->status             = $resource->status;
+        $record->status             = $fm_status;
         $record->amount             = $resource->amount;
         $record->type               = $resource->type;
         $record->maincategory       = $resource->maincategory;
         $record->subcategory        = $resource->subcategory;
-        $record->defect             = $fm_resourcedefect;
+        $record->defect             = $resource->defect;
 
         $DB->update_record('resources', $record, $bulk=false);
         echo 'Die Rückgabe der Ressource wurde verbucht.';
@@ -149,8 +169,8 @@ if(strpos($strUrl, 'resourceid=')){
     };
     echo nl2br("\n");
     // Navigation
-    echo $OUTPUT->single_button(new moodle_url('../apsechseins/view.php', array('id'=>$cm->id)), 'Zurück: Ressource zurückgeben');
-    echo $OUTPUT->single_button(new moodle_url('/course/view.php', array('id'=>2)), 'Weiter: Home');
+    echo html_writer::link(new moodle_url('../apsechseins/saveDefect.php', array('id'=>$cm->id, 'resourceid'=>$fm_resourceid)), 'Zurück: Schaden vermerken', array('class'=>'btn btn-secondary'));
+    echo html_writer::link(new moodle_url('/course/view.php', array('id'=>2)), 'Weiter: Home', array('class'=>'btn btn-secondary'));
 };
 
 /*********************** END CODE FOR SCHADENSDOKUMENTATION ***********************/
