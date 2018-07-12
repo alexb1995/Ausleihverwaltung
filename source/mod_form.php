@@ -15,12 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The main ausleihverwaltung configuration form
+ * The main checkdeadline configuration form
  *
  * It uses the standard core Moodle formslib. For more info about them, please
  * visit: http://docs.moodle.org/en/Development:lib/formslib.php
  *
- * @package    mod_ausleihverwaltung
+ * @package    mod_checkdeadline
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -32,11 +32,11 @@ require_once($CFG->dirroot.'/course/moodleform_mod.php');
 /**
  * Module instance settings form
  *
- * @package    mod_ausleihverwaltung
+ * @package    mod_checkdeadline
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_ausleihverwaltung_mod_form extends moodleform_mod {
+class mod_checkdeadline_mod_form extends moodleform_mod {
 
     /**
      * Defines forms elements
@@ -50,7 +50,7 @@ class mod_ausleihverwaltung_mod_form extends moodleform_mod {
         $mform->addElement('header', 'general', get_string('general', 'form'));
 
         // Adding the standard "name" field.
-        $mform->addElement('text', 'name', get_string('ausleihverwaltungname', 'ausleihverwaltung'), array('size' => '64'));
+        $mform->addElement('text', 'name', get_string('checkdeadlinename', 'checkdeadline'), array('size' => '64'));
         if (!empty($CFG->formatstringstriptags)) {
             $mform->setType('name', PARAM_TEXT);
         } else {
@@ -58,7 +58,7 @@ class mod_ausleihverwaltung_mod_form extends moodleform_mod {
         }
         $mform->addRule('name', null, 'required', null, 'client');
         $mform->addRule('name', get_string('maximumchars', '', 255), 'maxlength', 255, 'client');
-        $mform->addHelpButton('name', 'ausleihverwaltungname', 'ausleihverwaltung');
+        $mform->addHelpButton('name', 'checkdeadlinename', 'checkdeadline');
 
         // Adding the standard "intro" and "introformat" fields.
         if ($CFG->branch >= 29) {
@@ -67,12 +67,12 @@ class mod_ausleihverwaltung_mod_form extends moodleform_mod {
             $this->add_intro_editor();
         }
 
-        // Adding the rest of ausleihverwaltung settings, spreading all them into this fieldset
+        // Adding the rest of checkdeadline settings, spreading all them into this fieldset
         // ... or adding more fieldsets ('header' elements) if needed for better logic.
-        $mform->addElement('static', 'label1', 'ausleihverwaltungsetting1', 'Your ausleihverwaltung fields go here. Replace me!');
+        $mform->addElement('static', 'label1', 'checkdeadlinesetting1', 'Your checkdeadline fields go here. Replace me!');
 
-        $mform->addElement('header', 'ausleihverwaltungfieldset', get_string('ausleihverwaltungfieldset', 'ausleihverwaltung'));
-        $mform->addElement('static', 'label2', 'ausleihverwaltungsetting2', 'Your ausleihverwaltung fields go here. Replace me!');
+        $mform->addElement('header', 'checkdeadlinefieldset', get_string('checkdeadlinefieldset', 'checkdeadline'));
+        $mform->addElement('static', 'label2', 'checkdeadlinesetting2', 'Your checkdeadline fields go here. Replace me!');
 
         // Add standard grading elements.
         $this->standard_grading_coursemodule_elements();
