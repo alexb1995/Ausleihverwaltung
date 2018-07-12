@@ -14,12 +14,44 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="view.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="view.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/source/view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1268">
-              <caret line="46" column="34" lean-forward="false" selection-start-line="46" selection-start-column="34" selection-end-line="46" selection-end-column="34" />
+            <state relative-caret-position="308">
+              <caret line="122" column="19" lean-forward="false" selection-start-line="122" selection-start-column="12" selection-end-line="122" selection-end-column="19" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="version.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/source/version.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="checkdeadline_view.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/checkdeadline_view.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3060">
+              <caret line="204" column="0" lean-forward="false" selection-start-line="204" selection-start-column="0" selection-end-line="204" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="checkdeadline_delete.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/checkdeadline_delete.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="773">
+              <caret line="55" column="110" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+              <folding>
+                <marker date="1531422231333" expanded="true" signature="1913:1964" ph="SELECT dudes... responsibledudes" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -53,6 +85,8 @@
       <find>$record1</find>
       <find>mail</find>
       <find>delete</find>
+      <find>checkdeadline_delete</find>
+      <find>ausleihverwal</find>
     </findStrings>
     <replaceStrings>
       <replace>&quot;</replace>
@@ -61,8 +95,9 @@
       <replace>.</replace>
       <replace>$dudesName</replace>
       <replace>$responsibleID</replace>
-      <replace>checkdeadline</replace>
       <replace>responsibleName</replace>
+      <replace>checkdeadline_view</replace>
+      <replace>checkdeadline</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -89,6 +124,7 @@
         <option value="$PROJECT_DIR$/checkdeadline/classes/task/checkDeadlineTask.php" />
         <option value="$PROJECT_DIR$/checkdeadline/locallib.php" />
         <option value="$PROJECT_DIR$/source/checkdeadline_delete.php" />
+        <option value="$PROJECT_DIR$/source/checkdeadline_view.php" />
         <option value="$PROJECT_DIR$/source/view.php" />
       </list>
     </option>
@@ -105,6 +141,9 @@
     <option name="y" value="22" />
     <option name="width" value="1607" />
     <option name="height" value="1028" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -215,15 +254,16 @@
       <workItem from="1530730250376" duration="30187000" />
       <workItem from="1531292045144" duration="13233000" />
       <workItem from="1531325714081" duration="833000" />
-      <workItem from="1531327294319" duration="3726000" />
+      <workItem from="1531327294319" duration="4834000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82692000" />
+    <option name="totallyTimeSpent" value="83800000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -256,8 +296,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/checkdeadline/locallib.php" />
-    <entry file="file://$PROJECT_DIR$/checkdeadline/view.php" />
     <entry file="file://$PROJECT_DIR$/checkdeadline/forms/checkDeadlineControllForm.php" />
     <entry file="file://$PROJECT_DIR$/checkdeadline/db/tasks.php" />
     <entry file="file://$PROJECT_DIR$/checkdeadline/lib.php" />
@@ -325,14 +363,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/checkdeadline_delete.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="788">
-          <caret line="56" column="56" lean-forward="false" selection-start-line="56" selection-start-column="56" selection-end-line="56" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/source/lang/en/checkdeadline.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -343,10 +373,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/source/checkdeadline_delete.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="773">
+          <caret line="55" column="110" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+          <folding>
+            <marker date="1531422231333" expanded="true" signature="1913:1964" ph="SELECT dudes... responsibledudes" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/checkdeadline_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3060">
+          <caret line="204" column="0" lean-forward="false" selection-start-line="204" selection-start-column="0" selection-end-line="204" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/source/view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1268">
-          <caret line="46" column="34" lean-forward="false" selection-start-line="46" selection-start-column="34" selection-end-line="46" selection-end-column="34" />
+        <state relative-caret-position="308">
+          <caret line="122" column="19" lean-forward="false" selection-start-line="122" selection-start-column="12" selection-end-line="122" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/version.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
