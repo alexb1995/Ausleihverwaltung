@@ -58,7 +58,7 @@ $event->trigger();
 
 // Print the page header.
 
-$PAGE->set_url('/mod/ausleihantrag/view.php', array('id' => $cm->id));
+$PAGE->set_url('/mod/ausleihantrag/viewausleihantrag.php', array('id' => $cm->id));
 $PAGE->set_title(format_string($ausleihantrag->name));
 $PAGE->set_heading(format_string($course->fullname));
 
