@@ -17,22 +17,38 @@
 /**
  * Defines the view event.
  *
+<<<<<<< HEAD
  * @package    mod_checkdeadline
+=======
+ * @package    mod_ausleihverwaltung
+>>>>>>> ausleihantrag
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+<<<<<<< HEAD
 namespace mod_checkdeadline\event;
+=======
+namespace mod_ausleihverwaltung\event;
+>>>>>>> ausleihantrag
 
 defined('MOODLE_INTERNAL') || die();
 
 /**
+<<<<<<< HEAD
  * The mod_checkdeadline instance viewed event class
+=======
+ * The mod_ausleihverwaltung instance viewed event class
+>>>>>>> ausleihantrag
  *
  * If the view mode needs to be stored as well, you may need to
  * override methods get_url() and get_legacy_log_data(), too.
  *
+<<<<<<< HEAD
  * @package    mod_checkdeadline
+=======
+ * @package    mod_ausleihverwaltung
+>>>>>>> ausleihantrag
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -42,7 +58,11 @@ class course_module_viewed extends \core\event\course_module_viewed {
      * Initialize the event
      */
     protected function init() {
+<<<<<<< HEAD
         $this->data['objecttable'] = 'checkdeadline';
+=======
+        $this->data['objecttable'] = 'ausleihverwaltung';
+>>>>>>> ausleihantrag
         parent::init();
     }
 }
