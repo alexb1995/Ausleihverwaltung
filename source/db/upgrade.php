@@ -68,9 +68,6 @@ function xmldb_ausleihverwaltung_upgrade($oldversion) {
      *
      * First example, some fields were added to install.xml on 2007/04/01
      */
-      
-      return true;
-    }
 
      /*
     if ($oldversion < 2018071100) { //IMPORTANT -> ALWAYS UPDATE THIS -> CURRENT DATE!!!!!!!!!
