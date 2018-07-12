@@ -36,54 +36,37 @@ $PAGE->set_heading(format_string($course->fullname));
 
 
 /*
-// Um Tabelle >>borroweddevices<< zu belegen
+// Um Tabelle >>checkdeadline_borroweddevice<< zu belegen
 $record1->duedate = 1530897520;
 $record1->inventorynumber = '09876';
 $record1->studentmatrikelnummer = 3156763;
 $record1->studentmailaddress = 's153640@student.dhbw-mannheim.de';
 
-$DB->insert_record('borroweddevices', $record1, $returnid=false, $bulk=false);
+$DB->insert_record('checkdeadline_borroweddevice', $record1, $returnid=false, $bulk=false);
 
 $record1->duedate = 1530859235;
 $record1->inventorynumber = '73463574';
 $record1->studentmatrikelnummer = 8528640;
 $record1->studentmailaddress = 's145634@student.dhbw-mannheim.de';
 
-$DB->insert_record('borroweddevices', $record1, $returnid=false, $bulk=false);
+$DB->insert_record('checkdeadline_borroweddevice', $record1, $returnid=false, $bulk=false);
 
 $record1->duedate = 1532500835;
 $record1->inventorynumber = '134255';
 $record1->studentmatrikelnummer = 1630452;
 $record1->studentmailaddress = 's153660@student.dhbw-mannheim.de';
 
-$DB->insert_record('borroweddevices', $record1, $returnid=false, $bulk=false);
+$DB->insert_record('checkdeadline_borroweddevice', $record1, $returnid=false, $bulk=false);
 
 $record1->duedate = 1524638435;
 $record1->inventorynumber = '56765';
 $record1->studentmatrikelnummer = 5654193;
 $record1->studentmailaddress = 's153670@student.dhbw-mannheim.de';
 
-$DB->insert_record('borroweddevices', $record1, $returnid=false, $bulk=false);
+$DB->insert_record('checkdeadline_borroweddevice', $record1, $returnid=false, $bulk=false);
 
 // Datensatz mit übergebener ID löschen
-//$DB->delete_records_select('borroweddevices',"id = 2", $params=null);
-
-
-// Um Tabelle >>responsibledudes<< zu belegen
-$record1->dudesname = 'Mister Meister';
-$record1->dudesmail = 'meistermeister@dude.com';
-
-$DB->insert_record('responsibledudes', $record1, $returnid=false, $bulk=false);
-
-$record1->dudesname = 'Mister Martin';
-$record1->dudesmail = 'clemens.martin@dude.com';
-
-$DB->insert_record('responsibledudes', $record1, $returnid=false, $bulk=false);
-
-$record1->dudesname = 'Miss Frohwein';
-$record1->dudesmail = 'miss.frohwein@dude.com';
-
-$DB->insert_record('responsibledudes', $record1, $returnid=false, $bulk=false);
+//$DB->delete_records_select('checkdeadline_borroweddevice',"id = 2", $params=null);
 */
 
 
@@ -98,8 +81,8 @@ if ($checkdeadline->intro) {
 $strName = "Ausleihen-Übersicht";
 echo $OUTPUT->heading($strName);
 
-// Alle Datensätze aus der DB-Tabelle >>$borroweddevices<< abfragen.
-$borrowed = $DB->get_records('borroweddevices');
+// Alle Datensätze aus der DB-Tabelle >>$checkdeadline_borroweddevice<< abfragen.
+$borrowed = $DB->get_records('checkdeadline_borroweddevice');
 
 $table = new html_table();
 $table->head = array('ID','Due Date', 'Inventarnummer', 'Matrikelnummer', 'Studenten E-Mail');
@@ -121,8 +104,8 @@ echo html_writer::table($table);
 $strName = "Verantwortlichen-Übersicht";
 echo $OUTPUT->heading($strName);
 
-// Alle Datensätze aus der DB-Tabelle >>responsibledudes<< abfragen.
-$responsibleDudes = $DB->get_records('responsibledudes');
+// Alle Datensätze aus der DB-Tabelle >>checkdeadline_responsible<< abfragen.
+$responsibleDudes = $DB->get_records('checkdeadline_responsible');
 
 $table = new html_table();
 $table->head = array('Name des Verantwortlichen', 'E-Mail des Verantwortlichen', 'Löschen');
@@ -160,14 +143,14 @@ if ($mform->is_cancelled()) {
     $dudesName = $fromform->responsibleName;
     $dudesMail = $fromform->responsibleMail;
 
-// Um Tabelle >>responsibledudes<< zu belegen
+// Um Tabelle >>checkdeadline_responsible<< zu belegen
     $record1 = new \stdClass();
     $record1->dudesname = $dudesName;
     $record1->dudesmail = $dudesMail;
-    $DB->insert_record('responsibledudes', $record1, $returnid=false, $bulk=false);
+    $DB->insert_record('checkdeadline_responsible', $record1, $returnid=false, $bulk=false);
 
     //reload page so all Table views will be updated and Forms will be redisplayed
-    redirect(new moodle_url('../checkdeadline/view.php', array('id' => $cm->id)));
+    redirect(new moodle_url('../checkdeadline/checkdeadline_view.php', array('id' => $cm->id)));
 
 // $mform->render();
 

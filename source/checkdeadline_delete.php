@@ -43,7 +43,7 @@ echo nl2br("\n");
 echo nl2br("\n");
 
 $responsibleID = $_GET['responsibleid']; //Wird von View-PHP mit dem Delete-Link übergeben
-$sql= 'SELECT dudesname FROM {responsibledudes} WHERE id ='.$responsibleID.';';
+$sql= 'SELECT dudesname FROM {checkdeadline_responsible} WHERE id ='.$responsibleID.';';
 $responsibleDude = $DB->get_record_sql($sql, array($responsibleID));
 $responsibleName = $responsibleDude->dudesname;
 

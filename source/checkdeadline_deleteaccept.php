@@ -45,9 +45,9 @@ $strName = "Löschen erfolgreich";
 echo $OUTPUT->heading($strName);
 echo nl2br("\n");
 
-$responsibledudes = 'responsibledudes';
+$checkdeadline_responsible = 'checkdeadline_responsible';
 // Datensatz mit übergebener ID löschen
-$DB->delete_records_select($responsibledudes,"id ='".$responsibleID."'", $params=null);
+$DB->delete_records_select($checkdeadline_responsible,"id ='".$responsibleID."'", $params=null);
 
 //Erfolgsmeldung
 $message = "Verantwortlicher mit dem Namen " .$dudesName. " ist gelöscht.";
@@ -58,7 +58,7 @@ echo nl2br("\n");
 echo nl2br("\n");
 
 //Funktionstaste zum Fortfahren definieren
-echo $OUTPUT->single_button(new moodle_url('../checkdeadline/view.php', array('id' => $cm->id)), 'OK');
+echo $OUTPUT->single_button(new moodle_url('../checkdeadline/checkdeadline_view.php', array('id' => $cm->id)), 'OK');
 
 //Finish
 echo $OUTPUT->footer();

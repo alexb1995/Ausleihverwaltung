@@ -48,8 +48,8 @@ class checkDeadlineTask extends \core\task\scheduled_task {
 
         //$coreDateObject = new \core\core_date\core_date();
 
-        // Alle Datensätze aus der DB-Tabelle >>$borroweddevices<< abfragen.
-        $borrowed = $DB->get_records('borroweddevices');
+        // Alle Datensätze aus der DB-Tabelle >>$checkdeadline_borroweddevice<< abfragen.
+        $borrowed = $DB->get_records('checkdeadline_borroweddevice');
         //Aktuelle GMT Systemzeit im Epoch Time Format (Sekunden seit 1. Januar 1970) Deutschland ist GMT plus 2
         //$now = new DateTime("now", $coreDateObject);
         /*

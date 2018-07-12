@@ -100,87 +100,50 @@ function xmldb_checkdeadline_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2018071106, 'checkdeadline');
     }
 
-     /*
-    if ($oldversion < 2018071100) { //IMPORTANT -> ALWAYS UPDATE THIS -> CURRENT DATE!!!!!!!!!
+    if ($oldversion < 2018071106) {
 
-        // Define field course to be added to checkdeadline.
-        $table = new xmldb_table('resources');
-        $field = new xmldb_field('course', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '0', 'id');
+        // Define table checkdeadline_borroweddevice to be created.
+        $table = new xmldb_table('checkdeadline_borroweddevice');
 
-        // Add field course.
-        if (!$dbman->field_exists($table, $field)) {
-            $dbman->add_field($table, $field);
+        // Adding fields to table checkdeadline_borroweddevice.
+        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+        $table->add_field('duedate', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('inventorynumber', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('studentmatrikelnummer', XMLDB_TYPE_INTEGER, '7', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('studentmailaddress', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+
+        // Adding keys to table checkdeadline_borroweddevice.
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+
+        // Conditionally launch create table for checkdeadline_borroweddevice.
+        if (!$dbman->table_exists($table)) {
+            $dbman->create_table($table);
         }
 
-        // Define field intro to be added to checkdeadline.
-        $table = new xmldb_table('checkdeadline');
-        $field = new xmldb_field('intro', XMLDB_TYPE_TEXT, 'medium', null, null, null, null, 'name');
-
-        // Add field intro.
-        if (!$dbman->field_exists($table, $field)) {
-            $dbman->add_field($table, $field);
-        }
-
-        // Define field introformat to be added to checkdeadline.
-        $table = new xmldb_table('checkdeadline');
-        $field = new xmldb_field('introformat', XMLDB_TYPE_INTEGER, '4', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '0',
-            'intro');
-
-        // Add field introformat.
-        if (!$dbman->field_exists($table, $field)) {
-            $dbman->add_field($table, $field);
-        }
-
-        // Once we reach this point, we can store the new version and consider the module
-        // ... upgraded to the version 2007040100 so the next time this block is skipped.
-        upgrade_mod_savepoint(true, 2007040100, 'checkdeadline');
+        // Checkdeadline savepoint reached.
+        upgrade_mod_savepoint(true, 2018071106, 'checkdeadline');
     }
 
-    // Second example, some hours later, the same day 2007/04/01
-    // ... two more fields and one index were added to install.xml (note the micro increment
-    // ... "01" in the last two digits of the version).
-    if ($oldversion < 2007040101) {
+    if ($oldversion < 2018071106) {
 
-        // Define field timecreated to be added to checkdeadline.
-        $table = new xmldb_table('checkdeadline');
-        $field = new xmldb_field('timecreated', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '0',
-            'introformat');
+        // Define table checkdeadline_responsible to be created.
+        $table = new xmldb_table('checkdeadline_responsible');
 
-        // Add field timecreated.
-        if (!$dbman->field_exists($table, $field)) {
-            $dbman->add_field($table, $field);
+        // Adding fields to table checkdeadline_responsible.
+        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+        $table->add_field('dudesname', XMLDB_TYPE_CHAR, '255', null, null, null, null);
+        $table->add_field('dudesmail', XMLDB_TYPE_CHAR, '255', null, null, null, null);
+
+        // Adding keys to table checkdeadline_responsible.
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+
+        // Conditionally launch create table for checkdeadline_responsible.
+        if (!$dbman->table_exists($table)) {
+            $dbman->create_table($table);
         }
 
-        // Define field timemodified to be added to checkdeadline.
-        $table = new xmldb_table('checkdeadline');
-        $field = new xmldb_field('timemodified', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '0',
-            'timecreated');
-
-        // Add field timemodified.
-        if (!$dbman->field_exists($table, $field)) {
-            $dbman->add_field($table, $field);
-        }
-
-        // Define index course (not unique) to be added to checkdeadline.
-        $table = new xmldb_table('checkdeadline');
-        $index = new xmldb_index('courseindex', XMLDB_INDEX_NOTUNIQUE, array('course'));
-
-        // Add index to course field.
-        if (!$dbman->index_exists($table, $index)) {
-            $dbman->add_index($table, $index);
-        }
-
-        // Another save point reached.
-        upgrade_mod_savepoint(true, 2007040101, 'checkdeadline');
-    }
-
-    // Third example, the next day, 2007/04/02 (with the trailing 00),
-    // some actions were performed to install.php related with the module.
-    if ($oldversion < 2007040200) {
-
-        // Insert code here to perform some actions (same as in install.php).
-
-        upgrade_mod_savepoint(true, 2007040200, 'checkdeadline');
+        // Checkdeadline savepoint reached.
+        upgrade_mod_savepoint(true, 2018071106, 'checkdeadline');
     }
 
     /*
