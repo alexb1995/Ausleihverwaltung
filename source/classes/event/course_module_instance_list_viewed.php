@@ -15,37 +15,21 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
-<<<<<<< HEAD:ausleihverwaltung/classes/event/course_module_instance_list_viewed.php
- * The mod_ausleihverwaltung instance list viewed event.
+ * The mod_checkdeadline instance list viewed event.
  *
- * @package    mod_ausleihverwaltung
-=======
- * The mod_ausleihverwaltung instance list viewed event.
- *
- * @package    mod_ausleihverwaltung
->>>>>>> ausleihverwaltung:source/classes/event/course_module_instance_list_viewed.php
+ * @package    mod_checkdeadline
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-<<<<<<< HEAD:ausleihverwaltung/classes/event/course_module_instance_list_viewed.php
-namespace mod_ausleihverwaltung\event;
-=======
-namespace mod_ausleihverwaltung\event;
->>>>>>> ausleihverwaltung:source/classes/event/course_module_instance_list_viewed.php
+namespace mod_checkdeadline\event;
 
 defined('MOODLE_INTERNAL') || die();
 
 /**
-<<<<<<< HEAD:ausleihverwaltung/classes/event/course_module_instance_list_viewed.php
- * The mod_ausleihverwaltung instance list viewed event class.
+ * The mod_checkdeadline instance list viewed event class.
  *
- * @package    mod_ausleihverwaltung
-=======
- * The mod_ausleihverwaltung instance list viewed event class.
- *
- * @package    mod_ausleihverwaltung
->>>>>>> ausleihverwaltung:source/classes/event/course_module_instance_list_viewed.php
+ * @package    mod_checkdeadline
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
