@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Defines backup_apsechseins_activity_task class
+ * Defines backup_ausleihverwaltung_activity_task class
  *
- * @package   mod_apsechseins
+ * @package   mod_ausleihverwaltung
  * @category  backup
  * @copyright 2016 Your Name <your@email.address>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -25,17 +25,17 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-require_once($CFG->dirroot . '/mod/apsechseins/backup/moodle2/backup_apsechseins_stepslib.php');
+require_once($CFG->dirroot . '/mod/ausleihverwaltung/backup/moodle2/backup_ausleihverwaltung_stepslib.php');
 
 /**
- * Provides the steps to perform one complete backup of the apsechseins instance
+ * Provides the steps to perform one complete backup of the ausleihverwaltung instance
  *
- * @package   mod_apsechseins
+ * @package   mod_ausleihverwaltung
  * @category  backup
  * @copyright 2016 Your Name <your@email.address>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class backup_apsechseins_activity_task extends backup_activity_task {
+class backup_ausleihverwaltung_activity_task extends backup_activity_task {
 
     /**
      * No specific settings for this activity
@@ -44,10 +44,10 @@ class backup_apsechseins_activity_task extends backup_activity_task {
     }
 
     /**
-     * Defines a backup step to store the instance data in the apsechseins.xml file
+     * Defines a backup step to store the instance data in the ausleihverwaltung.xml file
      */
     protected function define_my_steps() {
-        $this->add_step(new backup_apsechseins_activity_structure_step('apsechseins_structure', 'apsechseins.xml'));
+        $this->add_step(new backup_ausleihverwaltung_activity_structure_step('ausleihverwaltung_structure', 'ausleihverwaltung.xml'));
     }
 
     /**
@@ -61,13 +61,13 @@ class backup_apsechseins_activity_task extends backup_activity_task {
 
         $base = preg_quote($CFG->wwwroot, '/');
 
-        // Link to the list of apsechseinss.
-        $search = '/('.$base.'\/mod\/apsechseins\/index.php\?id\=)([0-9]+)/';
-        $content = preg_replace($search, '$@APSECHSEINSINDEX*$2@$', $content);
+        // Link to the list of ausleihverwaltungs.
+        $search = '/('.$base.'\/mod\/ausleihverwaltung\/index.php\?id\=)([0-9]+)/';
+        $content = preg_replace($search, '$@AUSLEIHVERWALTUNGINDEX*$2@$', $content);
 
-        // Link to apsechseins view by moduleid.
-        $search = '/('.$base.'\/mod\/apsechseins\/view.php\?id\=)([0-9]+)/';
-        $content = preg_replace($search, '$@APSECHSEINSVIEWBYID*$2@$', $content);
+        // Link to ausleihverwaltung view by moduleid.
+        $search = '/('.$base.'\/mod\/ausleihverwaltung\/view.php\?id\=)([0-9]+)/';
+        $content = preg_replace($search, '$@AUSLEIHVERWALTUNGVIEWBYID*$2@$', $content);
 
         return $content;
     }

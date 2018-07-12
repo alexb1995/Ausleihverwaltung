@@ -15,23 +15,23 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Define all the restore steps that will be used by the restore_apsechseins_activity_task
+ * Define all the restore steps that will be used by the restore_ausleihverwaltung_activity_task
  *
- * @package   mod_apsechseins
+ * @package   mod_ausleihverwaltung
  * @category  backup
  * @copyright 2016 Your Name <your@email.address>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 /**
- * Structure step to restore one apsechseins activity
+ * Structure step to restore one ausleihverwaltung activity
  *
- * @package   mod_apsechseins
+ * @package   mod_ausleihverwaltung
  * @category  backup
  * @copyright 2016 Your Name <your@email.address>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class restore_apsechseins_activity_structure_step extends restore_activity_structure_step {
+class restore_ausleihverwaltung_activity_structure_step extends restore_activity_structure_step {
 
     /**
      * Defines structure of path elements to be processed during the restore
@@ -41,7 +41,7 @@ class restore_apsechseins_activity_structure_step extends restore_activity_struc
     protected function define_structure() {
 
         $paths = array();
-        $paths[] = new restore_path_element('apsechseins', '/activity/apsechseins');
+        $paths[] = new restore_path_element('ausleihverwaltung', '/activity/ausleihverwaltung');
 
         // Return the paths wrapped into standard activity structure.
         return $this->prepare_activity_structure($paths);
@@ -52,7 +52,7 @@ class restore_apsechseins_activity_structure_step extends restore_activity_struc
      *
      * @param array $data parsed element data
      */
-    protected function process_apsechseins($data) {
+    protected function process_ausleihverwaltung($data) {
         global $DB;
 
         $data = (object)$data;
@@ -72,8 +72,8 @@ class restore_apsechseins_activity_structure_step extends restore_activity_struc
             $data->grade = -($this->get_mappingid('scale', abs($data->grade)));
         }
 
-        // Create the apsechseins instance.
-        $newitemid = $DB->insert_record('apsechseins', $data);
+        // Create the ausleihverwaltung instance.
+        $newitemid = $DB->insert_record('ausleihverwaltung', $data);
         $this->apply_activity_instance($newitemid);
     }
 
@@ -81,7 +81,7 @@ class restore_apsechseins_activity_structure_step extends restore_activity_struc
      * Post-execution actions
      */
     protected function after_execute() {
-        // Add apsechseins related files, no need to match by itemname (just internally handled context).
-        $this->add_related_files('mod_apsechseins', 'intro', null);
+        // Add ausleihverwaltung related files, no need to match by itemname (just internally handled context).
+        $this->add_related_files('mod_ausleihverwaltung', 'intro', null);
     }
 }
