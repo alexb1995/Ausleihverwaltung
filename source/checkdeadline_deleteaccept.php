@@ -1,4 +1,5 @@
 <?php
+
 /*LOGIN*/
 require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 require_once(dirname(__FILE__).'/lib.php');
@@ -28,34 +29,37 @@ $event = \mod_checkdeadline\event\course_module_viewed::create(array(
 $event->add_record_snapshot('course', $PAGE->course);
 $event->add_record_snapshot($PAGE->cm->modname, $checkdeadline);
 $event->trigger();
+$responsibleID = $_GET['responsibleID'];
+$dudesName = $_GET['responsibleName'];
 
-/*PAGE setzen*/
-$PAGE->set_url('/mod/checkdeadline/delete.php', array('id' => $cm->id,'responsibleid' => $_GET['responsibleid']));
+/*PAGE Setzen*/
+$PAGE->set_url('/mod/checkdeadline/checkdeadline_deleteaccept.php', array('id' => $cm->id,'responsibleID' => $responsibleID));
 $PAGE->set_title(format_string($checkdeadline->name));
+echo nl2br("\n");
 $PAGE->set_heading(format_string($course->fullname));
 
 // Hier beginnt die Ausgabe
 echo $OUTPUT->header();
-
-$strName = "Verantwortlichen löschen";
+echo nl2br("\n");
+$strName = "Löschen erfolgreich";
 echo $OUTPUT->heading($strName);
 echo nl2br("\n");
+
+$responsibledudes = 'responsibledudes';
+// Datensatz mit übergebener ID löschen
+$DB->delete_records_select($responsibledudes,"id ='".$responsibleID."'", $params=null);
+
+//Erfolgsmeldung
+$message = "Verantwortlicher mit dem Namen " .$dudesName. " ist gelöscht.";
+
+echo $message;
+echo nl2br("\n");
+echo nl2br("\n");
 echo nl2br("\n");
 
-$responsibleID = $_GET['responsibleid']; //Wird von View-PHP mit dem Delete-Link übergeben
-$sql= 'SELECT dudesname FROM {responsibledudes} WHERE id ='.$responsibleID.';';
-$responsibleDude = $DB->get_record_sql($sql, array($responsibleID));
-$responsibleName = $responsibleDude->dudesname;
+//Funktionstaste zum Fortfahren definieren
+echo $OUTPUT->single_button(new moodle_url('../checkdeadline/view.php', array('id' => $cm->id)), 'OK');
 
-echo $message = "Willst du den Verantwortlichen ".$responsibleName. " löschen?";
-echo nl2br("\n");
-echo nl2br("\n");
-echo nl2br("\n");
-
-//Funktionstasten zum Abbrechen und Fortfahren
-echo $OUTPUT->single_button(new moodle_url('../checkdeadline/view.php', array('id' => $cm->id)), 'Abbrechen');
-echo html_writer::link(new moodle_url('../checkdeadline/deleteaccept.php', array('id' => $cm->id, 'responsibleID' => $responsibleID, 'responsibleName'=> $responsibleName)), 'Bestätigen', array('class' => 'btn btn-secondary'));
-
-//FINISH
+//Finish
 echo $OUTPUT->footer();
 ?>

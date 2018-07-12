@@ -165,7 +165,7 @@ foreach ($responsibleDudes as $responsible) {
     $name = $responsible->dudesname;
     $mail = $responsible->dudesmail;
     //Link zum löschen des Verantwortlichen in foreach-Schleife setzen
-    $htmlLinkDelete = html_writer::link(new moodle_url('../checkdeadline/delete.php', array('id' => $cm->id, 'responsibleid' => $responsible->id)), 'Delete', $attributes=null);
+    $htmlLinkDelete = html_writer::link(new moodle_url('../checkdeadline/checkdeadline_delete.php', array('id' => $cm->id, 'responsibleid' => $responsible->id)), 'Delete', $attributes=null);
 //Daten zuweisen an HTML-Tabelle
     $table->data[] = array($name, $mail, $htmlLinkDelete);
 }

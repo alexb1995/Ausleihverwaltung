@@ -17,7 +17,7 @@
       <file leaf-file-name="view.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/source/view.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
+            <state relative-caret-position="-1268">
               <caret line="46" column="34" lean-forward="false" selection-start-line="46" selection-start-column="34" selection-end-line="46" selection-end-column="34" />
               <folding />
             </state>
@@ -88,8 +88,8 @@
         <option value="$PROJECT_DIR$/checkdeadline/deleteaccept.php" />
         <option value="$PROJECT_DIR$/checkdeadline/classes/task/checkDeadlineTask.php" />
         <option value="$PROJECT_DIR$/checkdeadline/locallib.php" />
-        <option value="$PROJECT_DIR$/source/view.php" />
         <option value="$PROJECT_DIR$/source/checkdeadline_delete.php" />
+        <option value="$PROJECT_DIR$/source/view.php" />
       </list>
     </option>
   </component>
@@ -215,16 +215,15 @@
       <workItem from="1530730250376" duration="30187000" />
       <workItem from="1531292045144" duration="13233000" />
       <workItem from="1531325714081" duration="833000" />
-      <workItem from="1531327294319" duration="3512000" />
+      <workItem from="1531327294319" duration="3726000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82478000" />
+    <option name="totallyTimeSpent" value="82692000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -346,7 +345,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/source/view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
+        <state relative-caret-position="-1268">
           <caret line="46" column="34" lean-forward="false" selection-start-line="46" selection-start-column="34" selection-end-line="46" selection-end-column="34" />
           <folding />
         </state>
