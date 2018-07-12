@@ -16,27 +16,27 @@
 
 
 /**
- * English strings for checkdeadline
+ * English strings for ausleihverwaltung
  *
  * You can have a rather longer description of the file as well,
  * if you like, and it can span multiple lines.
  *
- * @package    mod_checkdeadline
+ * @package    mod_ausleihverwaltung
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['modulename'] = 'checkdeadline';
-$string['modulenameplural'] = 'checkdeadlines';
-$string['modulename_help'] = 'Use the checkdeadline module for... | The checkdeadline module allows...';
-$string['checkdeadline:addinstance'] = 'Add a new checkdeadline';
-$string['checkdeadline:submit'] = 'Submit checkdeadline';
-$string['checkdeadline:view'] = 'View checkdeadline';
-$string['checkdeadlinefieldset'] = 'Custom example fieldset';
-$string['checkdeadlinename'] = 'checkdeadline name';
-$string['checkdeadlinename_help'] = 'This is the content of the help tooltip associated with the checkdeadlinename field. Markdown syntax is supported.';
-$string['checkdeadline'] = 'checkdeadline';
-$string['pluginadministration'] = 'checkdeadline administration';
-$string['pluginname'] = 'checkdeadline';
+$string['modulename'] = 'ausleihverwaltung';
+$string['modulenameplural'] = 'ausleihverwaltungs';
+$string['modulename_help'] = 'Use the ausleihverwaltung module for... | The ausleihverwaltung module allows...';
+$string['ausleihverwaltung:addinstance'] = 'Add a new ausleihverwaltung';
+$string['ausleihverwaltung:submit'] = 'Submit ausleihverwaltung';
+$string['ausleihverwaltung:view'] = 'View ausleihverwaltung';
+$string['ausleihverwaltungfieldset'] = 'Custom example fieldset';
+$string['ausleihverwaltungname'] = 'ausleihverwaltung name';
+$string['ausleihverwaltungname_help'] = 'This is the content of the help tooltip associated with the ausleihverwaltungname field. Markdown syntax is supported.';
+$string['ausleihverwaltung'] = 'ausleihverwaltung';
+$string['pluginadministration'] = 'ausleihverwaltung administration';
+$string['pluginname'] = 'ausleihverwaltung';

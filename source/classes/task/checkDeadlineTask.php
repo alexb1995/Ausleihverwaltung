@@ -5,7 +5,7 @@
  * Time: 13:58
  */
 
-namespace mod_checkdeadline\task;
+namespace mod_ausleihverwaltung\task;
 use \DateTime;
 
 //require_once(dirname(dirname(dirname(dirname(dirname(__FILE__))))).'/lib/classes/date.php');
@@ -16,7 +16,7 @@ require_once(dirname(dirname(dirname(__FILE__))).'/locallib.php');
 class checkDeadlineTask extends \core\task\scheduled_task {
     public function get_name() {
         // Shown in admin screens
-        return 'checkdeadline';
+        return 'ausleihverwaltung';
     }
 
     public function execute() {
@@ -42,14 +42,14 @@ class checkDeadlineTask extends \core\task\scheduled_task {
         $content = array('*' => array('header' => ' test ', 'footer' => ' test ')); // Extra content for specific processor
         $message->set_additional_content('email', $content);
         $message->courseid = $course->id; // This is required in recent versions, use it from 3.2 on https://tracker.moodle.org/browse/MDL-47162
-        /*$message->fullmessage = 'checkdeadline task works';
-        $message->smallmessage = 'checkdeadline task works';             
+        /*$message->fullmessage = 'ausleihverwaltung task works';
+        $message->smallmessage = 'ausleihverwaltung task works';             
         $messageid = message_send($message);*/
 
         //$coreDateObject = new \core\core_date\core_date();
 
-        // Alle Datensätze aus der DB-Tabelle >>$checkdeadline_borroweddevice<< abfragen.
-        $borrowed = $DB->get_records('checkdeadline_borroweddevice');
+        // Alle Datensätze aus der DB-Tabelle >>$ausleihverwaltung_borroweddevice<< abfragen.
+        $borrowed = $DB->get_records('ausleihverwaltung_borroweddevice');
         //Aktuelle GMT Systemzeit im Epoch Time Format (Sekunden seit 1. Januar 1970) Deutschland ist GMT plus 2
         //$now = new DateTime("now", $coreDateObject);
         /*

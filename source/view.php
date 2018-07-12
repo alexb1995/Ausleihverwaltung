@@ -15,45 +15,45 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Prints a particular instance of checkdeadline
+ * Prints a particular instance of ausleihverwaltung
  *
  * You can have a rather longer description of the file as well,
  * if you like, and it can span multiple lines.
  *
- * @package    mod_checkdeadline
+ * @package    mod_ausleihverwaltung
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// Replace checkdeadline with the name of your module and remove this line.
+// Replace ausleihverwaltung with the name of your module and remove this line.
 
 require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 require_once(dirname(__FILE__).'/lib.php');
 require_once(dirname(__FILE__).'/locallib.php');
 
 $id = optional_param('id', 0, PARAM_INT); // Course_module ID, or
-$n  = optional_param('n', 0, PARAM_INT);  // ... checkdeadline instance ID - it should be named as the first character of the module.
+$n  = optional_param('n', 0, PARAM_INT);  // ... ausleihverwaltung instance ID - it should be named as the first character of the module.
 
 if ($id) {
-    $cm         = get_coursemodule_from_id('checkdeadline', $id, 0, false, MUST_EXIST);
+    $cm         = get_coursemodule_from_id('ausleihverwaltung', $id, 0, false, MUST_EXIST);
     $course     = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
-    $checkdeadline  = $DB->get_record('checkdeadline', array('id' => $cm->instance), '*', MUST_EXIST);
+    $ausleihverwaltung  = $DB->get_record('ausleihverwaltung', array('id' => $cm->instance), '*', MUST_EXIST);
 } else if ($n) {
-    $checkdeadline  = $DB->get_record('checkdeadline', array('id' => $n), '*', MUST_EXIST);
-    $course     = $DB->get_record('course', array('id' => $checkdeadline->course), '*', MUST_EXIST);
-    $cm         = get_coursemodule_from_instance('checkdeadline', $checkdeadline->id, $course->id, false, MUST_EXIST);
+    $ausleihverwaltung  = $DB->get_record('ausleihverwaltung', array('id' => $n), '*', MUST_EXIST);
+    $course     = $DB->get_record('course', array('id' => $ausleihverwaltung->course), '*', MUST_EXIST);
+    $cm         = get_coursemodule_from_instance('ausleihverwaltung', $ausleihverwaltung->id, $course->id, false, MUST_EXIST);
 } else {
     error('You must specify a course_module ID or an instance ID');
 }
 
 require_login($course, true, $cm);
 
-$event = \mod_checkdeadline\event\course_module_viewed::create(array(
+$event = \mod_ausleihverwaltung\event\course_module_viewed::create(array(
     'objectid' => $PAGE->cm->instance,
     'context' => $PAGE->context,
 ));
 $event->add_record_snapshot('course', $PAGE->course);
-$event->add_record_snapshot($PAGE->cm->modname, $checkdeadline);
+$event->add_record_snapshot($PAGE->cm->modname, $ausleihverwaltung);
 $event->trigger();
 
 
@@ -72,7 +72,7 @@ $record->maincategory    = "Handy";
 $record->subcategory = "sub";
 $record->defect = "damage is done";
 
-$DB->insert_record('checkdeadline_resources', $record, $returnid=false, $bulk=false);
+$DB->insert_record('ausleihverwaltung_resources', $record, $returnid=false, $bulk=false);
 
 /*
 $record1->name         = 'iPhone';
@@ -85,7 +85,7 @@ $record1->amount         = 4;
 $record1->type = 1;
 $record1->maincategory    = "Apple";
 $record1->subcategory = "phone";
-$DB->insert_record('checkdeadline_resources', $record1, $returnid=false, $bulk=false);
+$DB->insert_record('ausleihverwaltung_resources', $record1, $returnid=false, $bulk=false);
 
 $record2->name         = 'Mein iPhone';
 $record2->description = 'beschde';
@@ -97,40 +97,40 @@ $record2->amount         = 4;
 $record2->type = 1;
 $record2->maincategory    = "Apple";
 $record2->subcategory = "phone";
-$DB->insert_record('checkdeadline_resources', $record1, $returnid=false, $bulk=false);
+$DB->insert_record('ausleihverwaltung_resources', $record1, $returnid=false, $bulk=false);
 */
 
 /* PAGE belegen*/
-$PAGE->set_url('/mod/checkdeadline/view.php', array('id' => $cm->id));
-$PAGE->set_title(format_string($checkdeadline->name));
+$PAGE->set_url('/mod/ausleihverwaltung/view.php', array('id' => $cm->id));
+$PAGE->set_title(format_string($ausleihverwaltung->name));
 $PAGE->set_heading(format_string($course->fullname));
 
 /*
  * Other things you may want to set - remove if not needed.
  * $PAGE->set_cacheable(false);
  * $PAGE->set_focuscontrol('some-html-id');
- * $PAGE->add_body_class('checkdeadline-'.$somevar);
+ * $PAGE->add_body_class('ausleihverwaltung-'.$somevar);
  */
 
 // Hier beginnt die Ausgabe
 echo $OUTPUT->header();
 
 // Conditions to show the intro can change to look for own settings or whatever.
-if ($checkdeadline->intro) {
-    echo $OUTPUT->box(format_module_intro('checkdeadline', $checkdeadline, $cm->id), 'generalbox mod_introbox', 'checkdeadlineintro');
+if ($ausleihverwaltung->intro) {
+    echo $OUTPUT->box(format_module_intro('ausleihverwaltung', $ausleihverwaltung, $cm->id), 'generalbox mod_introbox', 'ausleihverwaltungintro');
 }
 
 $strName = "Ausleihen-Übersicht";
 echo $OUTPUT->heading($strName);
 
-echo $OUTPUT->single_button(new moodle_url('../checkdeadline/checkdeadline_view.php', array('id' => $cm->id)), 'Ausleihübersicht anzeigen');
+echo $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/ausleihverwaltung_view.php', array('id' => $cm->id)), 'Ausleihübersicht anzeigen');
 
 $strName = "Ressourcen-Übersicht";
 echo $OUTPUT->heading($strName);
 
 $attributes = array();
 // Alle Datensätze aus der DB-Tabelle >>resources<< abfragen.
-$resource = $DB->get_records('checkdeadline_resources');
+$resource = $DB->get_records('ausleihverwaltung_resources');
 
 $table = new html_table();
 $table->head = array('ID','Name', 'Beschreibung', 'Seriennummer', 'Inventarnummer', 'Kommentar', 'Status', 'Menge', 'Typ', 'Hauptkategorie', 'Subkategorie', 'Schaden', 'Bearbeiten', 'Löschen');
@@ -150,9 +150,9 @@ foreach ($resource as $res) {
     $subcategory = $res->subcategory;
     $defect = $res->defect;
 //Link zum Bearbeiten der aktuellen Ressource in foreach-Schleife setzen
-    $htmlLink = html_writer::link(new moodle_url('../checkdeadline/edit.php', array('id' => $cm->id, 'resourceid' => $res->id)), 'Edit', $attributes=null);
+    $htmlLink = html_writer::link(new moodle_url('../ausleihverwaltung/edit.php', array('id' => $cm->id, 'resourceid' => $res->id)), 'Edit', $attributes=null);
 //Analog: Link zum Löschen...
-    $htmlLinkDelete = html_writer::link(new moodle_url('../checkdeadline/delete.php', array('id' => $cm->id, 'resourceid' => $res->id)), 'Delete', $attributes=null);
+    $htmlLinkDelete = html_writer::link(new moodle_url('../ausleihverwaltung/delete.php', array('id' => $cm->id, 'resourceid' => $res->id)), 'Delete', $attributes=null);
 //Daten zuweisen an HTML-Tabelle
     $table->data[] = array($id, $name, $description, $serialnumber, $inventorynumber, $comment, $status, $amount, $type, $maincategory, $subcategory, $defect, $htmlLink, $htmlLinkDelete);
 }

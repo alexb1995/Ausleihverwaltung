@@ -15,16 +15,16 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Library of interface functions and constants for module checkdeadline
+ * Library of interface functions and constants for module ausleihverwaltung
  *
  * All the core Moodle functions, neeeded to allow the module to work
  * integrated in Moodle should be placed here.
  *
- * All the checkdeadline specific functions, needed to implement all the module
+ * All the ausleihverwaltung specific functions, needed to implement all the module
  * logic, should go to locallib.php. This will help to save some memory when
  * Moodle is performing actions across all modules.
  *
- * @package    mod_checkdeadline
+ * @package    mod_ausleihverwaltung
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -45,7 +45,7 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Example constant, you probably want to remove this :-)
  */
-define('CHECKDEADLINE_ULTIMATE_ANSWER', 42);
+define('AUSLEIHVERWALTUNG_ULTIMATE_ANSWER', 42);
 
 /* Moodle core API */
 
@@ -57,7 +57,7 @@ define('CHECKDEADLINE_ULTIMATE_ANSWER', 42);
  * @param string $feature FEATURE_xx constant for requested feature
  * @return mixed true if the feature is supported, null if unknown
  */
-function checkdeadline_supports($feature) {
+function ausleihverwaltung_supports($feature) {
 
     switch($feature) {
         case FEATURE_MOD_INTRO:
@@ -74,53 +74,53 @@ function checkdeadline_supports($feature) {
 }
 
 /**
- * Saves a new instance of the checkdeadline into the database
+ * Saves a new instance of the ausleihverwaltung into the database
  *
  * Given an object containing all the necessary data,
  * (defined by the form in mod_form.php) this function
  * will create a new instance and return the id number
  * of the new instance.
  *
- * @param stdClass $checkdeadline Submitted data from the form in mod_form.php
- * @param mod_checkdeadline_mod_form $mform The form instance itself (if needed)
- * @return int The id of the newly inserted checkdeadline record
+ * @param stdClass $ausleihverwaltung Submitted data from the form in mod_form.php
+ * @param mod_ausleihverwaltung_mod_form $mform The form instance itself (if needed)
+ * @return int The id of the newly inserted ausleihverwaltung record
  */
-function checkdeadline_add_instance(stdClass $checkdeadline, mod_checkdeadline_mod_form $mform = null) {
+function ausleihverwaltung_add_instance(stdClass $ausleihverwaltung, mod_ausleihverwaltung_mod_form $mform = null) {
     global $DB;
 
-    $checkdeadline->timecreated = time();
+    $ausleihverwaltung->timecreated = time();
 
     // You may have to add extra stuff in here.
 
-    $checkdeadline->id = $DB->insert_record('checkdeadline', $checkdeadline);
+    $ausleihverwaltung->id = $DB->insert_record('ausleihverwaltung', $ausleihverwaltung);
 
-    checkdeadline_grade_item_update($checkdeadline);
+    ausleihverwaltung_grade_item_update($ausleihverwaltung);
 
-    return $checkdeadline->id;
+    return $ausleihverwaltung->id;
 }
 
 /**
- * Updates an instance of the checkdeadline in the database
+ * Updates an instance of the ausleihverwaltung in the database
  *
  * Given an object containing all the necessary data,
  * (defined by the form in mod_form.php) this function
  * will update an existing instance with new data.
  *
- * @param stdClass $checkdeadline An object from the form in mod_form.php
- * @param mod_checkdeadline_mod_form $mform The form instance itself (if needed)
+ * @param stdClass $ausleihverwaltung An object from the form in mod_form.php
+ * @param mod_ausleihverwaltung_mod_form $mform The form instance itself (if needed)
  * @return boolean Success/Fail
  */
-function checkdeadline_update_instance(stdClass $checkdeadline, mod_checkdeadline_mod_form $mform = null) {
+function ausleihverwaltung_update_instance(stdClass $ausleihverwaltung, mod_ausleihverwaltung_mod_form $mform = null) {
     global $DB;
 
-    $checkdeadline->timemodified = time();
-    $checkdeadline->id = $checkdeadline->instance;
+    $ausleihverwaltung->timemodified = time();
+    $ausleihverwaltung->id = $ausleihverwaltung->instance;
 
     // You may have to add extra stuff in here.
 
-    $result = $DB->update_record('checkdeadline', $checkdeadline);
+    $result = $DB->update_record('ausleihverwaltung', $ausleihverwaltung);
 
-    checkdeadline_grade_item_update($checkdeadline);
+    ausleihverwaltung_grade_item_update($ausleihverwaltung);
 
     return $result;
 }
@@ -128,36 +128,36 @@ function checkdeadline_update_instance(stdClass $checkdeadline, mod_checkdeadlin
 /**
  * This standard function will check all instances of this module
  * and make sure there are up-to-date events created for each of them.
- * If courseid = 0, then every checkdeadline event in the site is checked, else
- * only checkdeadline events belonging to the course specified are checked.
+ * If courseid = 0, then every ausleihverwaltung event in the site is checked, else
+ * only ausleihverwaltung events belonging to the course specified are checked.
  * This is only required if the module is generating calendar events.
  *
  * @param int $courseid Course ID
  * @return bool
  */
-function checkdeadline_refresh_events($courseid = 0) {
+function ausleihverwaltung_refresh_events($courseid = 0) {
     global $DB;
 
     if ($courseid == 0) {
-        if (!$checkdeadlines = $DB->get_records('checkdeadline')) {
+        if (!$ausleihverwaltungs = $DB->get_records('ausleihverwaltung')) {
             return true;
         }
     } else {
-        if (!$checkdeadlines = $DB->get_records('checkdeadline', array('course' => $courseid))) {
+        if (!$ausleihverwaltungs = $DB->get_records('ausleihverwaltung', array('course' => $courseid))) {
             return true;
         }
     }
 
-    foreach ($checkdeadlines as $checkdeadline) {
+    foreach ($ausleihverwaltungs as $ausleihverwaltung) {
         // Create a function such as the one below to deal with updating calendar events.
-        // checkdeadline_update_events($checkdeadline);
+        // ausleihverwaltung_update_events($ausleihverwaltung);
     }
 
     return true;
 }
 
 /**
- * Removes an instance of the checkdeadline from the database
+ * Removes an instance of the ausleihverwaltung from the database
  *
  * Given an ID of an instance of this module,
  * this function will permanently delete the instance
@@ -166,18 +166,18 @@ function checkdeadline_refresh_events($courseid = 0) {
  * @param int $id Id of the module instance
  * @return boolean Success/Failure
  */
-function checkdeadline_delete_instance($id) {
+function ausleihverwaltung_delete_instance($id) {
     global $DB;
 
-    if (! $checkdeadline = $DB->get_record('checkdeadline', array('id' => $id))) {
+    if (! $ausleihverwaltung = $DB->get_record('ausleihverwaltung', array('id' => $id))) {
         return false;
     }
 
     // Delete any dependent records here.
 
-    $DB->delete_records('checkdeadline', array('id' => $checkdeadline->id));
+    $DB->delete_records('ausleihverwaltung', array('id' => $ausleihverwaltung->id));
 
-    checkdeadline_grade_item_delete($checkdeadline);
+    ausleihverwaltung_grade_item_delete($ausleihverwaltung);
 
     return true;
 }
@@ -193,10 +193,10 @@ function checkdeadline_delete_instance($id) {
  * @param stdClass $course The course record
  * @param stdClass $user The user record
  * @param cm_info|stdClass $mod The course module info object or record
- * @param stdClass $checkdeadline The checkdeadline instance record
+ * @param stdClass $ausleihverwaltung The ausleihverwaltung instance record
  * @return stdClass|null
  */
-function checkdeadline_user_outline($course, $user, $mod, $checkdeadline) {
+function ausleihverwaltung_user_outline($course, $user, $mod, $ausleihverwaltung) {
 
     $return = new stdClass();
     $return->time = 0;
@@ -213,21 +213,21 @@ function checkdeadline_user_outline($course, $user, $mod, $checkdeadline) {
  * @param stdClass $course the current course record
  * @param stdClass $user the record of the user we are generating report for
  * @param cm_info $mod course module info
- * @param stdClass $checkdeadline the module instance record
+ * @param stdClass $ausleihverwaltung the module instance record
  */
-function checkdeadline_user_complete($course, $user, $mod, $checkdeadline) {
+function ausleihverwaltung_user_complete($course, $user, $mod, $ausleihverwaltung) {
 }
 
 /**
  * Given a course and a time, this module should find recent activity
- * that has occurred in checkdeadline activities and print it out.
+ * that has occurred in ausleihverwaltung activities and print it out.
  *
  * @param stdClass $course The course record
  * @param bool $viewfullnames Should we display full names
  * @param int $timestart Print activity since this timestamp
  * @return boolean True if anything was printed, otherwise false
  */
-function checkdeadline_print_recent_activity($course, $viewfullnames, $timestart) {
+function ausleihverwaltung_print_recent_activity($course, $viewfullnames, $timestart) {
     return false;
 }
 
@@ -236,7 +236,7 @@ function checkdeadline_print_recent_activity($course, $viewfullnames, $timestart
  *
  * This callback function is supposed to populate the passed array with
  * custom activity records. These records are then rendered into HTML via
- * {@link checkdeadline_print_recent_mod_activity()}.
+ * {@link ausleihverwaltung_print_recent_mod_activity()}.
  *
  * Returns void, it adds items into $activities and increases $index.
  *
@@ -248,11 +248,11 @@ function checkdeadline_print_recent_activity($course, $viewfullnames, $timestart
  * @param int $userid check for a particular user's activity only, defaults to 0 (all users)
  * @param int $groupid check for a particular group's activity only, defaults to 0 (all groups)
  */
-function checkdeadline_get_recent_mod_activity(&$activities, &$index, $timestart, $courseid, $cmid, $userid=0, $groupid=0) {
+function ausleihverwaltung_get_recent_mod_activity(&$activities, &$index, $timestart, $courseid, $cmid, $userid=0, $groupid=0) {
 }
 
 /**
- * Prints single activity item prepared by {@link checkdeadline_get_recent_mod_activity()}
+ * Prints single activity item prepared by {@link ausleihverwaltung_get_recent_mod_activity()}
  *
  * @param stdClass $activity activity record with added 'cmid' property
  * @param int $courseid the id of the course we produce the report for
@@ -260,7 +260,7 @@ function checkdeadline_get_recent_mod_activity(&$activities, &$index, $timestart
  * @param array $modnames as returned by {@link get_module_types_names()}
  * @param bool $viewfullnames display users' full names
  */
-function checkdeadline_print_recent_mod_activity($activity, $courseid, $detail, $modnames, $viewfullnames) {
+function ausleihverwaltung_print_recent_mod_activity($activity, $courseid, $detail, $modnames, $viewfullnames) {
 }
 
 /**
@@ -273,7 +273,7 @@ function checkdeadline_print_recent_mod_activity($activity, $courseid, $detail, 
  *
  * @return boolean
  */
-function checkdeadline_cron () {
+function ausleihverwaltung_cron () {
     return true;
 }
 
@@ -285,26 +285,26 @@ function checkdeadline_cron () {
  *
  * @return array
  */
-function checkdeadline_get_extra_capabilities() {
+function ausleihverwaltung_get_extra_capabilities() {
     return array();
 }
 
 /* Gradebook API */
 
 /**
- * Is a given scale used by the instance of checkdeadline?
+ * Is a given scale used by the instance of ausleihverwaltung?
  *
- * This function returns if a scale is being used by one checkdeadline
+ * This function returns if a scale is being used by one ausleihverwaltung
  * if it has support for grading and scales.
  *
- * @param int $checkdeadlineid ID of an instance of this module
+ * @param int $ausleihverwaltungid ID of an instance of this module
  * @param int $scaleid ID of the scale
- * @return bool true if the scale is used by the given checkdeadline instance
+ * @return bool true if the scale is used by the given ausleihverwaltung instance
  */
-function checkdeadline_scale_used($checkdeadlineid, $scaleid) {
+function ausleihverwaltung_scale_used($ausleihverwaltungid, $scaleid) {
     global $DB;
 
-    if ($scaleid and $DB->record_exists('checkdeadline', array('id' => $checkdeadlineid, 'grade' => -$scaleid))) {
+    if ($scaleid and $DB->record_exists('ausleihverwaltung', array('id' => $ausleihverwaltungid, 'grade' => -$scaleid))) {
         return true;
     } else {
         return false;
@@ -312,17 +312,17 @@ function checkdeadline_scale_used($checkdeadlineid, $scaleid) {
 }
 
 /**
- * Checks if scale is being used by any instance of checkdeadline.
+ * Checks if scale is being used by any instance of ausleihverwaltung.
  *
  * This is used to find out if scale used anywhere.
  *
  * @param int $scaleid ID of the scale
- * @return boolean true if the scale is used by any checkdeadline instance
+ * @return boolean true if the scale is used by any ausleihverwaltung instance
  */
-function checkdeadline_scale_used_anywhere($scaleid) {
+function ausleihverwaltung_scale_used_anywhere($scaleid) {
     global $DB;
 
-    if ($scaleid and $DB->record_exists('checkdeadline', array('grade' => -$scaleid))) {
+    if ($scaleid and $DB->record_exists('ausleihverwaltung', array('grade' => -$scaleid))) {
         return true;
     } else {
         return false;
@@ -330,29 +330,29 @@ function checkdeadline_scale_used_anywhere($scaleid) {
 }
 
 /**
- * Creates or updates grade item for the given checkdeadline instance
+ * Creates or updates grade item for the given ausleihverwaltung instance
  *
  * Needed by {@link grade_update_mod_grades()}.
  *
- * @param stdClass $checkdeadline instance object with extra cmidnumber and modname property
+ * @param stdClass $ausleihverwaltung instance object with extra cmidnumber and modname property
  * @param bool $reset reset grades in the gradebook
  * @return void
  */
-function checkdeadline_grade_item_update(stdClass $checkdeadline, $reset=false) {
+function ausleihverwaltung_grade_item_update(stdClass $ausleihverwaltung, $reset=false) {
     global $CFG;
     require_once($CFG->libdir.'/gradelib.php');
 
     $item = array();
-    $item['itemname'] = clean_param($checkdeadline->name, PARAM_NOTAGS);
+    $item['itemname'] = clean_param($ausleihverwaltung->name, PARAM_NOTAGS);
     $item['gradetype'] = GRADE_TYPE_VALUE;
 
-    if ($checkdeadline->grade > 0) {
+    if ($ausleihverwaltung->grade > 0) {
         $item['gradetype'] = GRADE_TYPE_VALUE;
-        $item['grademax']  = $checkdeadline->grade;
+        $item['grademax']  = $ausleihverwaltung->grade;
         $item['grademin']  = 0;
-    } else if ($checkdeadline->grade < 0) {
+    } else if ($ausleihverwaltung->grade < 0) {
         $item['gradetype'] = GRADE_TYPE_SCALE;
-        $item['scaleid']   = -$checkdeadline->grade;
+        $item['scaleid']   = -$ausleihverwaltung->grade;
     } else {
         $item['gradetype'] = GRADE_TYPE_NONE;
     }
@@ -361,40 +361,40 @@ function checkdeadline_grade_item_update(stdClass $checkdeadline, $reset=false) 
         $item['reset'] = true;
     }
 
-    grade_update('mod/checkdeadline', $checkdeadline->course, 'mod', 'checkdeadline',
-            $checkdeadline->id, 0, null, $item);
+    grade_update('mod/ausleihverwaltung', $ausleihverwaltung->course, 'mod', 'ausleihverwaltung',
+            $ausleihverwaltung->id, 0, null, $item);
 }
 
 /**
- * Delete grade item for given checkdeadline instance
+ * Delete grade item for given ausleihverwaltung instance
  *
- * @param stdClass $checkdeadline instance object
+ * @param stdClass $ausleihverwaltung instance object
  * @return grade_item
  */
-function checkdeadline_grade_item_delete($checkdeadline) {
+function ausleihverwaltung_grade_item_delete($ausleihverwaltung) {
     global $CFG;
     require_once($CFG->libdir.'/gradelib.php');
 
-    return grade_update('mod/checkdeadline', $checkdeadline->course, 'mod', 'checkdeadline',
-            $checkdeadline->id, 0, null, array('deleted' => 1));
+    return grade_update('mod/ausleihverwaltung', $ausleihverwaltung->course, 'mod', 'ausleihverwaltung',
+            $ausleihverwaltung->id, 0, null, array('deleted' => 1));
 }
 
 /**
- * Update checkdeadline grades in the gradebook
+ * Update ausleihverwaltung grades in the gradebook
  *
  * Needed by {@link grade_update_mod_grades()}.
  *
- * @param stdClass $checkdeadline instance object with extra cmidnumber and modname property
+ * @param stdClass $ausleihverwaltung instance object with extra cmidnumber and modname property
  * @param int $userid update grade of specific user only, 0 means all participants
  */
-function checkdeadline_update_grades(stdClass $checkdeadline, $userid = 0) {
+function ausleihverwaltung_update_grades(stdClass $ausleihverwaltung, $userid = 0) {
     global $CFG, $DB;
     require_once($CFG->libdir.'/gradelib.php');
 
     // Populate array of grade objects indexed by userid.
     $grades = array();
 
-    grade_update('mod/checkdeadline', $checkdeadline->course, 'mod', 'checkdeadline', $checkdeadline->id, 0, $grades);
+    grade_update('mod/ausleihverwaltung', $ausleihverwaltung->course, 'mod', 'ausleihverwaltung', $ausleihverwaltung->id, 0, $grades);
 }
 
 /* File API */
@@ -410,14 +410,14 @@ function checkdeadline_update_grades(stdClass $checkdeadline, $userid = 0) {
  * @param stdClass $context
  * @return array of [(string)filearea] => (string)description
  */
-function checkdeadline_get_file_areas($course, $cm, $context) {
+function ausleihverwaltung_get_file_areas($course, $cm, $context) {
     return array();
 }
 
 /**
- * File browsing support for checkdeadline file areas
+ * File browsing support for ausleihverwaltung file areas
  *
- * @package mod_checkdeadline
+ * @package mod_ausleihverwaltung
  * @category files
  *
  * @param file_browser $browser
@@ -431,25 +431,25 @@ function checkdeadline_get_file_areas($course, $cm, $context) {
  * @param string $filename
  * @return file_info instance or null if not found
  */
-function checkdeadline_get_file_info($browser, $areas, $course, $cm, $context, $filearea, $itemid, $filepath, $filename) {
+function ausleihverwaltung_get_file_info($browser, $areas, $course, $cm, $context, $filearea, $itemid, $filepath, $filename) {
     return null;
 }
 
 /**
- * Serves the files from the checkdeadline file areas
+ * Serves the files from the ausleihverwaltung file areas
  *
- * @package mod_checkdeadline
+ * @package mod_ausleihverwaltung
  * @category files
  *
  * @param stdClass $course the course object
  * @param stdClass $cm the course module object
- * @param stdClass $context the checkdeadline's context
+ * @param stdClass $context the ausleihverwaltung's context
  * @param string $filearea the name of the file area
  * @param array $args extra arguments (itemid, path)
  * @param bool $forcedownload whether or not force download
  * @param array $options additional options affecting the file serving
  */
-function checkdeadline_pluginfile($course, $cm, $context, $filearea, array $args, $forcedownload, array $options=array()) {
+function ausleihverwaltung_pluginfile($course, $cm, $context, $filearea, array $args, $forcedownload, array $options=array()) {
     global $DB, $CFG;
 
     if ($context->contextlevel != CONTEXT_MODULE) {
@@ -464,28 +464,28 @@ function checkdeadline_pluginfile($course, $cm, $context, $filearea, array $args
 /* Navigation API */
 
 /**
- * Extends the global navigation tree by adding checkdeadline nodes if there is a relevant content
+ * Extends the global navigation tree by adding ausleihverwaltung nodes if there is a relevant content
  *
  * This can be called by an AJAX request so do not rely on $PAGE as it might not be set up properly.
  *
- * @param navigation_node $navref An object representing the navigation tree node of the checkdeadline module instance
+ * @param navigation_node $navref An object representing the navigation tree node of the ausleihverwaltung module instance
  * @param stdClass $course current course record
- * @param stdClass $module current checkdeadline instance record
+ * @param stdClass $module current ausleihverwaltung instance record
  * @param cm_info $cm course module information
  */
-function checkdeadline_extend_navigation(navigation_node $navref, stdClass $course, stdClass $module, cm_info $cm) {
+function ausleihverwaltung_extend_navigation(navigation_node $navref, stdClass $course, stdClass $module, cm_info $cm) {
     // TODO Delete this function and its docblock, or implement it.
 }
 
 /**
- * Extends the settings navigation with the checkdeadline settings
+ * Extends the settings navigation with the ausleihverwaltung settings
  *
- * This function is called when the context for the page is a checkdeadline module. This is not called by AJAX
+ * This function is called when the context for the page is a ausleihverwaltung module. This is not called by AJAX
  * so it is safe to rely on the $PAGE.
  *
  * @param settings_navigation $settingsnav complete settings navigation tree
- * @param navigation_node $checkdeadlinenode checkdeadline administration node
+ * @param navigation_node $ausleihverwaltungnode ausleihverwaltung administration node
  */
-function checkdeadline_extend_settings_navigation(settings_navigation $settingsnav, navigation_node $checkdeadlinenode=null) {
+function ausleihverwaltung_extend_settings_navigation(settings_navigation $settingsnav, navigation_node $ausleihverwaltungnode=null) {
     // TODO Delete this function and its docblock, or implement it.
 }
