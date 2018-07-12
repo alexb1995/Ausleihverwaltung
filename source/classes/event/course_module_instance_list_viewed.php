@@ -20,13 +20,7 @@
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-<<<<<<< HEAD
 namespace mod_ausleihverwaltung\event;
-=======
-
-namespace mod_ausleihverwaltung\event;
-
->>>>>>> master
 defined('MOODLE_INTERNAL') || die();
 /**
  * The mod_ausleihverwaltung instance list viewed event class.

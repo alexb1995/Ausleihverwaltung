@@ -69,43 +69,8 @@ function xmldb_checkdeadline_upgrade($oldversion) {
      * First example, some fields were added to install.xml on 2007/04/01
      */
 
-<<<<<<< HEAD
      /*
     if ($oldversion < 2018071100) { //IMPORTANT -> ALWAYS UPDATE THIS -> CURRENT DATE!!!!!!!!!
-=======
-    if ($oldversion < 2018071106) {
-
-        // Define table checkdeadline_resources to be created.
-        $table = new xmldb_table('checkdeadline_resources');
-
-        // Adding fields to table checkdeadline_resources.
-        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
-        $table->add_field('name', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
-        $table->add_field('description', XMLDB_TYPE_TEXT, null, null, null, null, null);
-        $table->add_field('serialnumber', XMLDB_TYPE_CHAR, '255', null, null, null, null);
-        $table->add_field('inventorynumber', XMLDB_TYPE_CHAR, '255', null, null, null, null);
-        $table->add_field('comment', XMLDB_TYPE_TEXT, null, null, null, null, null);
-        $table->add_field('status', XMLDB_TYPE_INTEGER, '2', null, XMLDB_NOTNULL, null, null);
-        $table->add_field('amount', XMLDB_TYPE_INTEGER, '7', null, null, null, null);
-        $table->add_field('type', XMLDB_TYPE_INTEGER, '2', null, XMLDB_NOTNULL, null, null);
-        $table->add_field('maincategory', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
-        $table->add_field('subcategory', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
-        $table->add_field('defect', XMLDB_TYPE_TEXT, null, null, null, null, null);
-
-        // Adding keys to table checkdeadline_resources.
-        $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
-
-        // Conditionally launch create table for checkdeadline_resources.
-        if (!$dbman->table_exists($table)) {
-            $dbman->create_table($table);
-        }
-
-        // Apeinsvier savepoint reached.
-        upgrade_mod_savepoint(true, 2018071106, 'checkdeadline');
-    }
-
-    if ($oldversion < 2018071106) {
->>>>>>> master
 
         // Define table checkdeadline_borroweddevice to be created.
         $table = new xmldb_table('checkdeadline_borroweddevice');
