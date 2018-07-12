@@ -15,37 +15,21 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
-<<<<<<< HEAD
- * The mod_checkdeadline instance list viewed event.
- *
- * @package    mod_checkdeadline
-=======
  * The mod_ausleihverwaltung instance list viewed event.
  *
  * @package    mod_ausleihverwaltung
->>>>>>> ausleihantrag
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-<<<<<<< HEAD
-namespace mod_checkdeadline\event;
-=======
 namespace mod_ausleihverwaltung\event;
->>>>>>> ausleihantrag
 
 defined('MOODLE_INTERNAL') || die();
 
 /**
-<<<<<<< HEAD
- * The mod_checkdeadline instance list viewed event class.
- *
- * @package    mod_checkdeadline
-=======
  * The mod_ausleihverwaltung instance list viewed event class.
  *
  * @package    mod_ausleihverwaltung
->>>>>>> ausleihantrag
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
