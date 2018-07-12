@@ -5,3 +5,5 @@ vendor/
 .vs/
 
 ausleihverwaltung/
+.codeclimate.yml
+.codeclimate.yml
