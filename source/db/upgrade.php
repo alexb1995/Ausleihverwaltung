@@ -69,7 +69,7 @@ function xmldb_checkdeadline_upgrade($oldversion) {
      * First example, some fields were added to install.xml on 2007/04/01
      */
 
-    if ($oldversion < 2018071105) {
+    if ($oldversion < 2018071106) {
 
         // Define table checkdeadline_resources to be created.
         $table = new xmldb_table('checkdeadline_resources');
@@ -97,7 +97,7 @@ function xmldb_checkdeadline_upgrade($oldversion) {
         }
 
         // Apeinsvier savepoint reached.
-        upgrade_mod_savepoint(true, 2018071105, 'checkdeadline');
+        upgrade_mod_savepoint(true, 2018071106, 'checkdeadline');
     }
 
      /*

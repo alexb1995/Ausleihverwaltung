@@ -27,8 +27,28 @@
       <file leaf-file-name="version.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/source/version.php">
           <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="30" column="29" lean-forward="false" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="install.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/db/install.xml">
+          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="0" column="108" lean-forward="false" selection-start-line="0" selection-start-column="108" selection-end-line="0" selection-end-column="108" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="upgrade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/db/upgrade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="551">
+              <caret line="99" column="46" lean-forward="false" selection-start-line="99" selection-start-column="46" selection-end-line="99" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -48,9 +68,9 @@
         <entry file="file://$PROJECT_DIR$/source/checkdeadline_delete.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="773">
-              <caret line="55" column="110" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+              <caret line="55" column="110" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
               <folding>
-                <marker date="1531422231333" expanded="true" signature="1913:1964" ph="SELECT dudes... responsibledudes" />
+                <marker date="1531423603028" expanded="true" signature="1913:1964" ph="SELECT dudes... responsibledudes" />
               </folding>
             </state>
           </provider>
@@ -126,6 +146,9 @@
         <option value="$PROJECT_DIR$/source/checkdeadline_delete.php" />
         <option value="$PROJECT_DIR$/source/checkdeadline_view.php" />
         <option value="$PROJECT_DIR$/source/view.php" />
+        <option value="$PROJECT_DIR$/source/db/install.xml" />
+        <option value="$PROJECT_DIR$/source/db/upgrade.php" />
+        <option value="$PROJECT_DIR$/source/version.php" />
       </list>
     </option>
   </component>
@@ -254,12 +277,12 @@
       <workItem from="1530730250376" duration="30187000" />
       <workItem from="1531292045144" duration="13233000" />
       <workItem from="1531325714081" duration="833000" />
-      <workItem from="1531327294319" duration="4942000" />
+      <workItem from="1531327294319" duration="5759000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83908000" />
+    <option name="totallyTimeSpent" value="84725000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -296,8 +319,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/checkdeadline/forms/checkDeadlineControllForm.php" />
-    <entry file="file://$PROJECT_DIR$/checkdeadline/db/tasks.php" />
     <entry file="file://$PROJECT_DIR$/checkdeadline/lib.php" />
     <entry file="file://$PROJECT_DIR$/checkdeadline/db/install.xml" />
     <entry file="file://$PROJECT_DIR$/checkdeadline/version.php" />
@@ -376,9 +397,9 @@
     <entry file="file://$PROJECT_DIR$/source/checkdeadline_delete.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="773">
-          <caret line="55" column="110" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+          <caret line="55" column="110" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
           <folding>
-            <marker date="1531422231333" expanded="true" signature="1913:1964" ph="SELECT dudes... responsibledudes" />
+            <marker date="1531423603028" expanded="true" signature="1913:1964" ph="SELECT dudes... responsibledudes" />
           </folding>
         </state>
       </provider>
@@ -399,10 +420,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/version.php">
+    <entry file="file://$PROJECT_DIR$/source/db/install.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="108" lean-forward="false" selection-start-line="0" selection-start-column="108" selection-end-line="0" selection-end-column="108" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/db/upgrade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="551">
+          <caret line="99" column="46" lean-forward="false" selection-start-line="99" selection-start-column="46" selection-end-line="99" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/version.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="30" column="29" lean-forward="false" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
           <folding />
         </state>
       </provider>

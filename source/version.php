@@ -28,7 +28,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'mod_checkdeadline';
-$plugin->version = 2018071100;
+$plugin->version = 2018071106;
 $plugin->release = 'v1.4';
 $plugin->requires = 2014051200;
 $plugin->maturity = MATURITY_ALPHA;

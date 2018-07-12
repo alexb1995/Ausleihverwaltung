@@ -1,4 +1,4 @@
-<XMLDB xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" PATH="mod/checkdeadline/db" VERSION="2018071100" COMMENT="XMLDB file for Moodle mod/checkdeadline" xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+<XMLDB xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" PATH="mod/checkdeadline/db" VERSION="2018071106" COMMENT="XMLDB file for Moodle mod/checkdeadline" xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
     <TABLES>
         <TABLE NAME="checkdeadline" COMMENT="Default comment for checkdeadline, please edit me">
             <FIELDS>
