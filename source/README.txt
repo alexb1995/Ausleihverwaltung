@@ -5,30 +5,30 @@ this module template code.
 
 * Unzip the archive and read this file
 
-* Rename the ausleihverwaltung/ folder to the name of your module (eg "widget").
+* Rename the checkdeadline/ folder to the name of your module (eg "widget").
   The module folder MUST be lower case and can't contain underscores. You should check the CVS contrib
   area at http://cvs.moodle.org/contrib/plugins/mod/ to make sure that
   your name is not already used by an other module. Registering the plugin
   name @ http://moodle.org/plugins will secure it for you.
 
 * Edit all the files in this directory and its subdirectories and change
-  all the instances of the string "ausleihverwaltung" to your module name
+  all the instances of the string "checkdeadline" to your module name
   (eg "widget"). If you are using Linux, you can use the following command
-  $ find . -type f -exec sed -i 's/ausleihverwaltung/widget/g' {} \;
-  $ find . -type f -exec sed -i 's/AUSLEIHVERWALTUNG/WIDGET/g' {} \;
+  $ find . -type f -exec sed -i 's/checkdeadline/widget/g' {} \;
+  $ find . -type f -exec sed -i 's/CHECKDEADLINE/WIDGET/g' {} \;
 
   On a mac, use:
-  $ find . -type f -exec sed -i '' 's/ausleihverwaltung/widget/g' {} \;
-  $ find . -type f -exec sed -i '' 's/AUSLEIHVERWALTUNG/WIDGET/g' {} \;
+  $ find . -type f -exec sed -i '' 's/checkdeadline/widget/g' {} \;
+  $ find . -type f -exec sed -i '' 's/CHECKDEADLINE/WIDGET/g' {} \;
 
-* Rename the file lang/en/ausleihverwaltung.php to lang/en/widget.php
+* Rename the file lang/en/checkdeadline.php to lang/en/widget.php
   where "widget" is the name of your module
 
-* Rename all files in backup/moodle2/ folder by replacing "ausleihverwaltung" with
+* Rename all files in backup/moodle2/ folder by replacing "checkdeadline" with
   the name of your module
 
   On Linux you can perform this and previous steps by calling:
-  $ find . -depth -name '*ausleihverwaltung*' -execdir bash -c 'mv -i "$1" "${1//ausleihverwaltung/widget}"' bash {} \;
+  $ find . -depth -name '*checkdeadline*' -execdir bash -c 'mv -i "$1" "${1//checkdeadline/widget}"' bash {} \;
 
 * Place the widget folder into the /mod folder of the moodle
   directory.
@@ -39,7 +39,7 @@ this module template code.
   the module's tables successfully created
 
 * Go to Site Administration > Plugins > Activity modules > Manage activities
-  and you should find that this ausleihverwaltung has been added to the list of
+  and you should find that this checkdeadline has been added to the list of
   installed modules.
 
 * You may now proceed to run your own code in an attempt to develop

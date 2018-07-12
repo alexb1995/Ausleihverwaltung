@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file keeps track of upgrades to the ausleihverwaltung module
+ * This file keeps track of upgrades to the checkdeadline module
  *
  * Sometimes, changes between versions involve alterations to database
  * structures and other major things that may break installations. The upgrade
@@ -24,7 +24,7 @@
  * it cannot do itself, it will tell you what you need to do.  The commands in
  * here will all be database-neutral, using the functions defined in DLL libraries.
  *
- * @package    mod_ausleihverwaltung
+ * @package    mod_checkdeadline
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -32,12 +32,12 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Execute ausleihverwaltung upgrade from the given old version
+ * Execute checkdeadline upgrade from the given old version
  *
  * @param int $oldversion
  * @return bool
  */
-function xmldb_ausleihverwaltung_upgrade($oldversion) {
+function xmldb_checkdeadline_upgrade($oldversion) {
     global $DB;
 
     $dbman = $DB->get_manager(); // Loads ddl manager and xmldb classes.
@@ -53,10 +53,10 @@ function xmldb_ausleihverwaltung_upgrade($oldversion) {
      *
      * Lines below (this included)  MUST BE DELETED once you get the first version
      * of your module ready to be installed. They are here only
-     * for demonstrative purposes and to show how the ausleihverwaltung
+     * for demonstrative purposes and to show how the checkdeadline
      * iself has been upgraded.
      *
-     * For each upgrade block, the file ausleihverwaltung/version.php
+     * For each upgrade block, the file checkdeadline/version.php
      * needs to be updated . Such change allows Moodle to know
      * that this file has to be processed.
      *
@@ -69,87 +69,86 @@ function xmldb_ausleihverwaltung_upgrade($oldversion) {
      * First example, some fields were added to install.xml on 2007/04/01
      */
 
+<<<<<<< HEAD
      /*
     if ($oldversion < 2018071100) { //IMPORTANT -> ALWAYS UPDATE THIS -> CURRENT DATE!!!!!!!!!
+=======
+    if ($oldversion < 2018071106) {
 
-        // Define field course to be added to ausleihverwaltung.
-        $table = new xmldb_table('resources');
-        $field = new xmldb_field('course', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '0', 'id');
+        // Define table checkdeadline_resources to be created.
+        $table = new xmldb_table('checkdeadline_resources');
 
-        // Add field course.
-        if (!$dbman->field_exists($table, $field)) {
-            $dbman->add_field($table, $field);
+        // Adding fields to table checkdeadline_resources.
+        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+        $table->add_field('name', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('description', XMLDB_TYPE_TEXT, null, null, null, null, null);
+        $table->add_field('serialnumber', XMLDB_TYPE_CHAR, '255', null, null, null, null);
+        $table->add_field('inventorynumber', XMLDB_TYPE_CHAR, '255', null, null, null, null);
+        $table->add_field('comment', XMLDB_TYPE_TEXT, null, null, null, null, null);
+        $table->add_field('status', XMLDB_TYPE_INTEGER, '2', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('amount', XMLDB_TYPE_INTEGER, '7', null, null, null, null);
+        $table->add_field('type', XMLDB_TYPE_INTEGER, '2', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('maincategory', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('subcategory', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('defect', XMLDB_TYPE_TEXT, null, null, null, null, null);
+
+        // Adding keys to table checkdeadline_resources.
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+
+        // Conditionally launch create table for checkdeadline_resources.
+        if (!$dbman->table_exists($table)) {
+            $dbman->create_table($table);
         }
 
-        // Define field intro to be added to ausleihverwaltung.
-        $table = new xmldb_table('ausleihverwaltung');
-        $field = new xmldb_field('intro', XMLDB_TYPE_TEXT, 'medium', null, null, null, null, 'name');
-
-        // Add field intro.
-        if (!$dbman->field_exists($table, $field)) {
-            $dbman->add_field($table, $field);
-        }
-
-        // Define field introformat to be added to ausleihverwaltung.
-        $table = new xmldb_table('ausleihverwaltung');
-        $field = new xmldb_field('introformat', XMLDB_TYPE_INTEGER, '4', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '0',
-            'intro');
-
-        // Add field introformat.
-        if (!$dbman->field_exists($table, $field)) {
-            $dbman->add_field($table, $field);
-        }
-
-        // Once we reach this point, we can store the new version and consider the module
-        // ... upgraded to the version 2007040100 so the next time this block is skipped.
-        upgrade_mod_savepoint(true, 2007040100, 'ausleihverwaltung');
+        // Apeinsvier savepoint reached.
+        upgrade_mod_savepoint(true, 2018071106, 'checkdeadline');
     }
 
-    // Second example, some hours later, the same day 2007/04/01
-    // ... two more fields and one index were added to install.xml (note the micro increment
-    // ... "01" in the last two digits of the version).
-    if ($oldversion < 2007040101) {
+    if ($oldversion < 2018071106) {
+>>>>>>> master
 
-        // Define field timecreated to be added to ausleihverwaltung.
-        $table = new xmldb_table('ausleihverwaltung');
-        $field = new xmldb_field('timecreated', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '0',
-            'introformat');
+        // Define table checkdeadline_borroweddevice to be created.
+        $table = new xmldb_table('checkdeadline_borroweddevice');
 
-        // Add field timecreated.
-        if (!$dbman->field_exists($table, $field)) {
-            $dbman->add_field($table, $field);
+        // Adding fields to table checkdeadline_borroweddevice.
+        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+        $table->add_field('duedate', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('inventorynumber', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('studentmatrikelnummer', XMLDB_TYPE_INTEGER, '7', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('studentmailaddress', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+
+        // Adding keys to table checkdeadline_borroweddevice.
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+
+        // Conditionally launch create table for checkdeadline_borroweddevice.
+        if (!$dbman->table_exists($table)) {
+            $dbman->create_table($table);
         }
 
-        // Define field timemodified to be added to ausleihverwaltung.
-        $table = new xmldb_table('ausleihverwaltung');
-        $field = new xmldb_field('timemodified', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '0',
-            'timecreated');
-
-        // Add field timemodified.
-        if (!$dbman->field_exists($table, $field)) {
-            $dbman->add_field($table, $field);
-        }
-
-        // Define index course (not unique) to be added to ausleihverwaltung.
-        $table = new xmldb_table('ausleihverwaltung');
-        $index = new xmldb_index('courseindex', XMLDB_INDEX_NOTUNIQUE, array('course'));
-
-        // Add index to course field.
-        if (!$dbman->index_exists($table, $index)) {
-            $dbman->add_index($table, $index);
-        }
-
-        // Another save point reached.
-        upgrade_mod_savepoint(true, 2007040101, 'ausleihverwaltung');
+        // Checkdeadline savepoint reached.
+        upgrade_mod_savepoint(true, 2018071106, 'checkdeadline');
     }
 
-    // Third example, the next day, 2007/04/02 (with the trailing 00),
-    // some actions were performed to install.php related with the module.
-    if ($oldversion < 2007040200) {
+    if ($oldversion < 2018071106) {
 
-        // Insert code here to perform some actions (same as in install.php).
+        // Define table checkdeadline_responsible to be created.
+        $table = new xmldb_table('checkdeadline_responsible');
 
-        upgrade_mod_savepoint(true, 2007040200, 'ausleihverwaltung');
+        // Adding fields to table checkdeadline_responsible.
+        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+        $table->add_field('dudesname', XMLDB_TYPE_CHAR, '255', null, null, null, null);
+        $table->add_field('dudesmail', XMLDB_TYPE_CHAR, '255', null, null, null, null);
+
+        // Adding keys to table checkdeadline_responsible.
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+
+        // Conditionally launch create table for checkdeadline_responsible.
+        if (!$dbman->table_exists($table)) {
+            $dbman->create_table($table);
+        }
+
+        // Checkdeadline savepoint reached.
+        upgrade_mod_savepoint(true, 2018071106, 'checkdeadline');
     }
 
     /*
