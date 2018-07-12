@@ -17,11 +17,7 @@
 /**
  * Defines the view event.
  *
-<<<<<<< HEAD:ausleihverwaltung/classes/event/course_module_viewed.php
  * @package    mod_ausleihverwaltung
-=======
- * @package    mod_ausleihverwaltung
->>>>>>> ausleihverwaltung:source/classes/event/course_module_viewed.php
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
