@@ -15,12 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Internal library of functions for module ausleihverwaltung
+ * Internal library of functions for module checkdeadline
  *
- * All the ausleihverwaltung specific functions, needed to implement the module
+ * All the checkdeadline specific functions, needed to implement the module
  * logic, should go here. Never include this file from your lib.php!
  *
- * @package    mod_ausleihverwaltung
+ * @package    mod_checkdeadline
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -81,11 +81,11 @@ function create_api_instances() {
 	);
 }
 
-function ausleihverwaltung_do_something_useful(array $things) {
+function checkdeadline_do_something_useful(array $things) {
     return new stdClass();
 }
 
-function ausleihverwaltung_get_process_definition_id($processKey) {
+function checkdeadline_get_process_definition_id($processKey) {
 	global $processDefinitionsApiInstance;
 
 	$version = null; // int | Only return process definitions with the given version.
@@ -112,7 +112,7 @@ function ausleihverwaltung_get_process_definition_id($processKey) {
 	}
 }
 
-function ausleihverwaltung_start_process($process_definition_id, $business_key) {
+function checkdeadline_start_process($process_definition_id, $business_key) {
 	global $processInstancesApiInstance;
 
 	$requestArray = array(
@@ -135,7 +135,7 @@ function ausleihverwaltung_start_process($process_definition_id, $business_key) 
 	}
 }
 
-function ausleihverwaltung_check_for_input_required($process_instance_id) {
+function checkdeadline_check_for_input_required($process_instance_id) {
 	global $tasksApiInstance;
 	try {
 		$result = $tasksApiInstance->getTasks(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, $process_instance_id, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
@@ -155,7 +155,7 @@ function ausleihverwaltung_check_for_input_required($process_instance_id) {
 
 
 //TODO J&C
-function ausleihverwaltung_answer_input_required_resources($task_id, $process_definition_id,
+function checkdeadline_answer_input_required_resources($task_id, $process_definition_id,
 $resName, $resDescription, $resSerNumber, $resInvNumber,$resComment,$resStatus,$resAmount,$resType,$resMainCategory,$resSubCategory) {
 	global $formsApiInstance;
 
@@ -219,7 +219,7 @@ $resName, $resDescription, $resSerNumber, $resInvNumber,$resComment,$resStatus,$
 	}
 }
 
-function ausleihverwaltung_answer_input_required($task_id, $process_definition_id, $value1, $value2) {
+function checkdeadline_answer_input_required($task_id, $process_definition_id, $value1, $value2) {
 	global $formsApiInstance;
 
 	$formArray = array(
@@ -250,7 +250,7 @@ function ausleihverwaltung_answer_input_required($task_id, $process_definition_i
 	}
 }
 
-function ausleihverwaltung_get_process_instance_status($process_instance_id) {
+function checkdeadline_get_process_instance_status($process_instance_id) {
 	global $processInstancesApiInstance;
 
 	try {

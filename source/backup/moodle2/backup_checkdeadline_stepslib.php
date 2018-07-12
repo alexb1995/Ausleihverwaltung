@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Define all the backup steps that will be used by the backup_ausleihverwaltung_activity_task
+ * Define all the backup steps that will be used by the backup_checkdeadline_activity_task
  *
- * @package   mod_ausleihverwaltung
+ * @package   mod_checkdeadline
  * @category  backup
  * @copyright 2016 Your Name <your@email.address>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -26,14 +26,14 @@
 defined('MOODLE_INTERNAL') || die;
 
 /**
- * Define the complete ausleihverwaltung structure for backup, with file and id annotations
+ * Define the complete checkdeadline structure for backup, with file and id annotations
  *
- * @package   mod_ausleihverwaltung
+ * @package   mod_checkdeadline
  * @category  backup
  * @copyright 2016 Your Name <your@email.address>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class backup_ausleihverwaltung_activity_structure_step extends backup_activity_structure_step {
+class backup_checkdeadline_activity_structure_step extends backup_activity_structure_step {
 
     /**
      * Defines the backup structure of the module
@@ -45,22 +45,22 @@ class backup_ausleihverwaltung_activity_structure_step extends backup_activity_s
         // Get know if we are including userinfo.
         $userinfo = $this->get_setting_value('userinfo');
 
-        // Define the root element describing the ausleihverwaltung instance.
-        $ausleihverwaltung = new backup_nested_element('ausleihverwaltung', array('id'), array(
+        // Define the root element describing the checkdeadline instance.
+        $checkdeadline = new backup_nested_element('checkdeadline', array('id'), array(
             'name', 'intro', 'introformat', 'grade'));
 
         // If we had more elements, we would build the tree here.
 
         // Define data sources.
-        $ausleihverwaltung->set_source_table('ausleihverwaltung', array('id' => backup::VAR_ACTIVITYID));
+        $checkdeadline->set_source_table('checkdeadline', array('id' => backup::VAR_ACTIVITYID));
 
         // If we were referring to other tables, we would annotate the relation
         // with the element's annotate_ids() method.
 
         // Define file annotations (we do not use itemid in this example).
-        $ausleihverwaltung->annotate_files('mod_ausleihverwaltung', 'intro', null);
+        $checkdeadline->annotate_files('mod_checkdeadline', 'intro', null);
 
-        // Return the root element (ausleihverwaltung), wrapped into standard activity structure.
-        return $this->prepare_activity_structure($ausleihverwaltung);
+        // Return the root element (checkdeadline), wrapped into standard activity structure.
+        return $this->prepare_activity_structure($checkdeadline);
     }
 }
