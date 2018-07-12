@@ -20,12 +20,12 @@
  * You can have a rather longer description of the file as well,
  * if you like, and it can span multiple lines.
  *
- * @package    mod_checkdeadline
+ * @package    mod_ausleihverwaltung
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// Replace checkdeadline with the name of your module and remove this line.
+// Replace ausleihverwaltung with the name of your module and remove this line.
 
 require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 require_once(dirname(__FILE__).'/lib.php');
@@ -39,12 +39,12 @@ require_course_login($course);
 $params = array(
     'context' => context_course::instance($course->id)
 );
-$event = \mod_checkdeadline\event\course_module_instance_list_viewed::create($params);
+$event = \mod_ausleihverwaltung\event\course_module_instance_list_viewed::create($params);
 $event->add_record_snapshot('course', $course);
 $event->trigger();
 
-$strname = get_string('modulenameplural', 'mod_checkdeadline');
-$PAGE->set_url('/mod/checkdeadline/index.php', array('id' => $id));
+$strname = get_string('modulenameplural', 'mod_ausleihverwaltung');
+$PAGE->set_url('/mod/ausleihverwaltung/index.php', array('id' => $id));
 $PAGE->navbar->add($strname);
 $PAGE->set_title("$course->shortname: $strname");
 $PAGE->set_heading($course->fullname);
@@ -53,8 +53,8 @@ $PAGE->set_pagelayout('incourse');
 echo $OUTPUT->header();
 echo $OUTPUT->heading($strname);
 
-if (! $checkdeadlines = get_all_instances_in_course('checkdeadline', $course)) {
-    notice(get_string('nocheckdeadlines', 'checkdeadline'), new moodle_url('/course/view.php', array('id' => $course->id)));
+if (! $ausleihverwaltungs = get_all_instances_in_course('ausleihverwaltung', $course)) {
+    notice(get_string('noausleihverwaltungs', 'ausleihverwaltung'), new moodle_url('/course/view.php', array('id' => $course->id)));
 }
 
 $usesections = course_format_uses_sections($course->format);
@@ -73,7 +73,7 @@ if ($usesections) {
 
 $modinfo = get_fast_modinfo($course);
 $currentsection = '';
-foreach ($modinfo->instances['checkdeadline'] as $cm) {
+foreach ($modinfo->instances['ausleihverwaltung'] as $cm) {
     $row = array();
     if ($usesections) {
         if ($cm->sectionnum !== $currentsection) {

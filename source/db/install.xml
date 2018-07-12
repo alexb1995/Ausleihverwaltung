@@ -1,41 +1,63 @@
-<XMLDB xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" PATH="mod/ausleihverwaltung/db" VERSION="20180619" COMMENT="XMLDB file for Moodle mod/ausleihverwaltung" xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
-  <TABLES>
-    <TABLE NAME="ausleihverwaltung" COMMENT="Default comment for ausleihverwaltung, please edit me">
-      <FIELDS>
-        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Course ausleihverwaltung activity belongs to"/>
-        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="name field for moodle instances"/>
-        <FIELD NAME="intro" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="General introduction of the ausleihverwaltung activity"/>
-        <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Format of the intro field (MOODLE, HTML, MARKDOWN...)"/>
-        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
-        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
-        <FIELD NAME="grade" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="100" SEQUENCE="false" COMMENT="The maximum grade. Can be negative to indicate the use of a scale."/>
-      </FIELDS>
-      <KEYS>
-        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
-      </KEYS>
-      <INDEXES>
-        <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
-      </INDEXES>
-    </TABLE>
-    <TABLE NAME="ausleihverwaltung_resources" COMMENT="Table for capturing resources to lend and rent">
-      <FIELDS>
-        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
-        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Name der Ressource"/>
-        <FIELD NAME="description" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Beschreibung"/>
-        <FIELD NAME="serialnumber" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="Seriennummer"/>
-        <FIELD NAME="inventorynumber" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="Inventarnummer"/>
-        <FIELD NAME="comment" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Anmerkung"/>
-        <FIELD NAME="status" TYPE="int" LENGTH="2" NOTNULL="true" SEQUENCE="false" COMMENT="Statusid: Ausgeliehen - 0 , Verfuegbar - 1, in Wartung - 2"/>
-        <FIELD NAME="amount" TYPE="int" LENGTH="7" NOTNULL="false" SEQUENCE="false" COMMENT="Menge"/>
-        <FIELD NAME="type" TYPE="int" LENGTH="2" NOTNULL="true" SEQUENCE="false" COMMENT="Art der Ressource: Stückgut (z.B. Smartphone) - 0; Schüttgut (z.B. Kullis) - 1"/>
-        <FIELD NAME="maincategory" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Kategorie"/>
-        <FIELD NAME="subcategory" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Subkategorie"/>
-        <FIELD NAME="defect" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Schadensinformationen können hier eingetragen werden"/>
-      </FIELDS>
-      <KEYS>
-        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
-      </KEYS>
-    </TABLE>
-  </TABLES>
+<XMLDB xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" PATH="mod/ausleihverwaltung/db" VERSION="2018071106" COMMENT="XMLDB file for Moodle mod/ausleihverwaltung" xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+    <TABLES>
+        <TABLE NAME="ausleihverwaltung" COMMENT="Default comment for ausleihverwaltung, please edit me">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Course ausleihverwaltung activity belongs to"/>
+                <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="name field for moodle instances"/>
+                <FIELD NAME="intro" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="General introduction of the ausleihverwaltung activity"/>
+                <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Format of the intro field (MOODLE, HTML, MARKDOWN...)"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+                <FIELD NAME="grade" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="100" SEQUENCE="false" COMMENT="The maximum grade. Can be negative to indicate the use of a scale."/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
+            </INDEXES>
+        </TABLE>
+        <TABLE NAME="ausleihverwaltung_borroweddevice" COMMENT="Default comment for the table, please edit me">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="duedate" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="inventorynumber" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="studentmatrikelnummer" TYPE="int" LENGTH="7" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="studentmailaddress" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="ausleihverwaltung_responsible" COMMENT="All the dudes that are responsible for the device administration">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="dudesname" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="the full name of the dude that is responsible for the device administration"/>
+                <FIELD NAME="dudesmail" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="The mail address of the dude that is responsible for the devices"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="ausleihverwaltung_resources" COMMENT="Table for capturing resources to lend and rent">
+          <FIELDS>
+            <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+            <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Name der Ressource"/>
+            <FIELD NAME="description" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Beschreibung"/>
+            <FIELD NAME="serialnumber" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="Seriennummer"/>
+            <FIELD NAME="inventorynumber" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="Inventarnummer"/>
+            <FIELD NAME="comment" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Anmerkung"/>
+            <FIELD NAME="status" TYPE="int" LENGTH="2" NOTNULL="true" SEQUENCE="false" COMMENT="Statusid: Ausgeliehen - 0 , Verfuegbar - 1, in Wartung - 2"/>
+            <FIELD NAME="amount" TYPE="int" LENGTH="7" NOTNULL="false" SEQUENCE="false" COMMENT="Menge"/>
+            <FIELD NAME="type" TYPE="int" LENGTH="2" NOTNULL="true" SEQUENCE="false" COMMENT="Art der Ressource: Stückgut (z.B. Smartphone) - 0; Schüttgut (z.B. Kullis) - 1"/>
+            <FIELD NAME="maincategory" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Kategorie"/>
+            <FIELD NAME="subcategory" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Subkategorie"/>
+            <FIELD NAME="defect" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Schadensinformationen können hier eingetragen werden"/>
+          </FIELDS>
+          <KEYS>
+           <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+          </KEYS>
+        </TABLE>
+    </TABLES>
 </XMLDB>

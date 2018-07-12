@@ -15,23 +15,23 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Define all the restore steps that will be used by the restore_checkdeadline_activity_task
+ * Define all the restore steps that will be used by the restore_ausleihverwaltung_activity_task
  *
- * @package   mod_checkdeadline
+ * @package   mod_ausleihverwaltung
  * @category  backup
  * @copyright 2016 Your Name <your@email.address>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 /**
- * Structure step to restore one checkdeadline activity
+ * Structure step to restore one ausleihverwaltung activity
  *
- * @package   mod_checkdeadline
+ * @package   mod_ausleihverwaltung
  * @category  backup
  * @copyright 2016 Your Name <your@email.address>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class restore_checkdeadline_activity_structure_step extends restore_activity_structure_step {
+class restore_ausleihverwaltung_activity_structure_step extends restore_activity_structure_step {
 
     /**
      * Defines structure of path elements to be processed during the restore
@@ -41,7 +41,7 @@ class restore_checkdeadline_activity_structure_step extends restore_activity_str
     protected function define_structure() {
 
         $paths = array();
-        $paths[] = new restore_path_element('checkdeadline', '/activity/checkdeadline');
+        $paths[] = new restore_path_element('ausleihverwaltung', '/activity/ausleihverwaltung');
 
         // Return the paths wrapped into standard activity structure.
         return $this->prepare_activity_structure($paths);
@@ -52,7 +52,7 @@ class restore_checkdeadline_activity_structure_step extends restore_activity_str
      *
      * @param array $data parsed element data
      */
-    protected function process_checkdeadline($data) {
+    protected function process_ausleihverwaltung($data) {
         global $DB;
 
         $data = (object)$data;
@@ -72,8 +72,8 @@ class restore_checkdeadline_activity_structure_step extends restore_activity_str
             $data->grade = -($this->get_mappingid('scale', abs($data->grade)));
         }
 
-        // Create the checkdeadline instance.
-        $newitemid = $DB->insert_record('checkdeadline', $data);
+        // Create the ausleihverwaltung instance.
+        $newitemid = $DB->insert_record('ausleihverwaltung', $data);
         $this->apply_activity_instance($newitemid);
     }
 
@@ -81,7 +81,7 @@ class restore_checkdeadline_activity_structure_step extends restore_activity_str
      * Post-execution actions
      */
     protected function after_execute() {
-        // Add checkdeadline related files, no need to match by itemname (just internally handled context).
-        $this->add_related_files('mod_checkdeadline', 'intro', null);
+        // Add ausleihverwaltung related files, no need to match by itemname (just internally handled context).
+        $this->add_related_files('mod_ausleihverwaltung', 'intro', null);
     }
 }

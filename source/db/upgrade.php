@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This file keeps track of upgrades to the checkdeadline module
+ * This file keeps track of upgrades to the ausleihverwaltung module
  *
  * Sometimes, changes between versions involve alterations to database
  * structures and other major things that may break installations. The upgrade
@@ -24,7 +24,7 @@
  * it cannot do itself, it will tell you what you need to do.  The commands in
  * here will all be database-neutral, using the functions defined in DLL libraries.
  *
- * @package    mod_checkdeadline
+ * @package    mod_ausleihverwaltung
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -32,12 +32,12 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Execute checkdeadline upgrade from the given old version
+ * Execute ausleihverwaltung upgrade from the given old version
  *
  * @param int $oldversion
  * @return bool
  */
-function xmldb_checkdeadline_upgrade($oldversion) {
+function xmldb_ausleihverwaltung_upgrade($oldversion) {
     global $DB;
 
     $dbman = $DB->get_manager(); // Loads ddl manager and xmldb classes.
@@ -53,10 +53,10 @@ function xmldb_checkdeadline_upgrade($oldversion) {
      *
      * Lines below (this included)  MUST BE DELETED once you get the first version
      * of your module ready to be installed. They are here only
-     * for demonstrative purposes and to show how the checkdeadline
+     * for demonstrative purposes and to show how the ausleihverwaltung
      * iself has been upgraded.
      *
-     * For each upgrade block, the file checkdeadline/version.php
+     * For each upgrade block, the file ausleihverwaltung/version.php
      * needs to be updated . Such change allows Moodle to know
      * that this file has to be processed.
      *
@@ -72,48 +72,48 @@ function xmldb_checkdeadline_upgrade($oldversion) {
      /*
     if ($oldversion < 2018071100) { //IMPORTANT -> ALWAYS UPDATE THIS -> CURRENT DATE!!!!!!!!!
 
-        // Define table checkdeadline_borroweddevice to be created.
-        $table = new xmldb_table('checkdeadline_borroweddevice');
+        // Define table ausleihverwaltung_borroweddevice to be created.
+        $table = new xmldb_table('ausleihverwaltung_borroweddevice');
 
-        // Adding fields to table checkdeadline_borroweddevice.
+        // Adding fields to table ausleihverwaltung_borroweddevice.
         $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
         $table->add_field('duedate', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
         $table->add_field('inventorynumber', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
         $table->add_field('studentmatrikelnummer', XMLDB_TYPE_INTEGER, '7', null, XMLDB_NOTNULL, null, null);
         $table->add_field('studentmailaddress', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
 
-        // Adding keys to table checkdeadline_borroweddevice.
+        // Adding keys to table ausleihverwaltung_borroweddevice.
         $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
 
-        // Conditionally launch create table for checkdeadline_borroweddevice.
+        // Conditionally launch create table for ausleihverwaltung_borroweddevice.
         if (!$dbman->table_exists($table)) {
             $dbman->create_table($table);
         }
 
         // Checkdeadline savepoint reached.
-        upgrade_mod_savepoint(true, 2018071106, 'checkdeadline');
+        upgrade_mod_savepoint(true, 2018071106, 'ausleihverwaltung');
     }
 
     if ($oldversion < 2018071106) {
 
-        // Define table checkdeadline_responsible to be created.
-        $table = new xmldb_table('checkdeadline_responsible');
+        // Define table ausleihverwaltung_responsible to be created.
+        $table = new xmldb_table('ausleihverwaltung_responsible');
 
-        // Adding fields to table checkdeadline_responsible.
+        // Adding fields to table ausleihverwaltung_responsible.
         $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
         $table->add_field('dudesname', XMLDB_TYPE_CHAR, '255', null, null, null, null);
         $table->add_field('dudesmail', XMLDB_TYPE_CHAR, '255', null, null, null, null);
 
-        // Adding keys to table checkdeadline_responsible.
+        // Adding keys to table ausleihverwaltung_responsible.
         $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
 
-        // Conditionally launch create table for checkdeadline_responsible.
+        // Conditionally launch create table for ausleihverwaltung_responsible.
         if (!$dbman->table_exists($table)) {
             $dbman->create_table($table);
         }
 
         // Checkdeadline savepoint reached.
-        upgrade_mod_savepoint(true, 2018071106, 'checkdeadline');
+        upgrade_mod_savepoint(true, 2018071106, 'ausleihverwaltung');
     }
 
     /*
