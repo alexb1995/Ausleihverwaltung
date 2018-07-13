@@ -97,17 +97,10 @@ if ($apeinsdrei->intro) {
 $strName = "Ressource anlegen";
 echo $OUTPUT->heading($strName);
 
-$attributes = array();
-// Alle Datensätze aus der DB-Tabelle >>resources<< abfragen.
-$resource = $DB->get_records('resources');
-
-$table = new html_table();
-$table->head = array('ID','Name', 'Beschreibung', 'Seriennummer', 'Inventarnummer', 'Kommentar', 'Status', 'Menge', 'Typ', 'Hauptkategorie', 'Subkategorie', 'Bearbeiten', 'Löschen');
-
 require_once(dirname(__FILE__).'/forms/newresourceform.php');
 $mform = new newresourcehtml_form(null);
 
-}
+
 
 // Finish the page.
 echo $OUTPUT->footer();

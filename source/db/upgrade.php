@@ -37,6 +37,7 @@ defined('MOODLE_INTERNAL') || die();
  * @param int $oldversion
  * @return bool
  */
+
 function xmldb_apeinsdrei_upgrade($oldversion) {
     global $DB;
 
@@ -68,39 +69,21 @@ function xmldb_apeinsdrei_upgrade($oldversion) {
      *
      * First example, some fields were added to install.xml on 2007/04/01
      */
-    if ($oldversion < 2018061900) { //IMPORTANT -> ALWAYS UPDATE THIS -> CURRENT DATE!!!!!!!!!
+    if ($oldversion < 2018071300) {
 
-        // Define field course to be added to apeinsdrei.
-        $table = new xmldb_table('resources');
-        $field = new xmldb_field('course', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '0', 'id');
-
-        // Add field course.
-        if (!$dbman->field_exists($table, $field)) {
-            $dbman->add_field($table, $field);
-        }
-
-        // Define field intro to be added to apeinsdrei.
+        // Define field id to be added to apeinsdrei.
         $table = new xmldb_table('apeinsdrei');
-        $field = new xmldb_field('intro', XMLDB_TYPE_TEXT, 'medium', null, null, null, null, 'name');
+        $field = new xmldb_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null);
 
-        // Add field intro.
+        // Conditionally launch add field id.
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
         }
 
-        // Define field introformat to be added to apeinsdrei.
-        $table = new xmldb_table('apeinsdrei');
-        $field = new xmldb_field('introformat', XMLDB_TYPE_INTEGER, '4', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '0',
-            'intro');
-
-        // Add field introformat.
-        if (!$dbman->field_exists($table, $field)) {
-            $dbman->add_field($table, $field);
-        }
-
-        // Once we reach this point, we can store the new version and consider the module
-        // ... upgraded to the version 2007040100 so the next time this block is skipped.
-        upgrade_mod_savepoint(true, 2007040100, 'apeinsdrei');
+        // Apeinsdrei savepoint reached.
+        upgrade_mod_savepoint(true, 2018071300, 'apeinsdrei');
+    }
+    return true;
     }
 
     // Second example, some hours later, the same day 2007/04/01
