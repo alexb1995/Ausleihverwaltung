@@ -72,31 +72,6 @@ $record->maincategory    = "Handy";
 $record->subcategory = "sub";
 
 $DB->insert_record('resources', $record, $returnid=false, $bulk=false);
-
-
-$record1->name         = 'iPhone';
-$record1->description = 'beschde';
-$record1->serialnumber        = 'serial14';
-$record1->inventorynumber = 'invent567';
-$record1->comment        = 'Comment that';
-$record1->status = 3;
-$record1->amount         = 4;
-$record1->type = 1;
-$record1->maincategory    = "Apple";
-$record1->subcategory = "phone";
-$DB->insert_record('resources', $record1, $returnid=false, $bulk=false);
-
-$record2->name         = 'Mein iPhone';
-$record2->description = 'beschde';
-$record2->serialnumber        = 'blablub';
-$record2->inventorynumber = 'invent567';
-$record2->comment        = 'Comment that';
-$record2->status = 3;
-$record2->amount         = 4;
-$record2->type = 1;
-$record2->maincategory    = "Apple";
-$record2->subcategory = "phone";
-$DB->insert_record('resources', $record1, $returnid=false, $bulk=false);
 */
 
 /* PAGE belegen*/
@@ -119,7 +94,7 @@ if ($apeinsdrei->intro) {
     echo $OUTPUT->box(format_module_intro('apeinsdrei', $apeinsdrei, $cm->id), 'generalbox mod_introbox', 'apeinsdreiintro');
 }
 
-$strName = "Ressourcen-Übersicht";
+$strName = "Ressource anlegen";
 echo $OUTPUT->heading($strName);
 
 $attributes = array();
@@ -129,28 +104,10 @@ $resource = $DB->get_records('resources');
 $table = new html_table();
 $table->head = array('ID','Name', 'Beschreibung', 'Seriennummer', 'Inventarnummer', 'Kommentar', 'Status', 'Menge', 'Typ', 'Hauptkategorie', 'Subkategorie', 'Bearbeiten', 'Löschen');
 
-//Für jeden Datensatz
-foreach ($resource as $res) {
-$id = $res->id;
-$name = $res->name;
-$description = $res->description;
-$serialnumber = $res->serialnumber;
-$inventorynumber = $res->inventorynumber;
-$comment = $res->comment;
-$status = $res->status;
-$amount = $res->amount;
-$type = $res->type;
-$maincategory = $res->maincategory;
-$subcategory = $res->subcategory;
-//Link zum Bearbeiten der aktuellen Ressource in foreach-Schleife setzen
-$htmlLink = html_writer::link(new moodle_url('../apeinsdrei/edit.php', array('id' => $cm->id, 'resourceid' => $res->id)), 'Edit', $attributes=null);
-//Analog: Link zum Löschen...
-$htmlLinkDelete = html_writer::link(new moodle_url('../apeinsdrei/delete.php', array('id' => $cm->id, 'resourceid' => $res->id)), 'Delete', $attributes=null);
-//Daten zuweisen an HTML-Tabelle
-$table->data[] = array($id, $name, $description, $serialnumber, $inventorynumber, $comment, $status, $amount, $type, $maincategory, $subcategory, $htmlLink, $htmlLinkDelete);
+require_once(dirname(__FILE__).'/forms/newresourceform.php');
+$mform = new resourcehtml_form(null);
+
 }
-//Tabelle ausgeben
-echo html_writer::table($table);
 
 // Finish the page.
 echo $OUTPUT->footer();
