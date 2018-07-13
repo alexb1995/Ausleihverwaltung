@@ -118,7 +118,7 @@ if(strpos($strUrl, 'resourceid=')){
     };
 	echo nl2br("\n");
     // Navigation
-    echo html_writer::link(new moodle_url('../ausleihverwaltung/view.php', array('id'=>$cm->id, 'resourceid'=>$resourceid)), 'Zurück: Ausleihübersicht', array('class'=>'btn btn-secondary'));
+    echo html_writer::link(new moodle_url('../ausleihverwaltung/checkdeadline_view.php', array('id'=>$cm->id)), 'Zurück: Ausleihübersicht', array('class'=>'btn btn-secondary'));
     echo html_writer::link(new moodle_url('../ausleihverwaltung/returnResource.php', array('id'=>$cm->id, 'resourceid'=>$resourceid)), 'Weiter: Ressource zurückgeben', array('class'=>'btn btn-secondary'));
 } else {
 	// Second run
@@ -154,7 +154,7 @@ if(strpos($strUrl, 'resourceid=')){
     };
     echo nl2br("\n");
     // Navigation
-    echo html_writer::link(new moodle_url('../ausleihverwaltung/view.php', array('id'=>$cm->id, 'resourceid'=>$fm_resourceid)), 'Zurück: Ausleihübersicht', array('class'=>'btn btn-secondary'));
+    echo html_writer::link(new moodle_url('../ausleihverwaltung/checkdeadline_view.php', array('id'=>$cm->id)), 'Zurück: Ausleihübersicht', array('class'=>'btn btn-secondary'));
     echo html_writer::link(new moodle_url('../ausleihverwaltung/returnResource.php', array('id'=>$cm->id, 'resourceid'=>$fm_resourceid)), 'Weiter: Ressource zurückgeben', array('class'=>'btn btn-secondary'));
 };
 
