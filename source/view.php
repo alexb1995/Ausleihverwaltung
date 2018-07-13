@@ -105,7 +105,7 @@ $table = new html_table();
 $table->head = array('ID','Name', 'Beschreibung', 'Seriennummer', 'Inventarnummer', 'Kommentar', 'Status', 'Menge', 'Typ', 'Hauptkategorie', 'Subkategorie', 'Bearbeiten', 'Löschen');
 
 require_once(dirname(__FILE__).'/forms/newresourceform.php');
-$mform = new resourcehtml_form(null);
+$mform = new newresourcehtml_form(null);
 
 }
 
