@@ -79,7 +79,7 @@ require_once(dirname(__FILE__).'/forms/saveDefect_form.php');
 if(strpos($strUrl, 'resourceid=')){
 	// First run
     $resourceid = $_GET['resourceid'];
-    $resource = $DB->get_record('resources', array('id'=>$resourceid));
+    $resource = $DB->get_record('apeinsvier_resources', array('id'=>$resourceid));
     $resourcename = $resource->name;
     $resourcedefect = $resource->defect;
 
@@ -128,7 +128,7 @@ if(strpos($strUrl, 'resourceid=')){
     	$fm_resourceid = $fromform->resourceid;
     	$fm_resourcedefect = $fromform->defect;
 
-    	$resource = $DB->get_record('resources', array('id'=>$fm_resourceid));
+    	$resource = $DB->get_record('apeinsvier_resources', array('id'=>$fm_resourceid));
 
     	$record = new stdClass();
     	$record->id 				= $fm_resourceid;
@@ -144,7 +144,7 @@ if(strpos($strUrl, 'resourceid=')){
         $record->subcategory 		= $resource->subcategory;
     	$record->defect 			= $fm_resourcedefect;
 
-    	$DB->update_record('resources', $record, $bulk=false);
+    	$DB->update_record('apeinsvier_resources', $record, $bulk=false);
     	echo 'Der Schadensvermerk "' . $fm_resourcedefect . '" zur Ressource ' . $resource->name . ' mit der ID ' . $fm_resourceid . ' wurde erfolgreich gespeichert.';
         echo nl2br("\n");
     } else {
