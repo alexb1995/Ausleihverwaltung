@@ -2,7 +2,7 @@
 // moodleform is defined in formslib.php
 require_once("$CFG->libdir/formslib.php");
 
-class checkDeadlineControllForm_form extends moodleform {
+class newresponsibleform_form extends moodleform {
     // Add elements to form
     public function definition() {
         global $CFG;
