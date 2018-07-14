@@ -80,7 +80,7 @@ if ($ausleihantrag->intro) {
 
 
 // Replace the following lines with you own code.
-echo $OUTPUT->heading('Kategorie der Ressource auswählen.');
+echo $OUTPUT->heading('Ausleihantrag stellen:');
 
 
 // Implement form for user
@@ -95,15 +95,48 @@ $mform = new simplehtml_form();
 if ($mform->is_cancelled()) {
     //Handle form cancel operation, if cancel button is present on form
 } else if ($fromform = $mform->get_data()) {
-    $value1 = $fromform->email;
-    $value2 = $fromform->name;
+    $value1 = $fromform->ausleiher;
+    $value2 = $fromform->matrikel;
+    $value3 = $fromform->mail;
+    $value4 = $fromform->grund;
+    $value5 = $fromform->anmerkung;
+    $value6 = $fromform->returnDate;
+    $value7 = $fromform->deviceId;
 
-    echo $value1;
-    error_log($value1);
+
+    // Um Tabelle >>checkdeadline_borroweddevice<< zu belegen
+    $record1 = new \stdClass();
+
+    $record1->studentname = $value1;
+    $record1->studentmatrikelnummer = $value2;
+    $record1->studentmailaddress = $value3;
+    $record1->comment = $value4;
+    $record1->borrowreason = $value5;
+    $record1->duedate = $value6;
+    $record1->resourceid = $value7;
+
+    $tomorrow = new DateTime("1 day", core_date::get_server_timezone_object());
+    $tomorrowint = $tomorrow->getTimestamp();
+
+    $record1->borrowdate = $tomorrowint;
+    
+    
+    
+    $record1->accepted = false;
+
+$DB->insert_record('checkdeadline_borroweddevice', $record1, $returnid=false, $bulk=false);
+
+
+    echo "Antrag wurde verschickt!";
+
+
+
+
+
 
   //In this case you process validated data. $mform->get_data() returns data posted in form.
   //Creating instance of relevant API modules
-  create_api_instances();
+  /*create_api_instances();
   $process_definition_id = ausleihantrag_get_process_definition_id("testttest");
   error_log("PROCESS DEFINITION ID IS: " . $process_definition_id);
   $process_instance_id = ausleihantrag_start_process($process_definition_id, "test_key");
@@ -111,14 +144,19 @@ if ($mform->is_cancelled()) {
   sleep(2);
   error_log("WAKEY WAKEY, BOYS AND GIRLS");
   $taskid = ausleihantrag_check_for_input_required($process_instance_id);
-  error_log("TASK ID IS: " . $taskid);
+  error_log("TASK ID IS: " . $taskid); */
+/*
   if ($taskid != null) {
     error_log("EXECUTION OF TASK RESPONSE");
-    $value1 = $fromform->email;
-    $value2 = $fromform->name;
+    $value1 = $fromform->ausleiher;
+    $value2 = $fromform->matrikel;
+    $value3 = $fromform->grund;
+    $value4 = $fromform->anmerkung;
+    $value5 = $fromform->returnDate;
+    $value6 = $fromform->deviceId;
     $result = ausleihantrag_answer_input_required($taskid, $process_definition_id, $value1, $value2);
     error_log("INPUT SEND RESULT IS: " . $result);
-  }
+  } */
 } else {
   // this branch is executed if the form is submitted but the data doesn't validate and the form should be redisplayed
   // or on the first display of the form.
@@ -131,60 +169,45 @@ if ($mform->is_cancelled()) {
   $mform->display();
 
   error_log("TEST FROM AFTER DISPLAY");
+
 }
-// Alle Datensätze aus der DB-Tabelle >>resources<< abfragen.
-$resource = $DB->get_records('resources');
-$table = new html_table();
-$table->head = array('ID','Name', 'Description', 'Serialnumber', 'Inventorynumber', 'Comment', 'Status', 'Amount', 'Type', 'Maincategory', 'Subcategory');
-//Für jeden Datensatz
-foreach ($resource as $res) {
-$id = $res->id;
-$name = $res->name;
-$description = $res->description;
-$serialnumber = $res->serialnumber;
-$inventorynumber = $res->inventorynumber;
-$comment = $res->comment;
-$status = $res->status;
-$amount = $res->amount;
-$type = $res->type;
-$maincategory = $res->maincategory;
-$subcategory = $res->subcategory;
-//Link zum Bearbeiten der aktuellen Ressource in foreach-Schleife setzen
 
-//Analog: Link zum Löschen...
+$strName = "Ressourcen-Übersicht";
+echo $OUTPUT->heading($strName);
 
-//Daten zuweisen an HTML-Tabelle
-$table->data[] = array($id, $name, $description, $serialnumber, $inventorynumber, $comment, $status, $amount, $type, $maincategory, $subcategory);
-}
-//Tabelle ausgeben
-echo html_writer::table($table);
-
+$attributes = array();
 // Alle Datensätze aus der DB-Tabelle >>resources<< abfragen.
 $resource = $DB->get_records('apeinsvier_resources');
+
 $table = new html_table();
-$table->head = array('ID','Name', 'Description', 'Serialnumber', 'Inventorynumber', 'Comment', 'Status', 'Amount', 'Type', 'Maincategory', 'Subcategory');
+$table->head = array('ID','Name', 'Beschreibung', 'Seriennummer', 'Inventarnummer', 'Kommentar', 'Status', 'Menge', 'Typ', 'Hauptkategorie', 'Subkategorie', 'Schaden', 'Bearbeiten', 'Löschen');
+
 //Für jeden Datensatz
 foreach ($resource as $res) {
-$id = $res->id;
-$name = $res->name;
-$description = $res->description;
-$serialnumber = $res->serialnumber;
-$inventorynumber = $res->inventorynumber;
-$comment = $res->comment;
-$status = $res->status;
-$amount = $res->amount;
-$type = $res->type;
-$maincategory = $res->maincategory;
-$subcategory = $res->subcategory;
+    $id = $res->id;
+    $name = $res->name;
+    $description = $res->description;
+    $serialnumber = $res->serialnumber;
+    $inventorynumber = $res->inventorynumber;
+    $comment = $res->comment;
+    $status = $res->status;
+    $amount = $res->amount;
+    $type = $res->type;
+    $maincategory = $res->maincategory;
+    $subcategory = $res->subcategory;
+    $defect = $res->defect;
 //Link zum Bearbeiten der aktuellen Ressource in foreach-Schleife setzen
-$htmlLink = html_writer::link(new moodle_url('../apeinsvier/edit.php', array('id' => $cm->id, 'resourceid' => $res->id)));
+    $htmlLink = html_writer::link(new moodle_url('../checkdeadline/edit.php', array('id' => $cm->id, 'resourceid' => $res->id)), 'Edit', $attributes=null);
 //Analog: Link zum Löschen...
-$htmlLinkDelete = html_writer::link(new moodle_url('../apeinsvier/delete.php', array('id' => $cm->id, 'resourceid' => $res->id)));
+    $htmlLinkDelete = html_writer::link(new moodle_url('../checkdeadline/delete.php', array('id' => $cm->id, 'resourceid' => $res->id)), 'Delete', $attributes=null);
 //Daten zuweisen an HTML-Tabelle
-$table->data[] = array($id, $name, $description, $serialnumber, $inventorynumber, $comment, $status, $amount, $type, $maincategory, $subcategory, $htmlLink, $htmlLinkDelete);
+    $table->data[] = array($id, $name, $description, $serialnumber, $inventorynumber, $comment, $status, $amount, $type, $maincategory, $subcategory, $defect, $htmlLink, $htmlLinkDelete);
 }
 //Tabelle ausgeben
 echo html_writer::table($table);
+
+// Finish the page.
+echo $OUTPUT->footer();
 
 // Finish the page.
 echo $OUTPUT->footer();
