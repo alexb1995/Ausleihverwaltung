@@ -54,7 +54,7 @@ echo $OUTPUT->header();
 echo $OUTPUT->heading($strname);
 
 if (! $ausleihverwaltungs = get_all_instances_in_course('ausleihverwaltung', $course)) {
-    notice(get_string('nonewmodules', 'ausleihverwaltung'), new moodle_url('/course/view.php', array('id' => $course->id)));
+    notice(get_string('noausleihverwaltungs', 'ausleihverwaltung'), new moodle_url('/course/view.php', array('id' => $course->id)));
 }
 
 $usesections = course_format_uses_sections($course->format);

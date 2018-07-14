@@ -1,5 +1,4 @@
 <?php
-
 /*LOGIN*/
 require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 require_once(dirname(__FILE__).'/lib.php');
@@ -29,37 +28,34 @@ $event = \mod_ausleihverwaltung\event\course_module_viewed::create(array(
 $event->add_record_snapshot('course', $PAGE->course);
 $event->add_record_snapshot($PAGE->cm->modname, $ausleihverwaltung);
 $event->trigger();
-$resID = $_GET['resourceid'];
-$resName = $_GET['resname'];
 
-/*PAGE Setzen*/
-$PAGE->set_url('/mod/ausleihverwaltung/deleteaccept.php', array('id' => $cm->id,'resourceid' => $resID));
+/*PAGE setzen*/
+$PAGE->set_url('/mod/ausleihverwaltung/ausleihverwaltung_delete.php', array('id' => $cm->id,'responsibleid' => $_GET['responsibleid']));
 $PAGE->set_title(format_string($ausleihverwaltung->name));
-echo nl2br("\n");
 $PAGE->set_heading(format_string($course->fullname));
 
 // Hier beginnt die Ausgabe
 echo $OUTPUT->header();
-echo nl2br("\n");
-$strName = "Löschen erfolgreich";
+
+$strName = "Verantwortlichen löschen";
 echo $OUTPUT->heading($strName);
 echo nl2br("\n");
+echo nl2br("\n");
 
-$resourcestable = 'ausleihverwaltung_resources';
-// Datensatz mit übergebener ID löschen
-$DB->delete_records_select($resourcestable,"id ='".$resID."'", $params=null);
+$responsibleID = $_GET['responsibleid']; //Wird von View-PHP mit dem Delete-Link übergeben
+$sql= 'SELECT dudesname FROM {ausleihverwaltung_responsible} WHERE id ='.$responsibleID.';';
+$responsibleDude = $DB->get_record_sql($sql, array($responsibleID));
+$responsibleName = $responsibleDude->dudesname;
 
-//Erfolgsmeldung
-$message = "Ressource mit dem Namen ".$resName." und der ID ".$resID." ist gelöscht.";
-
-echo $message;
+echo $message = "Willst du den Verantwortlichen ".$responsibleName. " löschen?";
 echo nl2br("\n");
 echo nl2br("\n");
 echo nl2br("\n");
 
-//Funktionstaste zum Fortfahren definieren
-echo $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/view.php', array('id' => $cm->id)), 'ok');
+//Funktionstasten zum Abbrechen und Fortfahren
+echo $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/view.php', array('id' => $cm->id)), 'Abbrechen');
+echo html_writer::link(new moodle_url('../ausleihverwaltung/ausleihverwaltung_deleteaccept.php', array('id' => $cm->id, 'responsibleID' => $responsibleID, 'responsibleName'=> $responsibleName)), 'Bestätigen', array('class' => 'btn btn-secondary'));
 
-//Finish
+//FINISH
 echo $OUTPUT->footer();
 ?>

@@ -130,6 +130,7 @@ echo $OUTPUT->heading($strName);
 
 echo $OUTPUT->single_button(new moodle_url('../ausleihantrag/ausleihantrag_view.php', array('id' => $cm->id)), 'Ausleihübersicht anzeigen');
 
+
 $strName = "Ressourcen-Übersicht";
 echo $OUTPUT->heading($strName);
 
@@ -155,9 +156,11 @@ foreach ($resource as $res) {
     $subcategory = $res->subcategory;
     $defect = $res->defect;
 //Link zum Bearbeiten der aktuellen Ressource in foreach-Schleife setzen
+  
     $htmlLink = html_writer::link(new moodle_url('../ausleihantrag/edit.php', array('id' => $cm->id, 'resourceid' => $res->id)), 'Edit', $attributes=null);
 //Analog: Link zum Löschen...
     $htmlLinkDelete = html_writer::link(new moodle_url('../ausleihantrag/delete.php', array('id' => $cm->id, 'resourceid' => $res->id)), 'Delete', $attributes=null);
+
 //Daten zuweisen an HTML-Tabelle
     $table->data[] = array($id, $name, $description, $serialnumber, $inventorynumber, $comment, $status, $amount, $type, $maincategory, $subcategory, $defect, $htmlLink, $htmlLinkDelete);
 }
