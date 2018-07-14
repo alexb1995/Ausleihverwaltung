@@ -31,6 +31,17 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+/*function checkDeadline()
+{
+    $email_user1 = new stdClass;
+    $email_user1>email= "abc@example.com";
+    $email_user1>firstname=" ";
+    $email_user1>lastname;
+    $email_user1>maildisplay = true;
+    $email_user1>mailformat = 1; // 0 (zero) text-only emails, 1 (one) for HTML/Text emails.
+    $email_user1>id=-99;
+    $a=>email_to_user($email_user, $email_user1, $subject, $content);
+}*/
 /**
  * Example constant, you probably want to remove this :-)
  */
@@ -478,4 +489,3 @@ function ausleihverwaltung_extend_navigation(navigation_node $navref, stdClass $
 function ausleihverwaltung_extend_settings_navigation(settings_navigation $settingsnav, navigation_node $ausleihverwaltungnode=null) {
     // TODO Delete this function and its docblock, or implement it.
 }
-
