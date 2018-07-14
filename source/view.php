@@ -35,13 +35,13 @@ $id = optional_param('id', 0, PARAM_INT); // Course_module ID, or
 $n  = optional_param('n', 0, PARAM_INT);  // ... ausleihantrag instance ID - it should be named as the first character of the module.
 
 if ($id) {
-    $cm         = get_coursemodule_from_id('ausleihantrag', $id, 0, false, MUST_EXIST);
+    $cm         = get_coursemodule_from_id('ausleihverwaltung', $id, 0, false, MUST_EXIST);
     $course     = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
-    $ausleihantrag  = $DB->get_record('ausleihantrag', array('id' => $cm->instance), '*', MUST_EXIST);
+    $ausleihverwaltung  = $DB->get_record('ausleihverwaltung', array('id' => $cm->instance), '*', MUST_EXIST);
 } else if ($n) {
-    $ausleihantrag  = $DB->get_record('ausleihantrag', array('id' => $n), '*', MUST_EXIST);
-    $course     = $DB->get_record('course', array('id' => $ausleihantrag->course), '*', MUST_EXIST);
-    $cm         = get_coursemodule_from_instance('ausleihantrag', $ausleihantrag->id, $course->id, false, MUST_EXIST);
+    $ausleihverwaltung  = $DB->get_record('ausleihverwaltung', array('id' => $n), '*', MUST_EXIST);
+    $course     = $DB->get_record('course', array('id' => $ausleihverwaltung->course), '*', MUST_EXIST);
+    $cm         = get_coursemodule_from_instance('ausleihverwaltung', $ausleihverwaltung->id, $course->id, false, MUST_EXIST);
 } else {
     error('You must specify a course_module ID or an instance ID');
 }
@@ -53,56 +53,13 @@ $event = \mod_ausleihverwaltung\event\course_module_viewed::create(array(
     'context' => $PAGE->context,
 ));
 $event->add_record_snapshot('course', $PAGE->course);
-$event->add_record_snapshot($PAGE->cm->modname, $ausleihantrag);
+$event->add_record_snapshot($PAGE->cm->modname, $ausleihverwaltung);
 $event->trigger();
 
 
-// Um Tabelle >>resources<< zu belegen
-/*
-$record = new stdClass();
-$record->name         = 'handy';
-$record->description = 'dasd';
-$record->serialnumber        = 'serial12';
-$record->inventorynumber = 'invent123';
-$record->comment        = 'Comment this Comment thisComment thisComment thisComment thisComment thisComment thisComment thisComment thisComment thisComment thisComment thisComment thisComment thisComment this';
-$record->status = 0;
-$record->amount         = 2;
-$record->type = 0;
-$record->maincategory    = "Handy";
-$record->subcategory = "sub";
-$record->defect = "damage is done";
-
-$DB->insert_record('ausleihantrag_resources', $record, $returnid=false, $bulk=false);
-
-/*
-$record1->name         = 'iPhone';
-$record1->description = 'beschde';
-$record1->serialnumber        = 'serial14';
-$record1->inventorynumber = 'invent567';
-$record1->comment        = 'Comment that';
-$record1->status = 3;
-$record1->amount         = 4;
-$record1->type = 1;
-$record1->maincategory    = "Apple";
-$record1->subcategory = "phone";
-$DB->insert_record('ausleihantrag_resources', $record1, $returnid=false, $bulk=false);
-
-$record2->name         = 'Mein iPhone';
-$record2->description = 'beschde';
-$record2->serialnumber        = 'blablub';
-$record2->inventorynumber = 'invent567';
-$record2->comment        = 'Comment that';
-$record2->status = 3;
-$record2->amount         = 4;
-$record2->type = 1;
-$record2->maincategory    = "Apple";
-$record2->subcategory = "phone";
-$DB->insert_record('ausleihantrag_resources', $record1, $returnid=false, $bulk=false);
-*/
-
 /* PAGE belegen*/
 $PAGE->set_url('/mod/ausleihverwaltung/view.php', array('id' => $cm->id));
-$PAGE->set_title(format_string($ausleihantrag->name));
+$PAGE->set_title(format_string($ausleihverwaltung->name));
 $PAGE->set_heading(format_string($course->fullname));
 
 /*
@@ -121,8 +78,8 @@ echo $OUTPUT->heading($strName);
 echo $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/ausleihantrag_view.php', array('id' => $cm->id)), 'Ausleihantrag stellen');
 
 // Conditions to show the intro can change to look for own settings or whatever.
-if ($ausleihantrag->intro) {
-    echo $OUTPUT->box(format_module_intro('ausleihantrag', $ausleihantrag, $cm->id), 'generalbox mod_introbox', 'ausleihantragintro');
+if ($ausleihverwaltung->intro) {
+    echo $OUTPUT->box(format_module_intro('ausleihantrag', $ausleihverwaltung, $cm->id), 'generalbox mod_introbox', 'ausleihantragintro');
 }
 
 $strName = "Ausleihen-Übersicht";
@@ -136,7 +93,7 @@ echo $OUTPUT->heading($strName);
 
 $attributes = array();
 // Alle Datensätze aus der DB-Tabelle >>resources<< abfragen.
-$resource = $DB->get_records('av_resources');
+$resource = $DB->get_records('ausleihverwaltung_resources');
 
 $table = new html_table();
 $table->head = array('ID','Name', 'Beschreibung', 'Seriennummer', 'Inventarnummer', 'Kommentar', 'Status', 'Menge', 'Typ', 'Hauptkategorie', 'Subkategorie', 'Schaden', 'Bearbeiten', 'Löschen');

@@ -273,10 +273,15 @@ function mail_to($email, $name, $subject, $message) {
 	global $DB;
 
 	$from = new stdClass();
-	$from->firstname = 'sWIm15';
-	$from->lastname  = '';
-	$from->email     = 'swim15.noreply@gmail.com';
-	$from->maildisplay = 1;
+    $from->firstname = 'sWIm15';
+    $from->lastname  = '';
+    $from->firstnamephonetic = '';
+    $from->lastnamephonetic = '';
+    $from->middlename = '';
+    $from->alternatename = '';
+    $from->email     = 'swim15.noreply@gmail.com';
+    $from->maildisplay = true;
+    $from->mailformat = 1; // 0 (zero) text-only emails, 1 (one) for HTML emails.
 	
 	$emailsubject = $subject;
 	$emailmessage = $message;
