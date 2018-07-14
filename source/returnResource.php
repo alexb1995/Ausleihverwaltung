@@ -79,7 +79,7 @@ require_once(dirname(__FILE__).'/forms/returnResource_form.php');
 if(strpos($strUrl, 'resourceid=')){
     // First run
     $resourceid = $_GET['resourceid'];
-    $resource = $DB->get_record('apeinsvier_resources', array('id'=>$resourceid));
+    $resource = $DB->get_record('av_resources', array('id'=>$resourceid));
     $resourcename = $resource->name;
     $resourcedefect = $resource->defect;
 
@@ -133,7 +133,7 @@ if(strpos($strUrl, 'resourceid=')){
     if ($fromform = $mform->get_data()) {
         $fm_resourceid = $fromform->resourceid;
 
-        $resource = $DB->get_record('apeinsvier_resources', array('id'=>$fm_resourceid));
+        $resource = $DB->get_record('av_resources', array('id'=>$fm_resourceid));
 
         switch ($fromform->available) {
             case 0:
@@ -160,7 +160,7 @@ if(strpos($strUrl, 'resourceid=')){
         $record->subcategory        = $resource->subcategory;
         $record->defect             = $resource->defect;
 
-        $DB->update_record('apeinsvier_resources', $record, $bulk=false);
+        $DB->update_record('av_resources', $record, $bulk=false);
         echo 'Die Rückgabe der Ressource wurde verbucht.';
         echo nl2br("\n");
     } else {

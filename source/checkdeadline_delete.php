@@ -21,7 +21,7 @@ if ($id) {
 
 require_login($course, true, $cm);
 
-$event = \mod_checkdeadline\event\course_module_viewed::create(array(
+$event = \mod_ausleihverwaltung\event\course_module_viewed::create(array(
     'objectid' => $PAGE->cm->instance,
     'context' => $PAGE->context,
 ));
@@ -30,7 +30,7 @@ $event->add_record_snapshot($PAGE->cm->modname, $checkdeadline);
 $event->trigger();
 
 /*PAGE setzen*/
-$PAGE->set_url('/mod/checkdeadline/checkdeadline_delete.php', array('id' => $cm->id,'responsibleid' => $_GET['responsibleid']));
+$PAGE->set_url('/mod/ausleihverwaltung/checkdeadline_delete.php', array('id' => $cm->id,'responsibleid' => $_GET['responsibleid']));
 $PAGE->set_title(format_string($checkdeadline->name));
 $PAGE->set_heading(format_string($course->fullname));
 
@@ -43,7 +43,7 @@ echo nl2br("\n");
 echo nl2br("\n");
 
 $responsibleID = $_GET['responsibleid']; //Wird von View-PHP mit dem Delete-Link übergeben
-$sql= 'SELECT dudesname FROM {checkdeadline_responsible} WHERE id ='.$responsibleID.';';
+$sql= 'SELECT dudesname FROM {av_responsible} WHERE id ='.$responsibleID.';';
 $responsibleDude = $DB->get_record_sql($sql, array($responsibleID));
 $responsibleName = $responsibleDude->dudesname;
 
@@ -53,8 +53,8 @@ echo nl2br("\n");
 echo nl2br("\n");
 
 //Funktionstasten zum Abbrechen und Fortfahren
-echo $OUTPUT->single_button(new moodle_url('../checkdeadline/checkdeadline_view.php', array('id' => $cm->id)), 'Abbrechen');
-echo html_writer::link(new moodle_url('../checkdeadline/checkdeadline_deleteaccept.php', array('id' => $cm->id, 'responsibleID' => $responsibleID, 'responsibleName'=> $responsibleName)), 'Bestätigen', array('class' => 'btn btn-secondary'));
+echo $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/checkdeadline_view.php', array('id' => $cm->id)), 'Abbrechen');
+echo html_writer::link(new moodle_url('../ausleihverwaltung/checkdeadline_deleteaccept.php', array('id' => $cm->id, 'responsibleID' => $responsibleID, 'responsibleName'=> $responsibleName)), 'Bestätigen', array('class' => 'btn btn-secondary'));
 
 //FINISH
 echo $OUTPUT->footer();

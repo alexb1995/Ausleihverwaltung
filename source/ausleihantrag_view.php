@@ -20,7 +20,7 @@
  * You can have a rather longer description of the file as well,
  * if you like, and it can span multiple lines.
  *
- * @package    mod_ausleihantrag
+ * @package    mod_ausleihverwaltung
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -48,7 +48,7 @@ if ($id) {
 
 require_login($course, true, $cm);
 
-$event = \mod_ausleihantrag\event\course_module_viewed::create(array(
+$event = \mod_ausleihverwaltung\event\course_module_viewed::create(array(
     'objectid' => $PAGE->cm->instance,
     'context' => $PAGE->context,
 ));
@@ -58,7 +58,7 @@ $event->trigger();
 
 // Print the page header.
 
-$PAGE->set_url('/mod/ausleihantrag/viewausleihantrag.php', array('id' => $cm->id));
+$PAGE->set_url('/mod/ausleihverwaltung/ausleihantrag_view.php', array('id' => $cm->id));
 $PAGE->set_title(format_string($ausleihantrag->name));
 $PAGE->set_heading(format_string($course->fullname));
 
@@ -104,7 +104,7 @@ if ($mform->is_cancelled()) {
     $value7 = $fromform->deviceId;
 
 
-    // Um Tabelle >>checkdeadline_borroweddevice<< zu belegen
+    // Um Tabelle >>av_borroweddevice<< zu belegen
     $record1 = new \stdClass();
 
     $record1->studentname = $value1;
@@ -124,7 +124,7 @@ if ($mform->is_cancelled()) {
     
     $record1->accepted = false;
 
-$DB->insert_record('checkdeadline_borroweddevice', $record1, $returnid=false, $bulk=false);
+$DB->insert_record('av_borroweddevice', $record1, $returnid=false, $bulk=false);
 
 
     echo "Antrag wurde verschickt!";
@@ -177,7 +177,7 @@ echo $OUTPUT->heading($strName);
 
 $attributes = array();
 // Alle Datensätze aus der DB-Tabelle >>resources<< abfragen.
-$resource = $DB->get_records('apeinsvier_resources');
+$resource = $DB->get_records('av_resources');
 
 $table = new html_table();
 $table->head = array('ID','Name', 'Beschreibung', 'Seriennummer', 'Inventarnummer', 'Kommentar', 'Status', 'Menge', 'Typ', 'Hauptkategorie', 'Subkategorie', 'Schaden', 'Bearbeiten', 'Löschen');
@@ -197,9 +197,9 @@ foreach ($resource as $res) {
     $subcategory = $res->subcategory;
     $defect = $res->defect;
 //Link zum Bearbeiten der aktuellen Ressource in foreach-Schleife setzen
-    $htmlLink = html_writer::link(new moodle_url('../checkdeadline/edit.php', array('id' => $cm->id, 'resourceid' => $res->id)), 'Edit', $attributes=null);
+    $htmlLink = html_writer::link(new moodle_url('../ausleihverwaltung/edit.php', array('id' => $cm->id, 'resourceid' => $res->id)), 'Edit', $attributes=null);
 //Analog: Link zum Löschen...
-    $htmlLinkDelete = html_writer::link(new moodle_url('../checkdeadline/delete.php', array('id' => $cm->id, 'resourceid' => $res->id)), 'Delete', $attributes=null);
+    $htmlLinkDelete = html_writer::link(new moodle_url('../ausleihverwaltung/resources_delete.php', array('id' => $cm->id, 'resourceid' => $res->id)), 'Delete', $attributes=null);
 //Daten zuweisen an HTML-Tabelle
     $table->data[] = array($id, $name, $description, $serialnumber, $inventorynumber, $comment, $status, $amount, $type, $maincategory, $subcategory, $defect, $htmlLink, $htmlLinkDelete);
 }

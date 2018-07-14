@@ -22,7 +22,7 @@ if ($id) {
 
 require_login($course, true, $cm);
 
-$event = \mod_checkdeadline\event\course_module_viewed::create(array(
+$event = \mod_ausleihverwaltung\event\course_module_viewed::create(array(
     'objectid' => $PAGE->cm->instance,
     'context' => $PAGE->context,
 ));
@@ -33,7 +33,7 @@ $responsibleID = $_GET['responsibleID'];
 $dudesName = $_GET['responsibleName'];
 
 /*PAGE Setzen*/
-$PAGE->set_url('/mod/checkdeadline/checkdeadline_deleteaccept.php', array('id' => $cm->id,'responsibleID' => $responsibleID));
+$PAGE->set_url('/mod/ausleihverwaltung/checkdeadline_deleteaccept.php', array('id' => $cm->id,'responsibleID' => $responsibleID));
 $PAGE->set_title(format_string($checkdeadline->name));
 echo nl2br("\n");
 $PAGE->set_heading(format_string($course->fullname));
@@ -45,9 +45,9 @@ $strName = "Löschen erfolgreich";
 echo $OUTPUT->heading($strName);
 echo nl2br("\n");
 
-$checkdeadline_responsible = 'checkdeadline_responsible';
+$av_responsible = 'av_responsible';
 // Datensatz mit übergebener ID löschen
-$DB->delete_records_select($checkdeadline_responsible,"id ='".$responsibleID."'", $params=null);
+$DB->delete_records_select($av_responsible,"id ='".$responsibleID."'", $params=null);
 
 //Erfolgsmeldung
 $message = "Verantwortlicher mit dem Namen " .$dudesName. " ist gelöscht.";
@@ -58,7 +58,7 @@ echo nl2br("\n");
 echo nl2br("\n");
 
 //Funktionstaste zum Fortfahren definieren
-echo $OUTPUT->single_button(new moodle_url('../checkdeadline/checkdeadline_view.php', array('id' => $cm->id)), 'OK');
+echo $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/checkdeadline_view.php', array('id' => $cm->id)), 'OK');
 
 //Finish
 echo $OUTPUT->footer();

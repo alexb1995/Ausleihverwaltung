@@ -27,7 +27,7 @@ $event->add_record_snapshot($PAGE->cm->modname, $ausleihverwaltung);
 $event->trigger();
 
 /*PAGE SETZEN*/
-$PAGE->set_url('/mod/ausleihverwaltung/edit.php', array('id' => $cm->id,'resourceid' => $_GET['resourceid']));
+$PAGE->set_url('/mod/ausleihverwaltung/resources_edit.php', array('id' => $cm->id,'resourceid' => $_GET['resourceid']));
 $PAGE->set_title(format_string($ausleihverwaltung->name));
 $PAGE->set_heading(format_string($course->fullname));
 

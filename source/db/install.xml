@@ -1,6 +1,6 @@
-<XMLDB xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" PATH="mod/apeinsvier/db" VERSION="20180705" COMMENT="XMLDB file for Moodle mod/apeinsvier" xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+<XMLDB xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" PATH="mod/av/db" VERSION="20180705" COMMENT="XMLDB file for Moodle mod/av" xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
 <TABLES>
-    <TABLE NAME="apeinsvier" COMMENT="Default comment for testmodule, please edit me">
+    <TABLE NAME="av" COMMENT="Default comment for testmodule, please edit me">
         <FIELDS>
             <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
             <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Course testmodule activity belongs to"/>
@@ -18,7 +18,7 @@
             <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
         </INDEXES>
     </TABLE>
-    <TABLE NAME="apeinsvier_resources" COMMENT="Table for capturing resources to lend and rent">
+    <TABLE NAME="av_resources" COMMENT="Table for capturing resources to lend and rent">
         <FIELDS>
             <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
             <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Name der Ressource"/>
@@ -55,11 +55,11 @@
             <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
         </INDEXES>
     </TABLE>
-    <TABLE NAME="checkdeadline_borroweddevice" COMMENT="Default comment for the table, please edit me">
+    <TABLE NAME="av_borroweddevice" COMMENT="Default comment for the table, please edit me">
         <FIELDS>
             <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
             <FIELD NAME="duedate" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="9999999999" SEQUENCE="false" COMMENT="Date when borrowed resource is to be returned"/>
-            <FIELD NAME="resourceid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="ID of resource in table apeinsvier_resource"/>
+            <FIELD NAME="resourceid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="ID of resource in table av_resource"/>
             <FIELD NAME="studentmatrikelnummer" TYPE="int" LENGTH="7" NOTNULL="true" SEQUENCE="false"/>
             <FIELD NAME="studentmailaddress" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
             <FIELD NAME="borrowdate" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Date when resource was borrowed"/>
@@ -72,7 +72,7 @@
             <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
         </KEYS>
     </TABLE>
-    <TABLE NAME="checkdeadline_responsible" COMMENT="All the dudes that are responsible for the device administration">
+    <TABLE NAME="av_responsible" COMMENT="All the dudes that are responsible for the device administration">
         <FIELDS>
             <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
             <FIELD NAME="dudesname" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="the full name of the dude that is responsible for the device administration"/>

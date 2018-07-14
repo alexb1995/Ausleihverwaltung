@@ -21,7 +21,7 @@ if ($id) {
 
 require_login($course, true, $cm);
 
-$event = \mod_checkdeadline\event\course_module_viewed::create(array(
+$event = \mod_ausleihverwaltung\event\course_module_viewed::create(array(
     'objectid' => $PAGE->cm->instance,
     'context' => $PAGE->context,
 ));
@@ -30,13 +30,13 @@ $event->add_record_snapshot($PAGE->cm->modname, $checkdeadline);
 $event->trigger();
 
 /*PAGE setzen*/
-$PAGE->set_url('/mod/checkdeadline/checkdeadline_view.php', array('id' => $cm->id));
+$PAGE->set_url('/mod/ausleihverwaltung/checkdeadline_view.php', array('id' => $cm->id));
 $PAGE->set_title(format_string($checkdeadline->name));
 $PAGE->set_heading(format_string($course->fullname));
 
 
 /*
-// Um Tabelle >>checkdeadline_borroweddevice<< zu belegen
+// Um Tabelle >>av_borroweddevice<< zu belegen
 $record1->duedate = 1530897520;
 $record1->resourceid = 1;
 $record1->studentmatrikelnummer = 3156763;
@@ -47,7 +47,7 @@ $record1->borrowreason = 'Einfach bock';
 $record1->comment = 'Für die krasseste Vorlesung auf diesem Planeten bruh.';
 $record1->accepted = true;
 
-$DB->insert_record('checkdeadline_borroweddevice', $record1, $returnid=false, $bulk=false);
+$DB->insert_record('av_borroweddevice', $record1, $returnid=false, $bulk=false);
 
 $record1->duedate = 1530859235;
 $record1->resourceid = 2;
@@ -59,7 +59,7 @@ $record1->borrowreason = 'Bli Bla Blubb';
 $record1->comment = 'Ich bin ein Dummkopf';
 $record1->accepted = false;
 
-$DB->insert_record('checkdeadline_borroweddevice', $record1, $returnid=false, $bulk=false);
+$DB->insert_record('av_borroweddevice', $record1, $returnid=false, $bulk=false);
 
 $record1->duedate = 1532500835;
 $record1->resourceid = 3;
@@ -71,7 +71,7 @@ $record1->borrowreason = 'Ich will einfach haben';
 $record1->comment = 'wojfweofjneofginet2o';
 $record1->accepted = true;
 
-$DB->insert_record('checkdeadline_borroweddevice', $record1, $returnid=false, $bulk=false);
+$DB->insert_record('av_borroweddevice', $record1, $returnid=false, $bulk=false);
 
 $record1->duedate = 1524638435;
 $record1->resourceid = 4;
@@ -83,10 +83,10 @@ $record1->borrowreason = 'für eBay zum Verkaufen safe';
 $record1->comment = 'öerkfjwetgiojt+#pfidhqäofig';
 $record1->accepted = false;
 
-$DB->insert_record('checkdeadline_borroweddevice', $record1, $returnid=false, $bulk=false);
+$DB->insert_record('av_borroweddevice', $record1, $returnid=false, $bulk=false);
 
 // Datensatz mit übergebener ID löschen
-//$DB->delete_records_select('checkdeadline_borroweddevice',"id = 2", $params=null);
+//$DB->delete_records_select('av_borroweddevice',"id = 2", $params=null);
 */
 
 
@@ -101,8 +101,8 @@ if ($checkdeadline->intro) {
 $strName = "Ausleihen-Übersicht";
 echo $OUTPUT->heading($strName);
 
-// Alle Datensätze aus der DB-Tabelle >>$checkdeadline_borroweddevice<< abfragen.
-$borrowed = $DB->get_records('checkdeadline_borroweddevice');
+// Alle Datensätze aus der DB-Tabelle >>$av_borroweddevice<< abfragen.
+$borrowed = $DB->get_records('av_borroweddevice');
 
 $table = new html_table();
 $table->head = array('Geräte ID', 'Gerätename', 'Ausgeliehen am', 'Fällig bis', 'Matrikelnummer', 'Studenten Name', 'E-Mail', 'Ausleihgrund', 'Rückgabe');
@@ -112,7 +112,7 @@ foreach ($borrowed as $borrowed) {
     if ($borrowed->accepted){
         //Get Name of the Resource that was borrowed
         $resourceId = $borrowed->resourceid;
-        $resourceName = $DB->get_field('apeinsvier_resources', 'name', array('id'=> $resourceId));
+        $resourceName = $DB->get_field('av_resources', 'name', array('id'=> $resourceId));
 
         //Transform Epoch time to human Time for <<borroweddate>>
         $borrowdateepoch = $borrowed->borrowdate;
@@ -135,7 +135,7 @@ foreach ($borrowed as $borrowed) {
         $borrowreason = $borrowed->borrowreason;
         $comment = $borrowed->comment;
 
-        $returnButton = $OUTPUT->single_button(new moodle_url('../checkdeadline/saveDefect.php', array('id' => $cm->id, 'resourceid' => $resourceId)), 'Rückgabe der Resource', $attributes=null);
+        $returnButton = $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/saveDefect.php', array('id' => $cm->id, 'resourceid' => $resourceId)), 'Rückgabe der Resource', $attributes=null);
 
 //Daten zuweisen an HTML-Tabelle
         $table->data[] = array($resourceId, $resourceName, $borrowdate, $duedate, $studentmatrikelnummer, $studentname, $studentmailaddress, $borrowreason, $returnButton);
@@ -148,8 +148,8 @@ echo html_writer::table($table);
 $strName = "Verantwortlichen-Übersicht";
 echo $OUTPUT->heading($strName);
 
-// Alle Datensätze aus der DB-Tabelle >>checkdeadline_responsible<< abfragen.
-$responsibleDudes = $DB->get_records('checkdeadline_responsible');
+// Alle Datensätze aus der DB-Tabelle >>av_responsible<< abfragen.
+$responsibleDudes = $DB->get_records('av_responsible');
 
 $table = new html_table();
 $table->head = array('Name des Verantwortlichen', 'E-Mail des Verantwortlichen', 'Löschen');
@@ -159,7 +159,7 @@ foreach ($responsibleDudes as $responsible) {
     $name = $responsible->dudesname;
     $mail = $responsible->dudesmail;
     //Link zum löschen des Verantwortlichen in foreach-Schleife setzen
-    $deleteButton = $OUTPUT->single_button(new moodle_url('../checkdeadline/checkdeadline_delete.php', array('id' => $cm->id, 'responsibleid' => $responsible->id)), 'Delete', $attributes=null);
+    $deleteButton = $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/checkdeadline_delete.php', array('id' => $cm->id, 'responsibleid' => $responsible->id)), 'Delete', $attributes=null);
 //Daten zuweisen an HTML-Tabelle
     $table->data[] = array($name, $mail, $deleteButton);
 }
@@ -187,14 +187,14 @@ if ($mform->is_cancelled()) {
     $dudesName = $fromform->responsibleName;
     $dudesMail = $fromform->responsibleMail;
 
-// Um Tabelle >>checkdeadline_responsible<< zu belegen
+// Um Tabelle >>av_responsible<< zu belegen
     $record1 = new \stdClass();
     $record1->dudesname = $dudesName;
     $record1->dudesmail = $dudesMail;
-    $DB->insert_record('checkdeadline_responsible', $record1, $returnid=false, $bulk=false);
+    $DB->insert_record('av_responsible', $record1, $returnid=false, $bulk=false);
 
     //reload page so all Table views will be updated and Forms will be redisplayed
-    redirect(new moodle_url('../checkdeadline/checkdeadline_view.php', array('id' => $cm->id)));
+    redirect(new moodle_url('../ausleihverwaltung/checkdeadline_view.php', array('id' => $cm->id)));
 
 // $mform->render();
 
