@@ -120,10 +120,9 @@ if ($mform->is_cancelled()) {
 
     $record1->borrowdate = $tomorrowint;
             
-    $record1->accepted = false;
+    $record1->accepted = true;
 
-$DB->insert_record('ausleihverwaltung_borrowed', $record1, $returnid=false, $bulk=false);
-
+    $recordid = $DB->insert_record('ausleihverwaltung_borrowed', $record1, $returnid=true, $bulk=false);
 
     echo "Antrag wurde verschickt!";
 
@@ -173,6 +172,8 @@ foreach ($resource as $res) {
 }
 //Tabelle ausgeben
 echo html_writer::table($table);
+
+echo $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/view.php', array('id' => $cm->id)), 'Home');
 
 // Finish the page.
 echo $OUTPUT->footer();

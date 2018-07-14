@@ -62,12 +62,6 @@ $PAGE->set_url('/mod/ausleihverwaltung/view.php', array('id' => $cm->id));
 $PAGE->set_title(format_string($ausleihverwaltung->name));
 $PAGE->set_heading(format_string($course->fullname));
 
-/*
- * Other things you may want to set - remove if not needed.
- * $PAGE->set_cacheable(false);
- * $PAGE->set_focuscontrol('some-html-id');
- * $PAGE->add_body_class('ausleihantrag-'.$somevar);
- */
 
 // Hier beginnt die Ausgabe
 echo $OUTPUT->header();
