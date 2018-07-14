@@ -171,10 +171,10 @@ $strName = "Gibt es weitere Verantwortliche?";
 echo $OUTPUT->heading($strName);
 
 // Implement form for user
-require_once(dirname(__FILE__).'/forms/checkDeadlineControllForm.php');
+require_once(dirname(__FILE__) . '/forms/newresponsibleform.php');
 //require_once(dirname(__FILE__).'/forms/leihscheinForm.php');
 
-$mform = new checkDeadlineControllForm_form();
+$mform = new newresponsibleform_form();
 //$mform = new leihschein_form();
 // $mform->render();
 
