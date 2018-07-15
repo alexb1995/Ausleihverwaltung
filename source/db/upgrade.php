@@ -44,6 +44,36 @@ function xmldb_ausleihverwaltung_upgrade($oldversion) {
 
     if ($oldversion < 2018071106) {
 
+        // Define table ausleihverwaltung to be created.
+        $table = new xmldb_table('ausleihverwaltung');
+
+        // Adding fields to table ausleihverwaltung.
+        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+        $table->add_field('course', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('name', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('intro', XMLDB_TYPE_TEXT, null, null, XMLDB_NOTNULL, null, null);
+        $table->add_field('introformat', XMLDB_TYPE_INTEGER, '4', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('timecreated', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('timemodified', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0');
+        $table->add_field('grade', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '100');
+
+        // Adding keys to table ausleihverwaltung.
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+
+        // Adding indexes to table ausleihverwaltung.
+        $table->add_index('course', XMLDB_INDEX_NOTUNIQUE, array('course'));
+
+        // Conditionally launch create table for ausleihverwaltung.
+        if (!$dbman->table_exists($table)) {
+            $dbman->create_table($table);
+        }
+
+        // ausleihverwaltung savepoint reached.
+        upgrade_mod_savepoint(true, 2018071106, 'ausleihverwaltung');
+    }
+
+    if ($oldversion < 2018071106) {
+
         // Define table ausleihverwaltung_resources to be created.
         $table = new xmldb_table('ausleihverwaltung_resources');
 
@@ -69,7 +99,38 @@ function xmldb_ausleihverwaltung_upgrade($oldversion) {
             $dbman->create_table($table);
         }
 
-        // Apeinsvier savepoint reached.
+        // ausleihverwaltung savepoint reached.
+        upgrade_mod_savepoint(true, 2018071106, 'ausleihverwaltung');
+    }
+
+    if ($oldversion < 2018071106) {
+
+        // Define table ausleihverwaltung_resources to be created.
+        $table = new xmldb_table('ausleihverwaltung_resources');
+
+        // Adding fields to table ausleihverwaltung_resources.
+        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+        $table->add_field('name', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('description', XMLDB_TYPE_TEXT, null, null, null, null, null);
+        $table->add_field('serialnumber', XMLDB_TYPE_CHAR, '255', null, null, null, null);
+        $table->add_field('inventorynumber', XMLDB_TYPE_CHAR, '255', null, null, null, null);
+        $table->add_field('comment', XMLDB_TYPE_TEXT, null, null, null, null, null);
+        $table->add_field('status', XMLDB_TYPE_INTEGER, '2', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('amount', XMLDB_TYPE_INTEGER, '7', null, null, null, null);
+        $table->add_field('type', XMLDB_TYPE_INTEGER, '2', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('maincategory', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('subcategory', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('defect', XMLDB_TYPE_TEXT, null, null, null, null, null);
+
+        // Adding keys to table ausleihverwaltung_resources.
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+
+        // Conditionally launch create table for ausleihverwaltung_resources.
+        if (!$dbman->table_exists($table)) {
+            $dbman->create_table($table);
+        }
+
+        // ausleihverwaltung savepoint reached.
         upgrade_mod_savepoint(true, 2018071106, 'ausleihverwaltung');
     }
 
@@ -89,6 +150,7 @@ function xmldb_ausleihverwaltung_upgrade($oldversion) {
         $table->add_field('borrowreason', XMLDB_TYPE_TEXT, null, null, null, null, null);
         $table->add_field('comment', XMLDB_TYPE_TEXT, null, null, null, null, null);
         $table->add_field('accepted', XMLDB_TYPE_BINARY, null, null, XMLDB_NOTNULL, null, null);
+        $table->add_field('returned', XMLDB_TYPE_BINARY, null, null, XMLDB_NOTNULL, null, null);
 
         // Adding keys to table ausleihverwaltung_borroweddevice.
         $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
