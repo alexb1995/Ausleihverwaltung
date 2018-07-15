@@ -131,6 +131,15 @@ if ($mform->is_cancelled()) {
             $category = 'Kabel';
         break;
     };
+
+    switch ($fromform->Ressourcentyp) {
+        case 0:
+            $type = 0;
+        break;
+        case 1:
+            $type = 1;
+        break;
+    };
     //$category = $fromform->category;
 
     //$tags = $fromform->tags;
@@ -141,7 +150,7 @@ if ($mform->is_cancelled()) {
     $category = 'Handy';
     */
     $tags = 'iPhone';
-    $type = 1;
+    //$type = 1;
 
     //Button Funktionalität hinzugefügt
     redirect(new moodle_url('../apeinsdrei/newressource.php', array('id' => $cm->id, 'ressourcename' => $ressourcename, 'category' => $category, 'tags' => $tags, 'type' => $type)));
