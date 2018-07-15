@@ -107,7 +107,31 @@ if ($mform->is_cancelled()) {
     
     //dynamisches Auslesen der eingegebenen Daten
     $ressourcename = $fromform->name;
-    $category = $fromform->category;
+
+    switch ($fromform->category) {
+        case 0:
+            $category = 'Handy';
+        break;
+        case 1:
+            $category = 'Tablet';
+        break;
+        case 2:
+            $category = 'Laptop';
+        break;
+        case 3:
+            $category = 'Computer';
+        break;
+        case 4:
+            $category = 'Software';
+        break;
+        case 5:
+            $category = 'Drucker';
+        break;
+        case 6:
+            $category = 'Kabel';
+        break;
+    };
+    //$category = $fromform->category;
     $tags = $fromform->tags;
     $type = $fromform->Ressourcentyp;
 
