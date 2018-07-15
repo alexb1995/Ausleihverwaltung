@@ -28,8 +28,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'mod_apeinsdrei';
-$plugin->version = 2018071502;
-$plugin->release = '2018071502';
+$plugin->version = 2018071504;
+$plugin->release = '2018071504';
 $plugin->requires = 2014051200;
 $plugin->maturity = MATURITY_ALPHA;
 $plugin->cron = 0;

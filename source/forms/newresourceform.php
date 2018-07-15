@@ -26,8 +26,8 @@ class newresourcehtml_form extends moodleform {
 
         //Radiobuton um Stückgut oder Schüttgut auszuwählen
         $radioarray = array();
-        $radioarray[] = $mform->createElement('radio', 'Typ', 'rdbtnSt', 'Stueckgut', 1);
-        $radioarray[] = $mform->createElement('radio', 'Typ', 'rdbtnSch', 'Schuettgut', 0);
+        $radioarray[] = $mform->createElement('radio', 'Typ', '', get_string('Stueckgut', 'apeinsdrei'), 1);
+        $radioarray[] = $mform->createElement('radio', 'Typ', '', get_string('Schuettgut', 'apeinsdrei'), 0);
         $mform->addGroup($radioarray, 'Ressourcentyp', 'Ressourcentyp', array('new'), false);
 
         error_log("TEST FROM INSIDE FORM");

@@ -99,8 +99,7 @@ echo $OUTPUT->heading($strName);
 
 require_once(dirname(__FILE__).'/forms/newresourceform.php');
 $mform = new newresourcehtml_form(null);
-
-
+$mform->display();
 
 // Finish the page.
 echo $OUTPUT->footer();
