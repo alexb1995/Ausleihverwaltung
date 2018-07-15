@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0735febe-206a-4e95-8d1c-931da427acaf" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/source/checkdeadline_view.php" afterPath="$PROJECT_DIR$/source/checkdeadline_view.php" />
+      <change beforePath="$PROJECT_DIR$/source/forms/checkDeadlineControllForm.php" afterPath="$PROJECT_DIR$/source/forms/newresponsibleform.php" />
+      <change beforePath="$PROJECT_DIR$/source/view.php" afterPath="$PROJECT_DIR$/source/view.php" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="checkdeadline_view.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/checkdeadline_view.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2640">
+              <caret line="176" column="39" lean-forward="true" selection-start-line="176" selection-start-column="39" selection-end-line="176" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="view.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/source/view.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2250">
+              <caret line="163" column="0" lean-forward="true" selection-start-line="163" selection-start-column="0" selection-end-line="163" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="checkdeadline_delete.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/checkdeadline_delete.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="915">
+              <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+              <folding>
+                <marker date="1531587857183" expanded="true" signature="1913:1973" ph="SELECT dudes... checkdeadline_responsible" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="checkdeadline_deleteaccept.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/checkdeadline_deleteaccept.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="871">
+              <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="install.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/db/install.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="403">
+              <caret line="39" column="17" lean-forward="false" selection-start-line="39" selection-start-column="17" selection-end-line="39" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="newresponsibleform.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/forms/newresponsibleform.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="19" lean-forward="true" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>email</find>
+      <find>checkdeadline_start_process</find>
+      <find>task</find>
+      <find>CHECKDEADLINE_ULTIMATE_ANSWER</find>
+      <find>2007040100</find>
+      <find>$res</find>
+      <find>echo &quot;form got content&quot;;</find>
+      <find>$borroweddevices</find>
+      <find>+</find>
+      <find>$DB</find>
+      <find>Core_dat</find>
+      <find>get_data</find>
+      <find>includes</find>
+      <find>$id</find>
+      <find>datet</find>
+      <find>apeinsvier</find>
+      <find>responsibleID</find>
+      <find>resourceid</find>
+      <find>resname</find>
+      <find>$</find>
+      <find>$record1</find>
+      <find>mail</find>
+      <find>delete</find>
+      <find>checkdeadline_delete</find>
+      <find>$htmlLinkDelete</find>
+      <find>$_GET</find>
+      <find>ausleihverwal</find>
+      <find>checkdeadli</find>
+      <find>get_rec</find>
+      <find>checkdeadline_resources</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>&quot;</replace>
+      <replace>$borrowed</replace>
+      <replace>$rowID</replace>
+      <replace>.</replace>
+      <replace>$dudesName</replace>
+      <replace>$responsibleID</replace>
+      <replace>responsibleName</replace>
+      <replace>checkdeadline_view</replace>
+      <replace>checkdeadline</replace>
+      <replace>$deleteButton</replace>
+      <replace>apeinsvier_resources</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/source/forms/leihscheinForm.php" />
+        <option value="$PROJECT_DIR$/checkdeadline/forms/simpleform.php" />
+        <option value="$PROJECT_DIR$/checkdeadline/lang/en/checkdeadline.php" />
+        <option value="$PROJECT_DIR$/checkdeadline/forms/leihscheinForm.php" />
+        <option value="$PROJECT_DIR$/checkdeadline/classes/tasks/checkDeadline.php" />
+        <option value="$PROJECT_DIR$/checkdeadline/lib.php" />
+        <option value="$PROJECT_DIR$/checkdeadline/classes/tasks/checkDeadlineTask.php" />
+        <option value="$PROJECT_DIR$/checkdeadline/db/tasks.php" />
+        <option value="$PROJECT_DIR$/checkdeadline/db/install.xml" />
+        <option value="$PROJECT_DIR$/checkdeadline/db/upgrade.php" />
+        <option value="$PROJECT_DIR$/checkdeadline/version.php" />
+        <option value="$PROJECT_DIR$/checkdeadline/view.php" />
+        <option value="$PROJECT_DIR$/checkdeadline/forms/checkDeadlineControllForm.php" />
+        <option value="$PROJECT_DIR$/checkdeadline/delete.php" />
+        <option value="$PROJECT_DIR$/checkdeadline/deleteaccept.php" />
+        <option value="$PROJECT_DIR$/checkdeadline/classes/task/checkDeadlineTask.php" />
+        <option value="$PROJECT_DIR$/checkdeadline/locallib.php" />
+        <option value="$PROJECT_DIR$/source/version.php" />
+        <option value="$PROJECT_DIR$/source/db/upgrade.php" />
+        <option value="$PROJECT_DIR$/source/checkdeadline_delete.php" />
+        <option value="$PROJECT_DIR$/source/checkdeadline_deleteaccept.php" />
+        <option value="$PROJECT_DIR$/source/db/install.xml" />
+        <option value="$PROJECT_DIR$/source/forms/newresponsibleform.php" />
+        <option value="$PROJECT_DIR$/source/checkdeadline_view.php" />
+        <option value="$PROJECT_DIR$/source/view.php" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="x" value="55" />
+    <option name="y" value="22" />
+    <option name="width" value="1607" />
+    <option name="height" value="1028" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Ausleihverwaltung" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Ausleihverwaltung" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Ausleihverwaltung" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Ausleihverwaltung" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="source" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Ausleihverwaltung" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Ausleihverwaltung" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="source" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="db" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Ausleihverwaltung" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Ausleihverwaltung" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="source" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="forms" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="settings.editor.selected.configurable" value="settings.github" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/checkdeadline/forms" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0735febe-206a-4e95-8d1c-931da427acaf" name="Default" comment="" />
+      <created>1530197530152</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1530197530152</updated>
+      <workItem from="1530197531784" duration="66000" />
+      <workItem from="1530197676748" duration="3135000" />
+      <workItem from="1530203186222" duration="24705000" />
+      <workItem from="1530638863300" duration="2733000" />
+      <workItem from="1530723376706" duration="4074000" />
+      <workItem from="1530730250376" duration="30187000" />
+      <workItem from="1531292045144" duration="13233000" />
+      <workItem from="1531325714081" duration="833000" />
+      <workItem from="1531327294319" duration="5759000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="96586000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.117" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/checkdeadline/classes/task/checkDeadlineTask.php" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/locallib.php" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/classes/task/checkDeadlineTask.php" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/view.php" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/db/tasks.php" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/lib.php" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/db/install.xml" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/version.php" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/forms/checkDeadlineControllForm.php" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/db/upgrade.php" />
+    <entry file="file://$PROJECT_DIR$/source/forms/leihscheinForm.php" />
+    <entry file="file://$PROJECT_DIR$/source/view.php" />
+    <entry file="file://$PROJECT_DIR$/source/locallib.php" />
+    <entry file="file://$PROJECT_DIR$/source/forms/simpleform.php" />
+    <entry file="file://$PROJECT_DIR$/source/forms/leihscheinForm.php" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/classes/tasks/checkDeadline.php" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/lib.php" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/db/install.php" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/classes/event/course_module_viewed.php" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/classes/event/course_module_instance_list_viewed.php" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/db/access.php" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/lib/autoload.php" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/lang/en/moodle.php" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/lang/en/checkdeadline.php" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/db/upgrade.php" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/version.php" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/forms/leihscheinForm.php" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/db/install.xml" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/forms/simpleform.php" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/forms/checkDeadlineControllForm.php" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/delete.php" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/deleteaccept.php" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/db/tasks.php" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/view.php" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/classes/task/checkDeadlineTask.php" />
+    <entry file="file://$PROJECT_DIR$/checkdeadline/locallib.php" />
+    <entry file="file://$PROJECT_DIR$/source/classes/task/checkDeadlineTask.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/lang/en/checkdeadline.php" />
+    <entry file="file://$PROJECT_DIR$/source/tests/behat/installed.feature" />
+    <entry file="file://$PROJECT_DIR$/source/db/upgrade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-157">
+          <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/version.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="30" column="29" lean-forward="false" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/classes/event/course_module_viewed.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="25" column="52" lean-forward="false" selection-start-line="25" selection-start-column="52" selection-end-line="25" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/locallib.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="116" column="0" lean-forward="false" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/checkdeadline_view.php" />
+    <entry file="file://$PROJECT_DIR$/source/edit.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2715">
+          <caret line="210" column="54" lean-forward="false" selection-start-line="210" selection-start-column="54" selection-end-line="210" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/checkdeadline_delete.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="915">
+          <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+          <folding>
+            <marker date="1531587857183" expanded="true" signature="1913:1973" ph="SELECT dudes... checkdeadline_responsible" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/db/install.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="39" column="17" lean-forward="false" selection-start-line="39" selection-start-column="17" selection-end-line="39" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/forms/newresponsibleform.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="19" lean-forward="true" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/checkdeadline_deleteaccept.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="871">
+          <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/checkdeadline_view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2640">
+          <caret line="176" column="39" lean-forward="true" selection-start-line="176" selection-start-column="39" selection-end-line="176" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2250">
+          <caret line="163" column="0" lean-forward="true" selection-start-line="163" selection-start-column="0" selection-end-line="163" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
