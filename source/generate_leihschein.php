@@ -57,21 +57,9 @@ $event->add_record_snapshot($PAGE->cm->modname, $ausleihverwaltung);
 $event->trigger();
 
 /* PAGE belegen*/
-$PAGE->set_url('/mod/ausleihverwaltung/ablage_view.php', array('id' => $cm->id, 'borrowedid'=>$_GET['borrowedid']));
+$PAGE->set_url('/mod/ausleihverwaltung/generate_leihschein.php', array('id' => $cm->id, 'borrowedid'=>$_GET['borrowedid']));
 $PAGE->set_title(format_string($ausleihverwaltung->name));
 $PAGE->set_heading(format_string($course->fullname));
-
-// Output starts here.
-echo $OUTPUT->header();
-
-// Conditions to show the intro can change to look for own settings or whatever.
-// Conditions to show the intro can change to look for own settings or whatever.
-if ($ausleihverwaltung->intro) {
-    echo $OUTPUT->box(format_module_intro('ausleihantrag', $ausleihverwaltung, $cm->id), 'generalbox mod_introbox', 'ausleihantragintro');
-}
-
-// Replace the following lines with you own code.
-echo $OUTPUT->heading('Ablage des Digitalen Leihscheins');
 
 $url = $PAGE->url;
 $strUrl = $url.'';
@@ -80,41 +68,4 @@ if(strpos($strUrl, 'borrowedid=')){
     $borrowedid = $_GET['borrowedid'];
     prep_leihschein($borrowedid);
 }
-
-// Implement form for user
-require_once(dirname(__FILE__).'/forms/formablageschein.php');
-
-$mform = new ablageleihschein_form();
-// $mform->render();
-
-// error_log("TEST FROM BEFORE DISPLAY");
-
-//Form processing and displaying is done here
-if ($mform->is_cancelled()) {
-    //Handle form cancel operation, if cancel button is present on form
-} else if ($fromform = $mform->get_data()) {
-    $value1 = $fromform->userfile;  //value1 = uploaded file     
-
-    $content = $mform->get_file_content('userfile');  //To get the contents of the file
-    $name = $mform->get_new_filename('userfile'); //To get the name of the chosen file
-    $path = '/opt/bitnami/moodle/uploads/'.$name; //Combine /opt/bitnami/moodle/uploads/ and the name of the uploaded file to get the path  
-    $success = $mform->save_file('userfile', $path, false);// To save the chosen file to the server filesystem (such as to moodledata folder)
-    
-
-     //echo $path;
-    //echo $content;
-    error_log($value1);
-
-  
-
-} else {
-  $formdata = array('id' => $id);
-  $mform->set_data($formdata);
-
-  $mform->display();
-
-}  
-
-// Finish the page.
-echo $OUTPUT->footer();
 ?>

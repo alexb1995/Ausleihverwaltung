@@ -83,7 +83,7 @@ foreach ($borrowed as $borrowed) {
         $borrowreason = $borrowed->borrowreason;
         $comment = $borrowed->comment;
 
-        $leihscheinButton = $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/ablage_view.php', array('id' => $cm->id, 'borrowedid' => $borrowed->id)), 'Leihschein', $attributes=null);
+        $leihscheinButton = $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/generate_leihschein.php', array('id' => $cm->id, 'borrowedid' => $borrowed->id)), 'Leihschein', $attributes=null);
         $returnButton = $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/saveDefect.php', array('id' => $cm->id, 'resourceid' => $resourceId)), 'Rückgabe', $attributes=null);
 
 //Daten zuweisen an HTML-Tabelle
@@ -93,6 +93,41 @@ foreach ($borrowed as $borrowed) {
 //Tabelle ausgeben
 echo html_writer::table($table);
 
+$strName = "Leihschein abgeben";
+echo $OUTPUT->heading($strName);
+
+require_once(dirname(__FILE__).'/forms/formablageschein.php');
+
+$mform = new ablageleihschein_form();
+// $mform->render();
+
+// error_log("TEST FROM BEFORE DISPLAY");
+
+//Form processing and displaying is done here
+if ($mform->is_cancelled()) {
+    //Handle form cancel operation, if cancel button is present on form
+} else if ($fromform = $mform->get_data()) {
+    $value1 = $fromform->userfile;  //value1 = uploaded file     
+
+    $content = $mform->get_file_content('userfile');  //To get the contents of the file
+    $name = $mform->get_new_filename('userfile'); //To get the name of the chosen file
+    $path = '/opt/bitnami/moodle/uploads/'.$name; //Combine /opt/bitnami/moodle/uploads/ and the name of the uploaded file to get the path  
+    $success = $mform->save_file('userfile', $path, false);// To save the chosen file to the server filesystem (such as to moodledata folder)
+    
+
+     //echo $path;
+    //echo $content;
+    error_log($value1);
+
+  
+
+} else {
+  $formdata = array('id' => $id);
+  $mform->set_data($formdata);
+
+  $mform->display();
+
+}
 
 $strName = "Verantwortlichen-Übersicht";
 echo $OUTPUT->heading($strName);
@@ -114,7 +149,6 @@ foreach ($responsibleDudes as $responsible) {
 }
 //Tabelle ausgeben
 echo html_writer::table($table);
-
 
 $strName = "Gibt es weitere Verantwortliche?";
 echo $OUTPUT->heading($strName);

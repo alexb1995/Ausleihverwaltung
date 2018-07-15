@@ -328,9 +328,10 @@ function prep_leihschein($borrowedid) {
 
     $ausleihantrag = array(
     '%Name' => $borrowedResource->studentname,
-    '%Matrikel' => $borrowedResource->studentmatrikelnummer,
-    '%Kurs' => '',
-    '%E-Mail' => $borrowedResource->studentmailaddress,
+	'%Matrikel' => $borrowedResource->studentmatrikelnummer,
+	'%Straße' => '',
+	'%Kurs' => '',
+    '%EMail' => $borrowedResource->studentmailaddress,
     '%Rückgabe' => $borrowedResource->duedate,
     '%Zweck' => $borrowedResource->borrowreason,
     '%Datum' => $today,
@@ -343,6 +344,8 @@ function prep_leihschein($borrowedid) {
 function generate_pdf($replacements, $id) {
 	ob_start();
 	$leihschein = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false, false);
+	$leihschein->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 027', PDF_HEADER_STRING);
+
 
 	$html = file_get_contents("leihschein.html");
 	$html = str_replace(array_keys($replacements), $replacements, $html);
@@ -357,11 +360,7 @@ function generate_pdf($replacements, $id) {
 	$leihschein->setPrintHeader(false);
 	$leihschein->setPrintFooter(false);
 
-	if(ob_get_contents()){
-		ob_end_clean();
-	} else {
-		ob_end_clean();
-	}
-
-	$leihschein->Output(__DIR__ ."/leihscheine/".'leihschein.pdf', 'D');
+	ob_clean();
+	error_reporting(E_ALL);
+	$leihschein->Output('leihschein.pdf', 'D');
 }
