@@ -23,8 +23,8 @@ class checkDeadlineTask extends \core\task\scheduled_task {
         global $DB;
         global $CFG;
 
-        // Alle Datensätze aus der DB-Tabelle >>$ausleihverwaltung_borroweddevice<< abfragen.
-        $borrowed = $DB->get_records('checkdeadline_borroweddevice');
+        // Alle Datensätze aus der DB-Tabelle >>$ausleihverwaltung_borrowed<< abfragen.
+        $borrowed = $DB->get_records('checkdeadline_borrowed');
         $responsible = $DB->get_records('checkdeadline_responsible');
 
         //Aktuelle GMT Systemzeit im Epoch Time Format (Sekunden seit 1. Januar 1970). Deutschland ist GMT plus 2

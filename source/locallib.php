@@ -324,7 +324,10 @@ function prep_leihschein($borrowedid) {
 
     $borrowedResource = $DB->get_record('ausleihverwaltung_borrowed', array('id'=> $borrowedid));
 
-    $today = date("m.d.y");
+	$today = date("m.d.y");
+	$duedate = $borrowedResource->duedate;
+	$duedate = new DateTime("@$duedateepoch");
+	$duedate = $duedate->format('d-m-Y');
 
     $ausleihantrag = array(
     '%Name' => $borrowedResource->studentname,
@@ -332,7 +335,7 @@ function prep_leihschein($borrowedid) {
 	'%Straße' => '',
 	'%Kurs' => '',
     '%EMail' => $borrowedResource->studentmailaddress,
-    '%Rückgabe' => $borrowedResource->duedate,
+    '%Rückgabe' => $duedate,
     '%Zweck' => $borrowedResource->borrowreason,
     '%Datum' => $today,
     '%Bemerkung' => $borrowedResource->comment

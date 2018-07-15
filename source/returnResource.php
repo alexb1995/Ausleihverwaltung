@@ -161,7 +161,7 @@ if(strpos($strUrl, 'resourceid=')){
 
         $DB->update_record('ausleihverwaltung_resources', $record, $bulk=false);
 
-        $ausleihantrag = $DB->get_record('ausleihverwaltung_borroweddevice', array('resourceid'=>$fm_resourceid));
+        $ausleihantrag = $DB->get_record('ausleihverwaltung_borrowed', array('resourceid'=>$fm_resourceid));
         $record = new stdClass();
         $record->id                     = $ausleihantrag->id;
         $record->duedate                = $ausleihantrag->record;
@@ -175,7 +175,7 @@ if(strpos($strUrl, 'resourceid=')){
         $record->accepted               = $ausleihantrag->accepted;
         $record->returned               = 'true';
 
-        $DB->update_record('ausleihverwaltung_borroweddevice', array('id'=>$ausleihantrag->id));
+        $DB->update_record('ausleihverwaltung_borrowed', array('id'=>$ausleihantrag->id));
 
         echo 'Die Rückgabe der Ressource wurde verbucht.';
         echo nl2br("\n");
