@@ -324,7 +324,7 @@ function prep_leihschein($borrowedid) {
 
     $borrowedResource = $DB->get_record('ausleihverwaltung_borrowed', array('id'=> $borrowedid));
 
-	$today = date("m.d.y");
+	$today = date("d-m-y");
 	$duedate = $borrowedResource->duedate;
 	$duedate = new DateTime("@$duedateepoch");
 	$duedate = $duedate->format('d-m-Y');

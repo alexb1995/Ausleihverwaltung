@@ -164,7 +164,7 @@ if(strpos($strUrl, 'resourceid=')){
         $ausleihantrag = $DB->get_record('ausleihverwaltung_borrowed', array('resourceid'=>$fm_resourceid));
         $record = new stdClass();
         $record->id                     = $ausleihantrag->id;
-        $record->duedate                = $ausleihantrag->record;
+        $record->duedate                = $ausleihantrag->duedate;
         $record->resourceid             = $fm_resourceid;
         $record->studentmatrikelnummer  = $ausleihantrag->studentmatrikelnummer;
         $record->studentmailaddress     = $ausleihantrag->studentmailaddress;
@@ -173,7 +173,7 @@ if(strpos($strUrl, 'resourceid=')){
         $record->borrowreason           = $ausleihantrag->borrowreason;
         $record->comment                = $ausleihantrag->borrowreason;
         $record->accepted               = $ausleihantrag->accepted;
-        $record->returned               = 'true';
+        $record->returned               = true;
 
         $DB->update_record('ausleihverwaltung_borrowed', array('id'=>$ausleihantrag->id));
 
