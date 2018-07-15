@@ -107,8 +107,10 @@ $category = 'Handy';
 $tags = array('Samsung', 'LTE');
 $type = 1;
 
+//Parameter aus der Form auslesen, um sie per Buttonclick übergeben zu können
+
 // Button-Funktionalität hinzugefügt
-echo $OUTPUT->single_button(new moodle_url('../apeinsdrei/newressource.php', array('ressourcename' => $ressourcename), 'category' => $category, 'tags' => $tags, 'type' => $type), 'Weiter');
+echo $OUTPUT->single_button(new moodle_url('../apeinsdrei/newressource.php', array('ressourcename' => $ressourcename), 'category' => $category, 'tags' => $tags, 'type' => $type)), 'Weiter');
 
 // Finish the page.
 echo $OUTPUT->footer();
