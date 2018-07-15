@@ -99,7 +99,6 @@ echo $OUTPUT->heading($strName);
 
 require_once(dirname(__FILE__).'/forms/newresourceform.php');
 $mform = new newresourcehtml_form(null);
-$mform->display();
 
 //Form processing and displaying is done here
 if ($mform->is_cancelled()) {
@@ -112,7 +111,7 @@ if ($mform->is_cancelled()) {
     $type = 1;
 
     //Button Funktionalität hinzugefügt
-    redirect(new moodle_url('../apeinsdrei/newressource.php', array('id' => $cm->id, 'ressourcename' => $ressourcename), 'category' => $category, 'tags' => $tags, 'type' => $type)));
+    redirect(new moodle_url('../apeinsdrei/newressource.php', array('id' => $cm->id, 'ressourcename' => $ressourcename, 'category' => $category, 'tags' => $tags, 'type' => $type)));
  
  } else {
   // this branch is executed if the form is submitted but the data doesn't validate and the form should be redisplayed
