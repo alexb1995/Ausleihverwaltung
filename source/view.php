@@ -104,11 +104,19 @@ $mform = new newresourcehtml_form(null);
 if ($mform->is_cancelled()) {
     //Handle form cancel operation, if cancel button is present on form
  } else if ($fromform = $mform->get_data()) {
-    //Hardgecodete Testparameter zur Übergabe
+    
+    //dynamisches Auslesen der eingegebenen Daten
+    $ressourcename = $fromform->name;
+    $ressourcename = $fromform->category;
+    $ressourcename = $fromform->tags;
+    $ressourcename = $fromform->Ressourcentyp;
+
+    /* Hardgecodete Testparameter zur Übergabe
     $ressourcename = 'Samsung Galaxy S9';
     $category = 'Handy';
     $tags = 'Samsung';
     $type = 1;
+    */
 
     //Button Funktionalität hinzugefügt
     redirect(new moodle_url('../apeinsdrei/newressource.php', array('id' => $cm->id, 'ressourcename' => $ressourcename, 'category' => $category, 'tags' => $tags, 'type' => $type)));
