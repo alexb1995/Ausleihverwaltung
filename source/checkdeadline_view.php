@@ -176,8 +176,6 @@ if ($mform->is_cancelled()) {
     //reload page so all Table views will be updated and Forms will be redisplayed
     redirect(new moodle_url('../ausleihverwaltung/checkdeadline_view.php', array('id' => $cm->id)));
 
-// $mform->render();
-
     // In this case you process validated data. $mform->get_data() returns data posted in form.
     // Creating instance of relevant API modules
     create_api_instances();

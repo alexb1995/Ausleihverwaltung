@@ -167,7 +167,7 @@ function xmldb_ausleihverwaltung_upgrade($oldversion) {
     if ($oldversion < 2018071106) {
 
         // Define table ausleihverwaltung_responsible to be created.
-        $table = new xmldb_table('ausleihverwaltung_responsible');
+        $table = new xmldb_table('ausleihverwaltung_resp');
 
         // Adding fields to table ausleihverwaltung_responsible.
         $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
