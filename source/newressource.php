@@ -80,7 +80,7 @@ $DB->insert_record('resources', $record, $returnid=false, $bulk=false);
 */
 
 /* PAGE belegen*/
-$PAGE->set_url('/mod/apeinsdrei/newressource.php', array('id' => $cm->id, 'ressourcename' => $ressourcename, 'category' => $category, 'tags' => $tags, 'type' => $type));
+$PAGE->set_url('/mod/apeinsdrei/newressource.php', array('id' => $cm->id, 'ressourcename' => $_GET['ressourcename'], 'category' => $_GET['category'], 'tags' => $_GET['tags'], 'type' => $_GET['type']));
 $PAGE->set_title(format_string($apeinsdrei->name));
 $PAGE->set_heading(format_string($course->fullname));
 
