@@ -269,7 +269,6 @@ require_once($CFG->dirroot.'/lib/moodlelib.php');
 require_once($CFG->dirroot.'/config.php');
 
 function mail_to($email, $name, $subject, $message) {
-
 	global $DB;
 
 	$from = new stdClass();
@@ -318,6 +317,28 @@ function generate_dummy_user($email, $name = '', $id = -99) {
 	}
 
 require_once($CFG->dirroot.'/lib/tcpdf/tcpdf.php');
+
+function prep_leihschein($borrowedid) {
+
+	global $DB;
+
+    $borrowedResource = $DB->get_record('ausleihverwaltung_borrowed', array('id'=> $borrowedid));
+
+    $today = date("m.d.y");
+
+    $ausleihantrag = array(
+    '%Name' => $borrowedResource->studentname,
+    '%Matrikel' => $borrowedResource->studentmatrikelnummer,
+    '%Kurs' => '',
+    '%E-Mail' => $borrowedResource->studentmailaddress,
+    '%Rückgabe' => $borrowedResource->duedate,
+    '%Zweck' => $borrowedResource->borrowreason,
+    '%Datum' => $today,
+    '%Bemerkung' => $borrowedResource->comment
+    );
+
+    generate_pdf($ausleihantrag);
+    }
 
 function generate_pdf($replacements) {
 	$leihschein = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false, false);

@@ -53,7 +53,7 @@ echo $OUTPUT->heading($strName);
 $borrowed = $DB->get_records('ausleihverwaltung_borrowed');
 
 $table = new html_table();
-$table->head = array('Geräte ID', 'Gerätename', 'Ausgeliehen am', 'Fällig bis', 'Matrikelnummer', 'Studenten Name', 'E-Mail', 'Ausleihgrund', 'Rückgabe');
+$table->head = array('Geräte ID', 'Gerätename', 'Ausgeliehen am', 'Fällig bis', 'Matrikelnummer', 'Studenten Name', 'E-Mail', 'Ausleihgrund', 'Leihschein', 'Rückgabe');
 
 //Für jeden Datensatz
 foreach ($borrowed as $borrowed) {
@@ -83,10 +83,11 @@ foreach ($borrowed as $borrowed) {
         $borrowreason = $borrowed->borrowreason;
         $comment = $borrowed->comment;
 
-        $returnButton = $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/saveDefect.php', array('id' => $cm->id, 'resourceid' => $resourceId)), 'Rückgabe der Resource', $attributes=null);
+        $leihscheinButton = $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/ablage_view.php', array('id' => $cm->id, 'borrowedid' => $borrowed->id)), 'Leihschein', $attributes=null);
+        $returnButton = $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/saveDefect.php', array('id' => $cm->id, 'resourceid' => $resourceId)), 'Rückgabe', $attributes=null);
 
 //Daten zuweisen an HTML-Tabelle
-        $table->data[] = array($resourceId, $resourceName, $borrowdate, $duedate, $studentmatrikelnummer, $studentname, $studentmailaddress, $borrowreason, $returnButton);
+        $table->data[] = array($resourceId, $resourceName, $borrowdate, $duedate, $studentmatrikelnummer, $studentname, $studentmailaddress, $borrowreason, $leihscheinButton, $returnButton);
     }
 }
 //Tabelle ausgeben

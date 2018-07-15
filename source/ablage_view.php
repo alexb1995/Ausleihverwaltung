@@ -57,7 +57,7 @@ $event->add_record_snapshot($PAGE->cm->modname, $ausleihverwaltung);
 $event->trigger();
 
 /* PAGE belegen*/
-$PAGE->set_url('/mod/ausleihverwaltung/ablage_view.php', array('id' => $cm->id));
+$PAGE->set_url('/mod/ausleihverwaltung/ablage_view.php', array('id' => $cm->id, 'borrowedid'=>$_GET['borrowedid']));
 $PAGE->set_title(format_string($ausleihverwaltung->name));
 $PAGE->set_heading(format_string($course->fullname));
 
@@ -65,15 +65,24 @@ $PAGE->set_heading(format_string($course->fullname));
 echo $OUTPUT->header();
 
 // Conditions to show the intro can change to look for own settings or whatever.
-if ($ablageleihschein->intro) {
-    echo $OUTPUT->box(format_module_intro('ablageleihschein', $ablageleihschein, $cm->id), 'generalbox mod_introbox', 'ablageleihscheinintro');
+// Conditions to show the intro can change to look for own settings or whatever.
+if ($ausleihverwaltung->intro) {
+    echo $OUTPUT->box(format_module_intro('ausleihantrag', $ausleihverwaltung, $cm->id), 'generalbox mod_introbox', 'ausleihantragintro');
 }
 
 // Replace the following lines with you own code.
-echo $OUTPUT->heading('Ablage de Digitalen Leihscheins');
+echo $OUTPUT->heading('Ablage des Digitalen Leihscheins');
+
+$url = $PAGE->url;
+$strUrl = $url.'';
+if(strpos($strUrl, 'borrowedid=')){
+	// First run
+    $borrowedid = $_GET['borrowedid'];
+    prep_leihschein($borrowedid);
+}
 
 // Implement form for user
-require_once(dirname(__FILE__).'/forms/formablageleihschein.php');
+require_once(dirname(__FILE__).'/forms/formablageschein.php');
 
 $mform = new ablageleihschein_form();
 // $mform->render();
@@ -105,6 +114,7 @@ if ($mform->is_cancelled()) {
   $mform->display();
 
 }  
+
 
 // Finish the page.
 echo $OUTPUT->footer();
