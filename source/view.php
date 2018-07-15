@@ -107,7 +107,7 @@ if ($mform->is_cancelled()) {
     //Hardgecodete Testparameter zur Übergabe
     $ressourcename = 'Samsung Galaxy S9';
     $category = 'Handy';
-    $tags = array('Samsung', 'LTE');
+    $tags = 'Samsung';
     $type = 1;
 
     //Button Funktionalität hinzugefügt

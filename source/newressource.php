@@ -102,7 +102,9 @@ if ($apeinsdrei->intro) {
 $strName = "Ressource anlegen";
 echo $OUTPUT->heading($strName);
 
-if ($type = 1){
+
+$type = $_GET['type'];
+if ($type == 1){
     require_once(dirname(__FILE__).'/forms/newresourceformst.php');
     $mform = new newresourcesthtml_form(null);
 }else{
