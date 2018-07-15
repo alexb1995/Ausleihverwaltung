@@ -16,12 +16,10 @@ class newresourcehtml_form extends moodleform {
         //Dropwdown-Menü wird erstellt, um Hauptkategorie auszuwählen
         $mform->addElement('select', 'category',
             get_string('category'), array('Handy', 'Tablet', 'Laptop', 'Computer','Software', 'Drucker', 'Kabel'));
-        $mform->setType('category', PARAM_ALPHA);
 
         //Dropwdown-Menü wird erstellt, um ein oder mehrere Tag(s) auszuwählen
-        $select = $mform->addElement('select', 'tags',
-            get_string('tags'), array('iPhone', 'Convertible', 'Mac', 'Huawei', 'Nexus', 'LTE'));
-        $select->setMultiple(true);    
+        $mform->addElement('select', 'tags',
+            get_string('tags'), array('iPhone', 'Convertible', 'Mac', 'Huawei', 'Nexus', 'LTE')) -> setMultiple(true);   
         $mform->setType('tags', PARAM_ALPHA);
 
         //Radiobuton um Stückgut oder Schüttgut auszuwählen
