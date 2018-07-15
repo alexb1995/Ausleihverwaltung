@@ -9,7 +9,7 @@ class ablageleihschein_form extends moodleform {
  
         $mform = $this->_form; // Don't forget the underscore! 
  
-        $mform->addElement('filepicker', 'userfile', get_string('file'), null, array('maxbytes' => $maxbytes, 'accepted_types' => '*'));
+        $mform->addElement('filepicker', 'userfile', get_string('file'), null, array('maxbytes' => 10485760, 'accepted_types' => '*'));
 
         // error_log("TEST FROM INSIDE FORM");
         

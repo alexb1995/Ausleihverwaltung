@@ -322,20 +322,30 @@ function prep_leihschein($borrowedid) {
 
 	global $DB;
 
-    $borrowedResource = $DB->get_record('ausleihverwaltung_borrowed', array('id'=> $borrowedid));
+	$borrowedMeta = $DB->get_record('ausleihverwaltung_borrowed', array('id'=> $borrowedid));
+	$borrowedResource = $DB->get_record('ausleihverwaltung_resources', array('id'=>$borrowedMeta->resourceid));
 
-    $today = date("m.d.y");
+	$today = date("d-m-y");
+
+	$duedateepoch = $borrowedMeta->duedate;
+	$duedate = new DateTime("@$duedateepoch");
+	$duedate = $duedate->format('d-m-Y');
+
+	//Ressourcentabelle erstellen:
+	$table = "<table><tr><th>ID</th><th>Menge</th><th>Artikel</th><th>Anmerkungen</th></tr>";
+	$table .= "<tr><td>" . $borrowedResource->id. "</td><td><p>1</p></td><td>" . $borrowedResource->name. "</td><td>" . $borrowedResource->defect. "</td></tr></table>";
+
 
     $ausleihantrag = array(
-    '%Name' => $borrowedResource->studentname,
-    '%Matrikel' => $borrowedResource->studentmatrikelnummer,
-    '%Kurs' => '',
-    '%E-Mail' => $borrowedResource->studentmailaddress,
-    '%Rückgabe' => $borrowedResource->duedate,
-    '%Zweck' => $borrowedResource->borrowreason,
+    '%Name' => $borrowedMeta->studentname,
+	'%Matrikel' => $borrowedMeta->studentmatrikelnummer,
+	'%Email' => $borrowedMeta->studentmailaddress,
+	'%Tabelle' => $table,
+    '%Rückgabe' => $duedate,
+    '%Zweck' => $borrowedMeta->borrowreason,
     '%Datum' => $today,
-    '%Bemerkung' => $borrowedResource->comment
-    );
+    '%Bemerkung' => $borrowedMeta->comment
+	);
 
     generate_pdf($ausleihantrag, $borrowedid);
     }
@@ -343,6 +353,7 @@ function prep_leihschein($borrowedid) {
 function generate_pdf($replacements, $id) {
 	ob_start();
 	$leihschein = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false, false);
+	$leihschein->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, 'DHBW Mannheim', 'Digitaler Leihschein');
 
 	$html = file_get_contents("leihschein.html");
 	$html = str_replace(array_keys($replacements), $replacements, $html);
@@ -357,11 +368,7 @@ function generate_pdf($replacements, $id) {
 	$leihschein->setPrintHeader(false);
 	$leihschein->setPrintFooter(false);
 
-	if(ob_get_contents()){
-		ob_end_clean();
-	} else {
-		ob_end_clean();
-	}
-
-	$leihschein->Output(__DIR__ ."/leihscheine/".'leihschein.pdf', 'D');
+	ob_clean();
+	error_reporting(E_ALL);
+	$leihschein->Output('leihschein.pdf', 'D');
 }
