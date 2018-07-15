@@ -104,6 +104,10 @@ echo $OUTPUT->heading($strName);
 
 
 $type = $_GET['type'];
+$ressourcename = $_GET['ressourcename'];
+$category = $_GET['category'];
+$tags = $_GET['tags'];
+
 if ($type == 1){
     require_once(dirname(__FILE__).'/forms/newresourceformst.php');
     $mform = new newresourcesthtml_form(null);
@@ -111,7 +115,37 @@ if ($type == 1){
     require_once(dirname(__FILE__).'/forms/newresourceformsch.php');
     $mform = new newresourceschhtml_form(null);
 }
-$mform->display();
+
+if ($mform->is_cancelled()) {
+    //Handle form cancel operation, if cancel button is present on form
+ } else if ($fromform = $mform->get_data()) {
+    
+    if ($type == 1){
+        $inventarnummer = $fromform->invnr;
+        $seriennummer = $fromform->sernr;
+        $beschreibung = $fromform->besch;
+        $kommentar = $fromform->kom;
+    }else{
+        $beschreibung = $fromform->besch;
+        $kommentar = $fromform->kom;
+        $anzahl = $fromform->anz;
+    }
+
+    //Button Funktionalität hinzugefügt
+    redirect(new moodle_url('../apeinsdrei/view.php', array('id' => $cm->id)));
+ 
+ } else {
+  // this branch is executed if the form is submitted but the data doesn't validate and the form should be redisplayed
+  // or on the first display of the form.
+ 
+  // Set default data (if any)
+  // Required for module not to crash as a course id is always needed
+  $formdata = array('id' => $id);
+  $mform->set_data($formdata);
+  //displays the form
+  $mform->display();
+ 
+ }
 
 // Finish the page.
 echo $OUTPUT->footer();
