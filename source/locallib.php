@@ -333,7 +333,7 @@ function prep_leihschein($borrowedid) {
 
 	//Ressourcentabelle erstellen:
 	$table = "<table><tr><th>ID</th><th>Menge</th><th>Artikel</th><th>Anmerkungen</th></tr>";
-	$table .= "<tr><td>" . $borrowedResource['id']. "</td><td>" . Blubber. "</td><td>" . $borrowedResource['name']. "</td><td>" . $borrowedResource['defect']. "</td></tr></table>";
+	$table .= "<tr><td>" . $borrowedResource->id. "</td><td><p>1</p></td><td>" . $borrowedResource->name. "</td><td>" . $borrowedResource->defect. "</td></tr></table>";
 
 
     $ausleihantrag = array(
