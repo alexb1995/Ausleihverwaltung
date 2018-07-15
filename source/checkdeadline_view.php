@@ -155,11 +155,8 @@ echo $OUTPUT->heading($strName);
 
 // Implement form for user
 require_once(dirname(__FILE__) . '/forms/newresponsibleform.php');
-//require_once(dirname(__FILE__).'/forms/leihscheinForm.php');
 
 $mform = new newresponsibleform_form();
-//$mform = new leihschein_form();
-// $mform->render();
 
 // Form processing and displaying is done here
 if ($mform->is_cancelled()) {
