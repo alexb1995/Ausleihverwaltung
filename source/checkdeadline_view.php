@@ -35,7 +35,7 @@ $PAGE->set_title(format_string($checkdeadline->name));
 $PAGE->set_heading(format_string($course->fullname));
 
 
-
+/*
 // Um Tabelle >>checkdeadline_borroweddevice<< zu belegen
 $record1->duedate = 1531652072;
 $record1->resourceid = 1;
@@ -49,7 +49,7 @@ $record1->accepted = true;
 $record1->returned = false;
 
 $DB->insert_record('checkdeadline_borroweddevice', $record1, $returnid=false, $bulk=false);
-/*
+
 $record1->duedate = 1530859235;
 $record1->resourceid = 2;
 $record1->studentmatrikelnummer = 8528640;
