@@ -101,20 +101,31 @@ require_once(dirname(__FILE__).'/forms/newresourceform.php');
 $mform = new newresourcehtml_form(null);
 $mform->display();
 
-//Hardgecodete Testparameter zur Übergabe
-$ressourcename = 'Samsung Galaxy S9';
-$category = 'Handy';
-$tags = array('Samsung', 'LTE');
-$type = 1;
+//Form processing and displaying is done here
+if ($mform->is_cancelled()) {
+    //Handle form cancel operation, if cancel button is present on form
+ } else if ($fromform = $mform->get_data()) {
+    //Hardgecodete Testparameter zur Übergabe
+    $ressourcename = 'Samsung Galaxy S9';
+    $category = 'Handy';
+    $tags = array('Samsung', 'LTE');
+    $type = 1;
 
-//Parameter aus der Form auslesen, um sie per Buttonclick übergeben zu können
-
-// Button-Funktionalität hinzugefügt
-echo nl2br("\n");
-echo $OUTPUT->single_button(new moodle_url('../apeinsdrei/newressource.php', array('ressourcename' => $ressourcename), 'category' => $category, 'tags' => $tags, 'type' => $type)), 'Weiter');
-
-echo nl2br("\n");
-echo nl2br("\n");
+    //Button Funktionalität hinzugefügt
+    redirect(new moodle_url('../apeinsdrei/newressource.php', array('id' => $cm->id, 'ressourcename' => $ressourcename), 'category' => $category, 'tags' => $tags, 'type' => $type)));
+ 
+ } else {
+  // this branch is executed if the form is submitted but the data doesn't validate and the form should be redisplayed
+  // or on the first display of the form.
+ 
+  // Set default data (if any)
+  // Required for module not to crash as a course id is always needed
+  $formdata = array('id' => $id);
+  $mform->set_data($formdata);
+  //displays the form
+  $mform->display();
+ 
+ }
 
 // Finish the page.
 echo $OUTPUT->footer();
