@@ -269,19 +269,18 @@ require_once($CFG->dirroot.'/lib/moodlelib.php');
 require_once($CFG->dirroot.'/config.php');
 
 function mail_to($email, $name, $subject, $message) {
-
 	global $DB;
 
 	$from = new stdClass();
     $from->firstname = 'sWIm15';
     $from->lastname  = '';
     $from->firstnamephonetic = '';
-   	$from->lastnamephonetic = '';
-   	$from->middlename = '';
-   	$from->alternatename = '';
+    $from->lastnamephonetic = '';
+    $from->middlename = '';
+    $from->alternatename = '';
     $from->email     = 'swim15.noreply@gmail.com';
     $from->maildisplay = true;
-   	$from->mailformat = 1; // 0 (zero) text-only emails, 1 (one) for HTML emails.
+    $from->mailformat = 1; // 0 (zero) text-only emails, 1 (one) for HTML emails.
 	
 	$emailsubject = $subject;
 	$emailmessage = $message;
@@ -317,3 +316,52 @@ function generate_dummy_user($email, $name = '', $id = -99) {
 	return $emailuser;
 	}
 
+require_once($CFG->dirroot.'/lib/tcpdf/tcpdf.php');
+
+function prep_leihschein($borrowedid) {
+
+	global $DB;
+
+    $borrowedResource = $DB->get_record('ausleihverwaltung_borrowed', array('id'=> $borrowedid));
+
+    $today = date("m.d.y");
+
+    $ausleihantrag = array(
+    '%Name' => $borrowedResource->studentname,
+    '%Matrikel' => $borrowedResource->studentmatrikelnummer,
+    '%Kurs' => '',
+    '%E-Mail' => $borrowedResource->studentmailaddress,
+    '%Rückgabe' => $borrowedResource->duedate,
+    '%Zweck' => $borrowedResource->borrowreason,
+    '%Datum' => $today,
+    '%Bemerkung' => $borrowedResource->comment
+    );
+
+    generate_pdf($ausleihantrag, $borrowedid);
+    }
+
+function generate_pdf($replacements, $id) {
+	ob_start();
+	$leihschein = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false, false);
+
+	$html = file_get_contents("leihschein.html");
+	$html = str_replace(array_keys($replacements), $replacements, $html);
+
+	$leihschein->AddPage();
+	
+	$leihschein->SetCreator('sWIm15');
+	$leihschein->SetAuthor('DHBW Mannheim');
+	$leihschein->SetTitle('Digitaler Leihschein');
+	$leihschein->SetSubject('');
+	$leihschein->writeHTML($html, true, 0, true, true);
+	$leihschein->setPrintHeader(false);
+	$leihschein->setPrintFooter(false);
+
+	if(ob_get_contents()){
+		ob_end_clean();
+	} else {
+		ob_end_clean();
+	}
+
+	$leihschein->Output(__DIR__ ."/leihscheine/".'leihschein.pdf', 'D');
+}
