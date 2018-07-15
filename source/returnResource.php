@@ -84,7 +84,7 @@ if(strpos($strUrl, 'resourceid=')){
     $resourcedefect = $resource->defect;
 
     echo 'Möchten Sie die Rückgabe für die Ressource mit dem Namen ' . $resourcename . ' und der Ressourcen-ID ' . $resourceid . ' verbuchen?';
-   
+
     // Initialize form and preallocate values
     require_once(dirname(__FILE__).'/forms/returnResource_form.php');
     $mform = new returnResource_form (null, array('resourceid'=>$resourceid, 'name'=>$resourcename, 'defect'=>$resourcedefect, 'status'=>''));
@@ -116,7 +116,6 @@ if(strpos($strUrl, 'resourceid=')){
         $record->maincategory       = $resource->maincategory;
         $record->subcategory        = $resource->subcategory;
         $record->defect             = $fm_resourcedefect;
-
     } else {
         $formdata = array('id'=>$id, 'resourceid'=>$resourceid);
         $mform->set_data($formdata);
@@ -161,6 +160,23 @@ if(strpos($strUrl, 'resourceid=')){
         $record->defect             = $resource->defect;
 
         $DB->update_record('ausleihverwaltung_resources', $record, $bulk=false);
+
+        $ausleihantrag = $DB->get_record('ausleihverwaltung_borroweddevice', array('resourceid'=>$fm_resourceid));
+        $record = new stdClass();
+        $record->id                     = $ausleihantrag->id;
+        $record->duedate                = $ausleihantrag->record;
+        $record->resourceid             = $fm_resourceid;
+        $record->studentmatrikelnummer  = $ausleihantrag->studentmatrikelnummer;
+        $record->studentmailaddress     = $ausleihantrag->studentmailaddress;
+        $record->borrowdate             = $ausleihantrag->borrowdate;
+        $record->studentname            = $ausleihantrag->studentname;
+        $record->borrowreason           = $ausleihantrag->borrowreason;
+        $record->comment                = $ausleihantrag->borrowreason;
+        $record->accepted               = $ausleihantrag->accepted;
+        $record->returned               = 'true';
+
+        $DB->update_record('ausleihverwaltung_borroweddevice', array('id'=>$ausleihantrag->id));
+
         echo 'Die Rückgabe der Ressource wurde verbucht.';
         echo nl2br("\n");
     } else {
