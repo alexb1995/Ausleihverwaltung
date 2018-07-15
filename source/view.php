@@ -107,9 +107,9 @@ if ($mform->is_cancelled()) {
     
     //dynamisches Auslesen der eingegebenen Daten
     $ressourcename = $fromform->name;
-    $ressourcename = $fromform->category;
-    $ressourcename = $fromform->tags;
-    $ressourcename = $fromform->Ressourcentyp;
+    $category = $fromform->category;
+    $tags = $fromform->tags;
+    $type = $fromform->Ressourcentyp;
 
     /* Hardgecodete Testparameter zur Übergabe
     $ressourcename = 'Samsung Galaxy S9';

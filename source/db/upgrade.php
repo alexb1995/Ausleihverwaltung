@@ -69,7 +69,7 @@ function xmldb_apeinsdrei_upgrade($oldversion) {
      *
      * First example, some fields were added to install.xml on 2007/04/01
      */
-    if ($oldversion < 2018071510) {
+    if ($oldversion < 2018071511) {
 
         // Define field id to be added to apeinsdrei.
         $table = new xmldb_table('apeinsdrei');
