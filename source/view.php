@@ -101,5 +101,15 @@ require_once(dirname(__FILE__).'/forms/newresourceform.php');
 $mform = new newresourcehtml_form(null);
 $mform->display();
 
+//Hardgecodete Testparameter zur Übergabe
+$ressourcename = 'Samsung Galaxy S9';
+$category = 'Handy';
+$tags = array('Samsung', 'LTE');
+$type = 1;
+
+// Button-Funktionalität hinzugefügt
+echo $OUTPUT->single_button(new moodle_url('../apeinsdrei/newressource.php', array('ressourcename' => $ressourcename), 'category' => $category, 'tags' => $tags, 'type' => $type), 'Weiter');
+
 // Finish the page.
 echo $OUTPUT->footer();
+
