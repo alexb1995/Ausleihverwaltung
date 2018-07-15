@@ -317,3 +317,21 @@ function generate_dummy_user($email, $name = '', $id = -99) {
 	return $emailuser;
 	}
 
+require_once($CFG->dirroot.'/lib/tcpdf/tcpdf.php');
+
+function generate_pdf($replacements) {
+	$leihschein = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false, false);
+
+	$html = file_get_contents("leihschein.html");
+	$html = str_replace(array_keys($replacements), $replacements, $html);
+	
+	$leihschein->SetCreator('sWIm15');
+	$leihschein->SetAuthor('DHBW Mannheim');
+	$leihschein->SetTitle('Digitaler Leihschein');
+	$leihschein->SetSubject('');
+	$leihschein->AddPage();
+	$leihschein->writeHTML($html, true, 0, true, true);
+
+	$leihschein->Output('leihschein.pdf', 'I');
+}
+
