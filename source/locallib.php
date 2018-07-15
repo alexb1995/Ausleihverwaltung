@@ -322,22 +322,30 @@ function prep_leihschein($borrowedid) {
 
 	global $DB;
 
-    $borrowedResource = $DB->get_record('ausleihverwaltung_borrowed', array('id'=> $borrowedid));
+	$borrowedMeta = $DB->get_record('ausleihverwaltung_borrowed', array('id'=> $borrowedid));
+	$borrowedResource = $DB->get_record('ausleihverwaltung_resources', array('id'=>$borrowedMeta->resourceid));
 
 	$today = date("d-m-y");
-	$duedateepoch = $borrowedResource->duedate;
+
+	$duedateepoch = $borrowedMeta->duedate;
 	$duedate = new DateTime("@$duedateepoch");
 	$duedate = $duedate->format('d-m-Y');
 
+	//Ressourcentabelle erstellen:
+	$table = "<table><tr><th>ID</th><th>Menge</th><th>Artikel</th><th>Anmerkungen</th></tr>";
+	$table .= "<tr><td>" . $borrowedResource['id']. "</td><td>" . Blubber. "</td><td>" . $borrowedResource['name']. "</td><td>" . $borrowedResource['defect']. "</td></tr></table>";
+
+
     $ausleihantrag = array(
-    '%Name' => $borrowedResource->studentname,
-	'%Matrikel' => $borrowedResource->studentmatrikelnummer,
-    '%EMail' => $borrowedResource->studentmailaddress,
+    '%Name' => $borrowedMeta->studentname,
+	'%Matrikel' => $borrowedMeta->studentmatrikelnummer,
+	'%Email' => $borrowedMeta->studentmailaddress,
+	'%Tabelle' => $table,
     '%Rückgabe' => $duedate,
-    '%Zweck' => $borrowedResource->borrowreason,
+    '%Zweck' => $borrowedMeta->borrowreason,
     '%Datum' => $today,
-    '%Bemerkung' => $borrowedResource->comment
-    );
+    '%Bemerkung' => $borrowedMeta->comment
+	);
 
     generate_pdf($ausleihantrag, $borrowedid);
     }
@@ -345,8 +353,7 @@ function prep_leihschein($borrowedid) {
 function generate_pdf($replacements, $id) {
 	ob_start();
 	$leihschein = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false, false);
-	$leihschein->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 027', PDF_HEADER_STRING);
-
+	$leihschein->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, 'DHBW Mannheim', 'Digitaler Leihschein');
 
 	$html = file_get_contents("leihschein.html");
 	$html = str_replace(array_keys($replacements), $replacements, $html);
