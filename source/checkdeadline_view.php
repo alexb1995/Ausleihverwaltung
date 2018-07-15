@@ -57,7 +57,7 @@ $table->head = array('Geräte ID', 'Gerätename', 'Ausgeliehen am', 'Fällig bis
 
 //Für jeden Datensatz
 foreach ($borrowed as $borrowed) {
-    if ($borrowed->accepted){
+    if ($borrowed->accepted && !($borrowed->returned)){
         //Get Name of the Resource that was borrowed
         $resourceId = $borrowed->resourceid;
         $resourceName = $DB->get_field('ausleihverwaltung_resources', 'name', array('id'=> $resourceId));
