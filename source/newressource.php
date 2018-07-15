@@ -125,10 +125,33 @@ if ($mform->is_cancelled()) {
         $seriennummer = $fromform->sernr;
         $beschreibung = $fromform->besch;
         $kommentar = $fromform->kom;
+
+        $stueck = new stdClass();
+        $stueck->name = $ressourcename;
+        $stueck->description = $beschreibung;
+        $stueck->type = $type;
+        $stueck->maincategory = $category;
+        $stueck->subcategory = $tags;
+        $stueck->comment = $kommentar;
+        $stueck->serialnumber = $seriennummer;
+        $stueck->inventorynumber = $inventarnummer;
+
+        $DB->insert_record('ausleihverwaltung_resources', $stueck);
     }else{
         $beschreibung = $fromform->besch;
         $kommentar = $fromform->kom;
         $anzahl = $fromform->anz;
+        
+        $stueck = new stdClass();
+        $stueck->name = $ressourcename;
+        $stueck->description = $beschreibung;
+        $stueck->type = $type;
+        $stueck->maincategory = $category;
+        $stueck->subcategory = $tags;
+        $stueck->comment = $kommentar;
+        $stueck->amount = $anzahl;
+        
+        $DB->insert_record('ausleihverwaltung_resources', $stueck);
     }
 
     //Button Funktionalität hinzugefügt

@@ -15,12 +15,12 @@ class newresourcehtml_form extends moodleform {
 
         //Dropwdown-Menü wird erstellt, um Hauptkategorie auszuwählen
         $mform->addElement('select', 'category',
-            get_string('category'), array('Handy', 'Tablet', 'Laptop', 'Computer', 'Software', 'Drucker', 'Kabel'));
+            get_string('category'), array(Handy => 'Handy', Tablet => 'Tablet', Laptop => 'Laptop', Computer => 'Computer', Software => 'Software', Drucker => 'Drucker', Kabel => 'Kabel'));
         $mform->setType('category', PARAM_ALPHA);
 
         //Dropwdown-Menü wird erstellt, um ein oder mehrere Tag(s) auszuwählen
         $select = $mform->addElement('select', 'tags',
-            get_string('tags'), array('iPhone', 'Convertible', 'Mac', 'Huawei', 'Nexus', 'LTE'));
+            get_string('tags'), array(iPhone => 'iPhone', Convertible => 'Convertible', Mac => 'Mac', Huawei => 'Huawei', Nexus => 'Nexus', LTE => 'LTE'));
         $select->setMultiple(true);    
         $mform->setType('tags', PARAM_ALPHA);
 
@@ -28,7 +28,7 @@ class newresourcehtml_form extends moodleform {
         $radioarray = array();
         $radioarray[] = $mform->createElement('radio', 'Typ', '', get_string('Stueckgut', 'apeinsdrei'), 1);
         $radioarray[] = $mform->createElement('radio', 'Typ', '', get_string('Schuettgut', 'apeinsdrei'), 0);
-        $mform->addGroup($radioarray, 'Ressourcentyp', 'Ressourcentyp', array('null'), false);
+        $mform->addGroup($radioarray, 'Ressourcentyp', 'Ressourcentyp', array(' '), false);
 
         error_log("TEST FROM INSIDE FORM");
 

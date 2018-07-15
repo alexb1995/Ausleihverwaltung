@@ -13,7 +13,6 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-
 /**
  * This file keeps track of upgrades to the apeinsdrei module
  *
@@ -28,21 +27,16 @@
  * @copyright  2016 Your Name <your@email.address>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 defined('MOODLE_INTERNAL') || die();
-
 /**
  * Execute apeinsdrei upgrade from the given old version
  *
  * @param int $oldversion
  * @return bool
  */
-
 function xmldb_apeinsdrei_upgrade($oldversion) {
     global $DB;
-
     $dbman = $DB->get_manager(); // Loads ddl manager and xmldb classes.
-
     /*
      * And upgrade begins here. For each one, you'll need one
      * block of code similar to the next one. Please, delete
@@ -69,70 +63,55 @@ function xmldb_apeinsdrei_upgrade($oldversion) {
      *
      * First example, some fields were added to install.xml on 2007/04/01
      */
-    if ($oldversion < 2018071511) {
-
+    if ($oldversion < 2018071513) {
         // Define field id to be added to apeinsdrei.
         $table = new xmldb_table('apeinsdrei');
         $field = new xmldb_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null);
-
         // Conditionally launch add field id.
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
         }
-
         // Apeinsdrei savepoint reached.
-        upgrade_mod_savepoint(true, 2018071504, 'apeinsdrei');
+        upgrade_mod_savepoint(true, 2018071513, 'apeinsdrei');
     }
     return true;
     }
-
     // Second example, some hours later, the same day 2007/04/01
     // ... two more fields and one index were added to install.xml (note the micro increment
     // ... "01" in the last two digits of the version).
     if ($oldversion < 2007040101) {
-
         // Define field timecreated to be added to apeinsdrei.
         $table = new xmldb_table('apeinsdrei');
         $field = new xmldb_field('timecreated', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '0',
             'introformat');
-
         // Add field timecreated.
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
         }
-
         // Define field timemodified to be added to apeinsdrei.
         $table = new xmldb_table('apeinsdrei');
         $field = new xmldb_field('timemodified', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, XMLDB_NOTNULL, null, '0',
             'timecreated');
-
         // Add field timemodified.
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
         }
-
         // Define index course (not unique) to be added to apeinsdrei.
         $table = new xmldb_table('apeinsdrei');
         $index = new xmldb_index('courseindex', XMLDB_INDEX_NOTUNIQUE, array('course'));
-
         // Add index to course field.
         if (!$dbman->index_exists($table, $index)) {
             $dbman->add_index($table, $index);
         }
-
         // Another save point reached.
         upgrade_mod_savepoint(true, 2007040101, 'apeinsdrei');
     }
-
     // Third example, the next day, 2007/04/02 (with the trailing 00),
     // some actions were performed to install.php related with the module.
     if ($oldversion < 2007040200) {
-
         // Insert code here to perform some actions (same as in install.php).
-
         upgrade_mod_savepoint(true, 2007040200, 'apeinsdrei');
     }
-
     /*
      * And that's all. Please, examine and understand the 3 example blocks above. Also
      * it's interesting to look how other modules are using this script. Remember that

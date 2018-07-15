@@ -12,6 +12,10 @@ class newresourceschhtml_form extends moodleform {
 		$mform->addElement('text', 'besch', 'Beschreibung');
         $mform->setType('besch', PARAM_NOTAGS);
         
+        /* ****************** Kommentar *************/
+		$mform->addElement('text', 'kom', 'Kommentar');
+        $mform->setType('kom', PARAM_NOTAGS);
+        
         /* ****************** Anzahl *************/
 		$mform->addElement('text', 'anz', 'Anzahl');
         $mform->setType('anz', PARAM_NOTAGS);
