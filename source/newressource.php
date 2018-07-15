@@ -35,7 +35,7 @@ $id = optional_param('id', 0, PARAM_INT); // Course_module ID, or
 $n  = optional_param('n', 0, PARAM_INT);  // ... apeinsdrei instance ID - it should be named as the first character of the module.
 $ressourcename = required_param('ressourcename', PARAM_TEXT);
 $category = required_param('category', PARAM_TEXT);
-$tags = required_param('tags', PARAM_ARRAY);
+$tags = required_param('tags', PARAM_TEXT);
 $type = required_param('type', PARAM_INT);
 
 
