@@ -115,6 +115,6 @@ if ($mform->is_cancelled()) {
 
 }  
 
-
 // Finish the page.
 echo $OUTPUT->footer();
+?>

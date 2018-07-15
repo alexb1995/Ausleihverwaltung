@@ -337,22 +337,31 @@ function prep_leihschein($borrowedid) {
     '%Bemerkung' => $borrowedResource->comment
     );
 
-    generate_pdf($ausleihantrag);
+    generate_pdf($ausleihantrag, $borrowedid);
     }
 
-function generate_pdf($replacements) {
+function generate_pdf($replacements, $id) {
+	ob_start();
 	$leihschein = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false, false);
 
 	$html = file_get_contents("leihschein.html");
 	$html = str_replace(array_keys($replacements), $replacements, $html);
+
+	$leihschein->AddPage();
 	
 	$leihschein->SetCreator('sWIm15');
 	$leihschein->SetAuthor('DHBW Mannheim');
 	$leihschein->SetTitle('Digitaler Leihschein');
 	$leihschein->SetSubject('');
-	$leihschein->AddPage();
 	$leihschein->writeHTML($html, true, 0, true, true);
+	$leihschein->setPrintHeader(false);
+	$leihschein->setPrintFooter(false);
 
-	$leihschein->Output('leihschein.pdf', 'I');
+	if(ob_get_contents()){
+		ob_end_clean();
+	} else {
+		ob_end_clean();
+	}
+
+	$leihschein->Output(__DIR__ ."/leihscheine/".'leihschein.pdf', 'D');
 }
-
