@@ -84,9 +84,9 @@ echo $OUTPUT->heading('Ausleihantrag stellen:');
 
 
 // Implement form for user
-require_once(dirname(__FILE__).'/forms/simpleformNeu.php');
+require_once(dirname(__FILE__).'/forms/antragForm.php');
 
-$mform = new simplehtml_form();
+$mform = new antragForm();
 // $mform->render();
 
 // error_log("TEST FROM BEFORE DISPLAY");
@@ -124,7 +124,11 @@ if ($mform->is_cancelled()) {
 
     $recordid = $DB->insert_record('ausleihverwaltung_borrowed', $record1, $returnid=true, $bulk=false);
 
-    echo "Antrag wurde verschickt!";
+    if (!empty($recordid)){
+    ?> <script type="text/javascript">alert("Antrag wurde verschickt!")</script><?php
+    };
+
+    redirect(new moodle_url('../ausleihverwaltung/checkdeadline_view.php', array('id' => $cm->id)));
 
 } else {
   // this branch is executed if the form is submitted but the data doesn't validate and the form should be redisplayed

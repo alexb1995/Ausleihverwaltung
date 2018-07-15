@@ -68,9 +68,9 @@ echo $OUTPUT->header();
 
 $strName = "Ausleihantrag stellen";
 echo $OUTPUT->heading($strName);
-
 echo $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/ausleihantrag_view.php', array('id' => $cm->id)), 'Ausleihantrag stellen');
-
+echo '<br>';
+echo '<br>';
 // Conditions to show the intro can change to look for own settings or whatever.
 if ($ausleihverwaltung->intro) {
     echo $OUTPUT->box(format_module_intro('ausleihantrag', $ausleihverwaltung, $cm->id), 'generalbox mod_introbox', 'ausleihantragintro');
@@ -78,45 +78,15 @@ if ($ausleihverwaltung->intro) {
 
 $strName = "Ausleihen-Übersicht";
 echo $OUTPUT->heading($strName);
-
 echo $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/checkdeadline_view.php', array('id' => $cm->id)), 'Ausleihübersicht anzeigen');
-
+echo '<br>';
+echo '<br>';
 
 $strName = "Ressourcen-Übersicht";
 echo $OUTPUT->heading($strName);
-
-$attributes = array();
-// Alle Datensätze aus der DB-Tabelle >>resources<< abfragen.
-$resource = $DB->get_records('ausleihverwaltung_resources');
-
-$table = new html_table();
-$table->head = array('ID','Name', 'Beschreibung', 'Seriennummer', 'Inventarnummer', 'Kommentar', 'Status', 'Menge', 'Typ', 'Hauptkategorie', 'Subkategorie', 'Schaden', 'Bearbeiten', 'Löschen');
-
-//Für jeden Datensatz
-foreach ($resource as $res) {
-    $id = $res->id;
-    $name = $res->name;
-    $description = $res->description;
-    $serialnumber = $res->serialnumber;
-    $inventorynumber = $res->inventorynumber;
-    $comment = $res->comment;
-    $status = $res->status;
-    $amount = $res->amount;
-    $type = $res->type;
-    $maincategory = $res->maincategory;
-    $subcategory = $res->subcategory;
-    $defect = $res->defect;
-//Link zum Bearbeiten der aktuellen Ressource in foreach-Schleife setzen
-  
-    $htmlLink = html_writer::link(new moodle_url('../ausleihverwaltung/resources_edit.php', array('id' => $cm->id, 'resourceid' => $res->id)), 'Edit', $attributes=null);
-//Analog: Link zum Löschen...
-    $htmlLinkDelete = html_writer::link(new moodle_url('../ausleihverwaltung/resources_delete.php', array('id' => $cm->id, 'resourceid' => $res->id)), 'Delete', $attributes=null);
-
-//Daten zuweisen an HTML-Tabelle
-    $table->data[] = array($id, $name, $description, $serialnumber, $inventorynumber, $comment, $status, $amount, $type, $maincategory, $subcategory, $defect, $htmlLink, $htmlLinkDelete);
-}
-//Tabelle ausgeben
-echo html_writer::table($table);
+echo $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/resources_view.php', array('id' => $cm->id)), 'Ressourcenübersicht anzeigen');
+echo '<br>';
+echo '<br>';
 
 // Finish the page.
 echo $OUTPUT->footer();

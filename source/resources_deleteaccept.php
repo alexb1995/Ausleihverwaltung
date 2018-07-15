@@ -47,7 +47,7 @@ echo nl2br("\n");
 echo nl2br("\n");
 echo nl2br("\n");
 //Funktionstaste zum Fortfahren definieren
-echo $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/view.php', array('id' => $cm->id)), 'ok');
+echo $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/view.php', array('id' => $cm->id)), 'Ok');
 //Finish
 echo $OUTPUT->footer();
 ?>
