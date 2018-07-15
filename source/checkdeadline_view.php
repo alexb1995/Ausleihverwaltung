@@ -35,20 +35,21 @@ $PAGE->set_title(format_string($checkdeadline->name));
 $PAGE->set_heading(format_string($course->fullname));
 
 
-/*
+
 // Um Tabelle >>checkdeadline_borroweddevice<< zu belegen
-$record1->duedate = 1530897520;
+$record1->duedate = 1531652072;
 $record1->resourceid = 1;
 $record1->studentmatrikelnummer = 3156763;
-$record1->studentmailaddress = 's153640@student.dhbw-mannheim.de';
+$record1->studentmailaddress = 's151634@student.dhbw-mannheim.de';
 $record1->borrowdate = 1515653672;
 $record1->studentname = 'Hans Peter';
 $record1->borrowreason = 'Einfach bock';
 $record1->comment = 'Für die krasseste Vorlesung auf diesem Planeten bruh.';
 $record1->accepted = true;
+$record1->returned = false;
 
 $DB->insert_record('checkdeadline_borroweddevice', $record1, $returnid=false, $bulk=false);
-
+/*
 $record1->duedate = 1530859235;
 $record1->resourceid = 2;
 $record1->studentmatrikelnummer = 8528640;
@@ -58,6 +59,7 @@ $record1->studentname = 'Hans Wurst';
 $record1->borrowreason = 'Bli Bla Blubb';
 $record1->comment = 'Ich bin ein Dummkopf';
 $record1->accepted = false;
+$record1->returned = false;
 
 $DB->insert_record('checkdeadline_borroweddevice', $record1, $returnid=false, $bulk=false);
 
@@ -70,6 +72,7 @@ $record1->studentname = 'Hans Mustermann';
 $record1->borrowreason = 'Ich will einfach haben';
 $record1->comment = 'wojfweofjneofginet2o';
 $record1->accepted = true;
+$record1->returned = true;
 
 $DB->insert_record('checkdeadline_borroweddevice', $record1, $returnid=false, $bulk=false);
 
@@ -82,6 +85,7 @@ $record1->studentname = 'Hans Musterfrau';
 $record1->borrowreason = 'für eBay zum Verkaufen safe';
 $record1->comment = 'öerkfjwetgiojt+#pfidhqäofig';
 $record1->accepted = false;
+$record1->returned = false;
 
 $DB->insert_record('checkdeadline_borroweddevice', $record1, $returnid=false, $bulk=false);
 
@@ -109,7 +113,7 @@ $table->head = array('Geräte ID', 'Gerätename', 'Ausgeliehen am', 'Fällig bis
 
 //Für jeden Datensatz
 foreach ($borrowed as $borrowed) {
-    if ($borrowed->accepted){
+    if ($borrowed->accepted && !($borrowed->returned)){
         //Get Name of the Resource that was borrowed
         $resourceId = $borrowed->resourceid;
         $resourceName = $DB->get_field('apeinsvier_resources', 'name', array('id'=> $resourceId));
