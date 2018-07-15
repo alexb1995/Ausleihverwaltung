@@ -110,7 +110,11 @@ $type = 1;
 //Parameter aus der Form auslesen, um sie per Buttonclick übergeben zu können
 
 // Button-Funktionalität hinzugefügt
+echo nl2br("\n");
 echo $OUTPUT->single_button(new moodle_url('../apeinsdrei/newressource.php', array('ressourcename' => $ressourcename), 'category' => $category, 'tags' => $tags, 'type' => $type)), 'Weiter');
+
+echo nl2br("\n");
+echo nl2br("\n");
 
 // Finish the page.
 echo $OUTPUT->footer();
