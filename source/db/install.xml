@@ -49,6 +49,7 @@
             <FIELD NAME="borrowreason" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Reason why the device is needed by the student"/>
             <FIELD NAME="comment" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
             <FIELD NAME="accepted" TYPE="binary" NOTNULL="true" SEQUENCE="false" COMMENT="Flag, if the request for borrowing a specific device was accepted by the administrator or if the request has not been reviewed yet"/>
+            <FIELD NAME="returned" TYPE="binary" NOTNULL="true" SEQUENCE="false" COMMENT="Flag, if the borrowed resource has been returned"/>
         </FIELDS>
         <KEYS>
             <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
