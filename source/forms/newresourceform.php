@@ -26,7 +26,11 @@ class newresourcehtml_form extends moodleform {
         $radioarray = array();
         $radioarray[] = $mform->createElement('radio', 'Typ', '', get_string('Stueckgut', 'apeinsdrei'), 1);
         $radioarray[] = $mform->createElement('radio', 'Typ', '', get_string('Schuettgut', 'apeinsdrei'), 0);
+        $mform->addGroup($radioarray, 'Ressourcentyp', null, false);
+
+        /* old
         $mform->addGroup($radioarray, 'Ressourcentyp', 'Ressourcentyp', array(' '), false);
+        */
 
         error_log("TEST FROM INSIDE FORM");
 
