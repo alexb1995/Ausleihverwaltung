@@ -195,6 +195,8 @@ if ($mform->is_cancelled()) {
     error_log("TEST FROM AFTER DISPLAY");
 }
 
+echo $OUTPUT->single_button(new moodle_url('../ausleihverwaltung/view.php', array('id' => $cm->id)), 'Home');
+
 //FINISH
 echo $OUTPUT->footer();
 ?>
