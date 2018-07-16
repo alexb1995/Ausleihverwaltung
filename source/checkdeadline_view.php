@@ -106,20 +106,16 @@ $mform = new ablageleihschein_form();
 //Form processing and displaying is done here
 if ($mform->is_cancelled()) {
     //Handle form cancel operation, if cancel button is present on form
-} else if ($fromform = $mform->get_data()) {
-    $value1 = $fromform->userfile;  //value1 = uploaded file     
+} else if ($fromform = $mform->get_data()) {     
 
     $content = $mform->get_file_content('userfile');  //To get the contents of the file
     $name = $mform->get_new_filename('userfile'); //To get the name of the chosen file
     $path = '/opt/bitnami/moodle/uploads/'.$name; //Combine /opt/bitnami/moodle/uploads/ and the name of the uploaded file to get the path  
-    $success = $mform->save_file('userfile', $path, false);// To save the chosen file to the server filesystem (such as to moodledata folder)
-    
+    $success = $mform->save_file('userfile', $path, false);// To save the chosen file to the server filesystem (such as to moodledata folder)  
 
-     //echo $path;
-    //echo $content;
-    error_log($value1);
-
-  
+    if ($success){
+        ?> <script type="text/javascript">alert("Leihschein abgegeben!")</script><?php
+        };
 
 } else {
   $formdata = array('id' => $id);

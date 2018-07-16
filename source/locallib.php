@@ -368,7 +368,11 @@ function generate_pdf($replacements, $id) {
 	$leihschein->setPrintHeader(false);
 	$leihschein->setPrintFooter(false);
 
+	$filename = "leihschein";
+	$filename .= $id;
+	$filename .= ".pdf";
+
 	ob_clean();
 	error_reporting(E_ALL);
-	$leihschein->Output('leihschein.pdf', 'D');
+	$leihschein->Output($filename, 'D');
 }
