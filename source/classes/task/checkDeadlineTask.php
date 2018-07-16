@@ -43,12 +43,12 @@ class checkDeadlineTask extends \core\task\scheduled_task {
 
                     $mailText = "Sehr geehrter " . $studentName . ",
                     
-sie haben ein Gerät der DHBW Mannheim mit der ID " . $resourceId . " in ihrem Besitzt. Wir mussten leider feststellen, dass die Rückgabefrist überschritten wurde. 
-Wir möchten Sie daher bitten, die ausgeliehene resource schnellstmöglich an die verantwortliche Person zurückzugeben. 
+sie haben ein Gerät der DHBW Mannheim mit der ID " . $resourceId . " in ihrem Besitz. Wir mussten leider feststellen, dass die Rückgabefrist überschritten wurde. 
+Wir möchten Sie daher bitten, die ausgeliehene Ressource schnellstmöglich an die verantwortliche Person zurückzugeben. 
 
 Dies ist eine automatisch generierte Mail. Antworten auf diese Mail werden daher unbeantwortet bleiben.
 
-Mit freundlichm Gruß, 
+Mit freundlichem Gruß, 
 das IT Team der DHBW Mannheim";
 
                     mail_to($studentmailaddress, $studentName, 'Überfälliges Device', $mailText);
@@ -57,12 +57,12 @@ das IT Team der DHBW Mannheim";
                         $responsibleMail = $res->dudesmail;
                         $responsibleName = $res->dudesname;
                         $mailText = "Sehr geehrter ". $responsibleName . ",
-Das Gerät mit der Geräte ID " . $resourceId . ", welches vom Studenten " . $studentName . " mit der Matrikelnummer " . $studentmatrikelnummer . " und der E-Mail-Adresse " . $studentmailaddress . " ausgeliehen wurde ist überfällig.
+Das Gerät mit der Geräte ID " . $resourceId . ", welches vom Studenten " . $studentName . " mit der Matrikelnummer " . $studentmatrikelnummer . " und der E-Mail-Adresse " . $studentmailaddress . " ausgeliehen wurde, ist überfällig.
 Eine Erinnerung mit der Bitte zur schnellstmöglichen Rückgabe wurde verschickt. Falls Sie in den Nächsten Tagen keine Reaktion des Studierenden wahrnehmen, leiten Sie weitere Schritte gegen den Studierenden ein.
 
 Dies ist eine automatisch generierte Mail. Antworten auf diese Mail werden daher unbeantwortet bleiben.
 
-Mit freundlichm Gruß, 
+Mit freundlichem Gruß, 
 das IT Team der DHBW Mannheim";
 
                         mail_to($responsibleMail, $responsibleName, 'Überfälliges Device', $mailText);
