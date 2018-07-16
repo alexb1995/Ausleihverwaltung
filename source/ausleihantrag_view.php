@@ -102,7 +102,7 @@ if ($mform->is_cancelled()) {
     $value5 = $fromform->anmerkung;
     $value6 = $fromform->returnDate;
     $value7 = $fromform->deviceId;
-
+    $value8 = false;
 
     // Um Tabelle >>ausleihverwaltung_borrowed<< zu belegen
     $record1 = new \stdClass();
@@ -114,12 +114,13 @@ if ($mform->is_cancelled()) {
     $record1->borrowreason = $value5;
     $record1->duedate = $value6;
     $record1->resourceid = $value7;
+    $record1->returned = $value8;
 
     $tomorrow = new DateTime("1 day", core_date::get_server_timezone_object());
     $tomorrowint = $tomorrow->getTimestamp();
 
     $record1->borrowdate = $tomorrowint;
-            
+
     $record1->accepted = true;
 
     $recordid = $DB->insert_record('ausleihverwaltung_borrowed', $record1, $returnid=true, $bulk=false);
