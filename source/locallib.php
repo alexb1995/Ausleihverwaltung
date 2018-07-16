@@ -281,16 +281,16 @@ function mail_to($email, $name, $subject, $message) {
     $from->email     = 'swim15.noreply@gmail.com';
     $from->maildisplay = true;
     $from->mailformat = 1; // 0 (zero) text-only emails, 1 (one) for HTML emails.
-	
+
 	$emailsubject = $subject;
 	$emailmessage = $message;
-	
+
 	$user = $DB->get_record('user', ['email' => $email]);
 
 	if (!isset($user) or empty($user['email'])) {
 		$user = generate_dummy_user($email, $name);
 	}
-	
+
 	$success = email_to_user($user, $from, $emailsubject, $emailmessage);
 
 	return $success;
@@ -359,7 +359,7 @@ function generate_pdf($replacements, $id) {
 	$html = str_replace(array_keys($replacements), $replacements, $html);
 
 	$leihschein->AddPage();
-	
+
 	$leihschein->SetCreator('sWIm15');
 	$leihschein->SetAuthor('DHBW Mannheim');
 	$leihschein->SetTitle('Digitaler Leihschein');
@@ -372,3 +372,35 @@ function generate_pdf($replacements, $id) {
 	error_reporting(E_ALL);
 	$leihschein->Output('leihschein.pdf', 'D');
 }
+function mail_confirm_ausleihantrag($iEmail,$iName,$iAusleihantrag,$iUserrolle){
+	//Erwartet wird Email & Namen des Ausleihenden, die Userrolle(student v teacher v editingteacher)und die Nachricht(Ausleihantrag) als String
+
+	global $DB;
+
+	//Deklarierung der Genehmiger
+	$EmailLaboringenieur = 'Laboringenieur@dhbw-mannheim.de';
+	$EmailStudiengangsleitung ='Studiengangsleitung@dhbw-mannheim.de';
+
+		if (strpos($iUserrolle, 'student') == true){
+				//Benachrichtigung Studentische Ausleihe
+				mail_to($iEmail,$iName,'Eingang Ihres Ausleihantrags',$iAusleihantrag);
+				mail_to($EmailStudiengangsleitung,'Studiengangsleitung','Eingang Ausleihantrag Student',$iAusleihantrag);
+				mail_to($EmailLaboringenieur,'Laboringenieur','Eingang Ausleihantrag Student',$iAusleihantrag);
+		}
+		if(strpos($iUserrolle, 'teacher') == true){
+				//Benachrichtigung Dozenten Ausleihe
+				mail_to($iEmail,$iName,'Eingang Ihres Ausleihantrags',$iAusleihantrag);
+				mail_to($EmailLaboringenieur,'Laboringenieur','Eingang Ausleihantrag Dozenten',$iAusleihantrag);
+		}
+		else{
+			//Benachrichtigung externe Asusleihe
+			mail_to($iEmail,$iName,'Eingang Ihres Ausleihantrags',$iAusleihantrag);
+			mail_to($EmailLaboringenieur,'Laboringenieur','Eingang eines externen Ausleihantrags',$iAusleihantrag);
+		}
+
+	//Persistente Speicherung der Emailadresse und der Nachricht/Ausleihantrags in der DB
+	$record = new stdClass();
+	$record->email        = $iEmail;
+	$record->message = $iAusleihantrag;
+	$lastinsertid = $DB->insert_record('ausleihverwaltung_emailantrag', $record, false);
+	}
