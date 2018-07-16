@@ -107,6 +107,7 @@ $type = $_GET['type'];
 $ressourcename = $_GET['ressourcename'];
 $category = $_GET['category'];
 $tags = $_GET['tags'];
+echo $ressourcename;
 
 if ($type == 1){
     require_once(dirname(__FILE__).'/forms/newresourceformst.php');
@@ -146,7 +147,10 @@ if ($mform->is_cancelled()) {
         $beschreibung = $fromform->besch;
         $kommentar = $fromform->kom;
         $anzahl = $fromform->anz;
-        
+
+        $ressourcename = $_GET['ressourcename'];
+        echo $ressourcename;
+
         $stueck = new stdClass();
         $stueck->name = $_GET['ressourcename'];
         $stueck->description = $beschreibung;
