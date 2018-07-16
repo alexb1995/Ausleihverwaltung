@@ -132,21 +132,39 @@ if ($mform->is_cancelled()) {
         break;
     };
 
-    switch ($fromform['Ressourcentyp']) {
+    switch ($fromform->resourcetype) {
         case 0:
-            $type = 0;
+            $resourcetype = 0;
         break;
         case 1:
-            $type = 1;
+            $resourcetype = 1;
         break;
     };
-    error_log($type);
 
-    $tagsarray = $fromform['tags'];
-    foreach ($tagsarray as $tag)
-        error_log($tag);
-
-    //Button Funktionalität hinzugefügt
+    error_log($resourcetype);
+    $tags = '';
+    if($fromform->iPhone == 1){
+        $tags = $tags + 'iPhone';
+    }
+    if($fromform->Convertible == 1){
+        $tags = $tags + 'Convertible';
+    }
+    if($fromform->Mac == 1){
+        $tags = $tags + 'Mac';
+    }
+    if($fromform->Huawai == 1){
+        $tags = $tags + 'Huawai';
+    }
+    if($fromform->Samsung == 1){
+        $tags = $tags + 'Samsung';
+    }
+    if($fromform->Nexus == 1){
+        $tags = $tags + 'Nexus';
+    }
+    if($fromform->LTE == 1){
+        $tags = $tags + 'LTE';
+    }
+    
     redirect(new moodle_url('../apeinsdrei/newressource.php', array('id' => $cm->id, 'ressourcename' => $ressourcename, 'category' => $category, 'tags' => $tags, 'type' => $type)));
  
  } else {
