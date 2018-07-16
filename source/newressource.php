@@ -155,7 +155,7 @@ if ($mform->is_cancelled()) {
         $stueck->comment = $kommentar;
         $stueck->amount = $anzahl;
 
-        $success = $DB->insert_record('ausleihverwaltung_resources', $stueck, $stueck, false, $bulk=false);
+        $success = $DB->insert_record('ausleihverwaltung_resources', $stueck, false, $bulk=false);
         if ($success){
             ?> <script type="text/javascript">alert("Ressource angelegt!")</script><?php
         };
