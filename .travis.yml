@@ -37,6 +37,8 @@ sudo: false
 
 notifications:
   email: false
-  #slack:
-   # rooms:
-    #  - wwi15scb:GL6zGn42jLxtsCd5TAm4M2x6#mdl_ops
+  slack:
+    on_success: change
+    on_failure: always
+    rooms:
+     - wwi15scb:GL6zGn42jLxtsCd5TAm4M2x6#mdl_ops
