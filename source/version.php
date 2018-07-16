@@ -28,9 +28,9 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'mod_apeinsdrei';
-$plugin->version = 2018071611;
+$plugin->version = 2018071612;
 $plugin->release = '2018071600';
-$plugin->requires = 2014051211;
+$plugin->requires = 2014051212;
 $plugin->maturity = MATURITY_ALPHA;
 $plugin->cron = 0;
 $plugin->dependencies = array();

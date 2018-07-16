@@ -33,10 +33,10 @@ require_once(dirname(__FILE__).'/locallib.php');
 
 $id = optional_param('id', 0, PARAM_INT); // Course_module ID, or
 $n  = optional_param('n', 0, PARAM_INT);  // ... apeinsdrei instance ID - it should be named as the first character of the module.
-$ressourcename = optional_param('ressourcename', PARAM_TEXT);
-$category = optional_param('category', PARAM_TEXT);
-$tags = optional_param('tags', PARAM_TEXT);
-$type = optional_param('type', PARAM_INT);
+$ressourcename = optional_param('ressourcename','', PARAM_TEXT);
+$category = optional_param('category','', PARAM_TEXT);
+$tags = optional_param('tags','', PARAM_TEXT);
+$type = optional_param('type',0, PARAM_INT);
 
 
 if ($id) {
