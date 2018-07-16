@@ -134,34 +134,33 @@ if ($mform->is_cancelled()) {
 
     switch ($fromform->resourcetype) {
         case 0:
-            $resourcetype = 0;
+            $type = 0;
         break;
         case 1:
-            $resourcetype = 1;
+            $type = 1;
         break;
     };
 
-    error_log($resourcetype);
     $tags = '';
-    if($fromform->iPhone == 1){
+    if(!isset($fromform->iPhone) & $fromform->iPhone == 1){
         $tags = $tags + 'iPhone';
     }
-    if($fromform->Convertible == 1){
+    if(!isset($fromform->Convertible) & $fromform->Convertible == 1){
         $tags = $tags + 'Convertible';
     }
-    if($fromform->Mac == 1){
+    if(!isset($fromform->Mac) & $fromform->Mac == 1){
         $tags = $tags + 'Mac';
     }
-    if($fromform->Huawai == 1){
+    if(!isset($fromform->Huawai) & $fromform->Huawai == 1){
         $tags = $tags + 'Huawai';
     }
-    if($fromform->Samsung == 1){
+    if(!isset($fromform->Samsung) & $fromform->Samsung == 1){
         $tags = $tags + 'Samsung';
     }
-    if($fromform->Nexus == 1){
+    if(!isset($fromform->Nexus) & $fromform->Nexus == 1){
         $tags = $tags + 'Nexus';
     }
-    if($fromform->LTE == 1){
+    if(!isset($fromform->LTE) & $fromform->LTE == 1){
         $tags = $tags + 'LTE';
     }
     
