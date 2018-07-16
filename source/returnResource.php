@@ -92,14 +92,12 @@ if(strpos($strUrl, 'resourceid=')){
     if ($fromform = $mform->get_data()) {
         $fm_resourceid = $fromform->resourceid;
 
-        switch ($fromform->available) {
+        switch($fromform->available) {
             case 0:
-                // Verfügbar
-                $fm_status = 1;
-            break;
-            case 1:
-                // Nicht verfügbar
                 $fm_status = 2;
+            break;
+            case 1: 
+                $fm_status = 1;
             break;
         };
 
@@ -132,18 +130,15 @@ if(strpos($strUrl, 'resourceid=')){
     if ($fromform = $mform->get_data()) {
         $fm_resourceid = $fromform->resourceid;
 
-        $resource = $DB->get_record('ausleihverwaltung_resources', array('id'=>$fm_resourceid));
-
-        switch ($fromform->available) {
+        switch($fromform->available) {
             case 0:
-                // Verfügbar
-                $fm_status = 1;
-            break;
-            case 1:
-                // Nicht verfügbar
                 $fm_status = 2;
             break;
+            case 1: 
+                $fm_status = 1;
+            break;
         };
+        $resource = $DB->get_record('ausleihverwaltung_resources', array('id'=>$fm_resourceid));
 
         $record = new stdClass();
         $record->id                 = $fm_resourceid;
@@ -171,12 +166,11 @@ if(strpos($strUrl, 'resourceid=')){
         $record->borrowdate             = $ausleihantrag->borrowdate;
         $record->studentname            = $ausleihantrag->studentname;
         $record->borrowreason           = $ausleihantrag->borrowreason;
-        $record->comment                = $ausleihantrag->borrowreason;
+        $record->comment                = $ausleihantrag->comment;
         $record->accepted               = $ausleihantrag->accepted;
         $record->returned               = true;
 
-        $DB->update_record('ausleihverwaltung_borrowed', array('id'=>$ausleihantrag->id));
-
+        $DB->update_record('ausleihverwaltung_borrowed', $record, $bulk=false);
         echo 'Die Rückgabe der Ressource wurde verbucht.';
         echo nl2br("\n");
     } else {
