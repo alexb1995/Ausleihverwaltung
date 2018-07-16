@@ -140,17 +140,11 @@ if ($mform->is_cancelled()) {
             $type = 1;
         break;
     };
-    //$category = $fromform->category;
+    error_log($type);
 
-    //$tags = $fromform->tags;
-    //$type = $fromform->Ressourcentyp;
-
-    /* Hardgecodete Testparameter zur Übergabe
-    $ressourcename = 'Samsung Galaxy S9';
-    $category = 'Handy';
-    */
-    $tags = 'iPhone';
-    //$type = 1;
+    $tagsarray = $fromform->tags;
+    foreach ($tagsarray as $tag)
+        error_log($tag);
 
     //Button Funktionalität hinzugefügt
     redirect(new moodle_url('../apeinsdrei/newressource.php', array('id' => $cm->id, 'ressourcename' => $ressourcename, 'category' => $category, 'tags' => $tags, 'type' => $type)));
