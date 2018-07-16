@@ -107,11 +107,10 @@ $type = $_GET['type'];
 $ressourcename = $_GET['ressourcename'];
 $category = $_GET['category'];
 $tags = $_GET['tags'];
-echo $ressourcename;
 
 if ($type == 1){
     require_once(dirname(__FILE__).'/forms/newresourceformst.php');
-    $mform = new newresourcesthtml_form(null);
+    $mform = new newresourcesthtml_form(null, array('ressourcename'=>$ressourcename,'category'=>$category,'tags'=>$tags,'type'=>$type));
 }else{
     require_once(dirname(__FILE__).'/forms/newresourceformsch.php');
     $mform = new newresourceschhtml_form(null);
@@ -128,12 +127,12 @@ if ($mform->is_cancelled()) {
         $kommentar = $fromform->kom;
 
         $stueck = new stdClass();
-        $stueck->name = $_GET['ressourcename'];
+        $stueck->name = $fromfrom->ressourcename;
         $stueck->description = $beschreibung;
-        $stueck->type = $_GET['type'];
+        $stueck->type = $fromfrom->type;
         $stueck->status = 1;
-        $stueck->maincategory = $_GET['category'];
-        $stueck->subcategory = $_GET['tags'];
+        $stueck->maincategory = $fromfrom->category;
+        $stueck->subcategory = $fromfrom->tags;
         $stueck->comment = $kommentar;
         $stueck->serialnumber = $seriennummer;
         $stueck->inventorynumber = $inventarnummer;
@@ -148,16 +147,13 @@ if ($mform->is_cancelled()) {
         $kommentar = $fromform->kom;
         $anzahl = $fromform->anz;
 
-        $ressourcename = $_GET['ressourcename'];
-        echo $ressourcename;
-
         $stueck = new stdClass();
-        $stueck->name = $_GET['ressourcename'];
+        $stueck->name = $fromfrom->ressourcename;
         $stueck->description = $beschreibung;
-        $stueck->type = $_GET['type'];
+        $stueck->type = $fromfrom->type;
         $stueck->status = 1;
-        $stueck->maincategory = $_GET['category'];
-        $stueck->subcategory = $_GET['tags'];
+        $stueck->maincategory = $fromfrom->category;
+        $stueck->subcategory = $fromfrom->tags;
         $stueck->comment = $kommentar;
         $stueck->amount = $anzahl;
         $success = $DB->insert_record('ausleihverwaltung_resources', $stueck, false, $bulk=false);
