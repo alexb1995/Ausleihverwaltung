@@ -77,7 +77,8 @@ $strUrl = $url.'';
 require_once(dirname(__FILE__).'/forms/returnResource_form.php');
 
 if(strpos($strUrl, 'resourceid=')){
-    // First run
+    // Erster Durchlauf der Seite
+    // Auf Basis der ResourceID wird die Ressource aus der DB geladen und Name und bisher vermerkter Schaden ausgelesen
     $resourceid = $_GET['resourceid'];
     $resource = $DB->get_record('ausleihverwaltung_resources', array('id'=>$resourceid));
     $resourcename = $resource->name;
@@ -85,13 +86,15 @@ if(strpos($strUrl, 'resourceid=')){
 
     echo 'Möchten Sie die Rückgabe für die Ressource mit dem Namen ' . $resourcename . ' und der Ressourcen-ID ' . $resourceid . ' verbuchen?';
 
-    // Initialize form and preallocate values
+   	// Initialisierung und Vorbelegung des Formulars mit der RessourceID, dem Namen und dem aktuell vermerkten Schaden (ggf. leer)
     require_once(dirname(__FILE__).'/forms/returnResource_form.php');
     $mform = new returnResource_form (null, array('resourceid'=>$resourceid, 'name'=>$resourcename, 'defect'=>$resourcedefect, 'status'=>''));
 
+    // Verarbeitung der Formulardaten
     if ($fromform = $mform->get_data()) {
         $fm_resourceid = $fromform->resourceid;
 
+        // Steht die Ressource nach Rückgabe nicht wieder zur Ausleihe zur Verfügung (bpsw. defekt; case 0), wird sie in der Ressourcenübersicht mit dem Status 2 vermerkt, andernfalls mit dem Status 1.
         switch($fromform->available) {
             case 0:
                 $fm_status = 2;
@@ -101,6 +104,7 @@ if(strpos($strUrl, 'resourceid=')){
             break;
         };
 
+    	// Aufbau eines neuen Datenobjektes mit ausgelesener ID, Schadensvermerk und Status, restliche Werte werden aus DB-Objekt übernommen
         $record = new stdClass();
         $record->id                 = $fm_resourceid;
         $record->name               = $resource->name;
@@ -124,12 +128,16 @@ if(strpos($strUrl, 'resourceid=')){
     echo html_writer::link(new moodle_url('../ausleihverwaltung/saveDefect.php', array('id'=>$cm->id, 'resourceid'=>$resourceid)), 'Zurück: Schaden vermerken', array('class'=>'btn btn-secondary'));
     echo html_writer::link(new moodle_url('/course/view.php', array('id'=>2)), 'Weiter: Home', array('class'=>'btn btn-secondary'));
 } else {
-    // Second run
+    // Zweiter Durchlauf der Seite
     require_once(dirname(__FILE__).'/forms/returnResource_form.php');
     $mform = new returnResource_form ();
-    if ($fromform = $mform->get_data()) {
-        $fm_resourceid = $fromform->resourceid;
 
+	// Verabeitung der Daten
+    if ($fromform = $mform->get_data()) {
+    	// Auslesen der ID (als Primary Key) aus dem Form
+
+        $fm_resourceid = $fromform->resourceid;
+        // Steht die Ressource nach Rückgabe nicht wieder zur Ausleihe zur Verfügung (bpsw. defekt; case 0), wird sie in der Ressourcenübersicht mit dem Status 2 vermerkt, andernfalls mit dem Status 1.
         switch($fromform->available) {
             case 0:
                 $fm_status = 2;
@@ -138,8 +146,11 @@ if(strpos($strUrl, 'resourceid=')){
                 $fm_status = 1;
             break;
         };
+
+    	// Auslesen des DB-Objektes mit der ausgelesenen ID als Primary Key
         $resource = $DB->get_record('ausleihverwaltung_resources', array('id'=>$fm_resourceid));
 
+    	// Aufbau eines neuen Datenobjektes mit ausgelesener ID, Schadensvermerk und Status, restliche Werte werden aus DB-Objekt übernommen
         $record = new stdClass();
         $record->id                 = $fm_resourceid;
         $record->name               = $resource->name;
@@ -154,9 +165,13 @@ if(strpos($strUrl, 'resourceid=')){
         $record->subcategory        = $resource->subcategory;
         $record->defect             = $resource->defect;
 
+    	// Update des DB-Objektes mit der aktuellen ID; wird ersetzt durch oben zusammengebautes DB-Objekt
         $DB->update_record('ausleihverwaltung_resources', $record, $bulk=false);
 
+        // Auslesen des DB-Objektes des Ausleihvorgangs auf Basis der ResourceID
         $ausleihantrag = $DB->get_record('ausleihverwaltung_borrowed', array('resourceid'=>$fm_resourceid));
+
+    	// Aufbau eines neuen Datenobjektes mit ausgelesener ID, Schadensvermerk und Status, restliche Werte werden aus DB-Objekt übernommen
         $record = new stdClass();
         $record->id                     = $ausleihantrag->id;
         $record->duedate                = $ausleihantrag->duedate;
@@ -170,7 +185,9 @@ if(strpos($strUrl, 'resourceid=')){
         $record->accepted               = $ausleihantrag->accepted;
         $record->returned               = true;
 
+    	// Update des DB-Objektes mit der aktuellen ID; wird ersetzt durch oben zusammengebautes DB-Objekt
         $DB->update_record('ausleihverwaltung_borrowed', $record, $bulk=false);
+       	// Ausgabe Erfolgsmeldung
         echo 'Die Rückgabe der Ressource wurde verbucht.';
         echo nl2br("\n");
     } else {

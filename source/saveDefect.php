@@ -77,26 +77,31 @@ $strUrl = $url.'';
 require_once(dirname(__FILE__).'/forms/saveDefect_form.php');
 
 if(strpos($strUrl, 'resourceid=')){
-	// First run
+	// Erster Durchlauf der Seite
+	// Auf Basis der RessourceID wird die Ressource aus der DB geladen und Name und bisher vermerkter Schaden ausgelesen
     $resourceid = $_GET['resourceid'];
     $resource = $DB->get_record('ausleihverwaltung_resources', array('id'=>$resourceid));
     $resourcename = $resource->name;
     $resourcedefect = $resource->defect;
 
+    // Fallunterscheidung: Dem User wird ein jeweils anderer Text angezeigt, sollte bereits ein Schadensvermerk vorliegen bzw. liegt keiner vor
     if ($resourcedefect == '') {
     	echo 'Bitte legen Sie einen Schadensvermerk für die Ressource mit dem Namen ' . $resourcename . ' und der Ressourcen-ID ' . $resourceid . ' an:';
     } else {
     	echo 'Es ist bereits ein Schadensvermerk für die Ressource mit dem Namen ' . $resourcename . ' und der Ressourcen-ID ' . $resourceid . ' vorhanden. Sie können ihn nun bearbeiten:';
     };
    
-    // Initialize form and preallocate values
+   	// Initialisierung und Vorbelegung des Formulars mit der RessourceID, dem Namen und dem aktuell vermerkten Schaden (ggf. leer)
     require_once(dirname(__FILE__).'/forms/saveDefect_form.php');
     $mform = new saveDefect_form (null, array('resourceid'=>$resourceid, 'name'=>$resourcename, 'defect'=>$resourcedefect));
 
+    // Verarbeitung der Formulardaten
     if ($fromform = $mform->get_data()) {
+    	// Auslesen der ID (als Primary Key) und des neu gesetzen Schadensvermerks aus dem Form
     	$fm_resourceid = $fromform->resourceid;
     	$fm_resourcedefect = $fromform->defect;
 
+    	// Aufbau eines neuen Datenobjektes mit ausgelesener ID und Schadensvermerk, restliche Werte werden aus DB-Objekt übernommen
     	$record = new stdClass();
     	$record->id 				= $fm_resourceid;
     	$record->name 				= $resource->name;
@@ -110,7 +115,6 @@ if(strpos($strUrl, 'resourceid=')){
         $record->maincategory 		= $resource->maincategory;
         $record->subcategory 		= $resource->subcategory;
     	$record->defect 			= $fm_resourcedefect;
-
     } else {
     	$formdata = array('id'=>$id, 'resourceid'=>$resourceid);
         $mform->set_data($formdata);
@@ -121,15 +125,20 @@ if(strpos($strUrl, 'resourceid=')){
     echo html_writer::link(new moodle_url('../ausleihverwaltung/checkdeadline_view.php', array('id'=>$cm->id)), 'Zurück: Ausleihübersicht', array('class'=>'btn btn-secondary'));
     echo html_writer::link(new moodle_url('../ausleihverwaltung/returnResource.php', array('id'=>$cm->id, 'resourceid'=>$resourceid)), 'Weiter: Rückgabe verbuchen', array('class'=>'btn btn-secondary'));
 } else {
-	// Second run
+	// Zweiter Durchlauf der Seite
     require_once(dirname(__FILE__).'/forms/saveDefect_form.php');
     $mform = new saveDefect_form ();
+
+    // Verabeitung der Daten
     if ($fromform = $mform->get_data()) {
+    	// Auslesen der ID (als Primary Key) und des neu gesetzen Schadensvermerks aus dem Form
     	$fm_resourceid = $fromform->resourceid;
     	$fm_resourcedefect = $fromform->defect;
 
+    	// Auslesen des DB-Objektes mit der ausgelesenen ID als Primary Key
     	$resource = $DB->get_record('ausleihverwaltung_resources', array('id'=>$fm_resourceid));
 
+    	// Aufbau eines neuen Datenobjektes mit ausgelesener ID und Schadensvermerk, restliche Werte werden aus DB-Objekt übernommen
     	$record = new stdClass();
     	$record->id 				= $fm_resourceid;
     	$record->name 				= $resource->name;
@@ -144,7 +153,9 @@ if(strpos($strUrl, 'resourceid=')){
         $record->subcategory 		= $resource->subcategory;
     	$record->defect 			= $fm_resourcedefect;
 
+    	// Update des DB-Objektes mit der aktuellen ID; wird ersetzt durch oben zusammengebautes DB-Objekt
     	$DB->update_record('ausleihverwaltung_resources', $record, $bulk=false);
+    	// Ausgabe Erfolgsmeldung
     	echo 'Der Schadensvermerk "' . $fm_resourcedefect . '" zur Ressource ' . $resource->name . ' mit der ID ' . $fm_resourceid . ' wurde erfolgreich gespeichert.';
         echo nl2br("\n");
     } else {

@@ -23,15 +23,17 @@ class returnResource_form extends moodleform {
         /************* Status **************/
         $mform->addElement('select', 'available', 'Ressource wieder zur Ausleihe verfügbar', array('Ja', 'Nein'));
 
+        /********** versteckt: ID ***********/
         $mform->addElement('hidden', 'id');
         $mform->setType('id', PARAM_INT);
+        /****** versteckt: ResourceID *******/
         $mform->addElement('hidden', 'resourceid');
         $mform->setType('resourceid', PARAM_INT);
 
+        /******** Button: Speichern ********/
         $mform->addElement('submit', 'btnSubmit', 'Rückgabe verbuchen');
     }
 
-    //Custom validation should be added here
     function validation($data, $files) {
         return array();
     }

@@ -8,7 +8,7 @@ class saveDefect_form extends moodleform {
 
         $mform = $this->_form;   
 
-        /**************** ID ***************/
+        /************ ResourceID ***********/
         $mform->addElement('static', 'text', 'ID', $this->_customdata['resourceid']);
         $mform->setType('resourceid', PARAM_INT);
 
@@ -21,15 +21,17 @@ class saveDefect_form extends moodleform {
         $mform->setType('defect', PARAM_NOTAGS);
         $mform->setDefault('defect', $this->_customdata['defect']);
 
+        /********** versteckt: ID ***********/
         $mform->addElement('hidden', 'id');
         $mform->setType('id', PARAM_INT);
+        /****** versteckt: ResourceID *******/
         $mform->addElement('hidden', 'resourceid');
         $mform->setType('resourceid', PARAM_INT);
 
+        /******** Button: Speichern ********/
         $mform->addElement('submit', 'btnSubmit', 'Speichern');
     }
 
-    //Custom validation should be added here
     function validation($data, $files) {
         return array();
     }
