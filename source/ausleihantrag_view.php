@@ -120,7 +120,6 @@ if ($mform->is_cancelled()) {
     $tomorrowint = $tomorrow->getTimestamp();
 
     $record1->borrowdate = $tomorrowint;
-
     $record1->accepted = true;
 
     $recordid = $DB->insert_record('ausleihverwaltung_borrowed', $record1, $returnid=true, $bulk=false);
