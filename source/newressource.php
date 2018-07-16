@@ -136,7 +136,11 @@ if ($mform->is_cancelled()) {
         $stueck->serialnumber = $seriennummer;
         $stueck->inventorynumber = $inventarnummer;
 
-        $DB->insert_record('ausleihverwaltung_resources', $stueck);
+        $success = $DB->insert_record('ausleihverwaltung_resources', $stueck);
+        if ($success){
+            ?> <script type="text/javascript">alert("Ressource angelegt!")</script><?php
+        };
+        echo $OUTPUT->single_button(new moodle_url('../apeinsdrei/view.php', array('id' => $cm->id)), 'Home');
     }else{
         $beschreibung = $fromform->besch;
         $kommentar = $fromform->kom;
@@ -150,12 +154,16 @@ if ($mform->is_cancelled()) {
         $stueck->subcategory = $tags;
         $stueck->comment = $kommentar;
         $stueck->amount = $anzahl;
-        
-        $DB->insert_record('ausleihverwaltung_resources', $stueck);
+
+        $success = $DB->insert_record('ausleihverwaltung_resources', $stueck);
+        if ($success){
+            ?> <script type="text/javascript">alert("Ressource angelegt!")</script><?php
+        };
+        echo $OUTPUT->single_button(new moodle_url('../apeinsdrei/view.php', array('id' => $cm->id)), 'Home');
     }
 
     //Button Funktionalität hinzugefügt
-    redirect(new moodle_url('../apeinsdrei/view.php', array('id' => $cm->id)));
+    //redirect(new moodle_url('../apeinsdrei/view.php', array('id' => $cm->id)));
  
  } else {
   // this branch is executed if the form is submitted but the data doesn't validate and the form should be redisplayed
