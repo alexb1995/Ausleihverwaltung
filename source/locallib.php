@@ -269,14 +269,18 @@ require_once($CFG->dirroot.'/lib/moodlelib.php');
 require_once($CFG->dirroot.'/config.php');
 
 function mail_to($email, $name, $subject, $message) {
-
 	global $DB;
 
 	$from = new stdClass();
-	$from->firstname = 'sWIm15';
-	$from->lastname  = '';
-	$from->email     = 'swim15.noreply@gmail.com';
-	$from->maildisplay = 1;
+    $from->firstname = 'sWIm15';
+    $from->lastname  = '';
+    $from->firstnamephonetic = '';
+    $from->lastnamephonetic = '';
+    $from->middlename = '';
+    $from->alternatename = '';
+    $from->email     = 'swim15.noreply@gmail.com';
+    $from->maildisplay = true;
+    $from->mailformat = 1; // 0 (zero) text-only emails, 1 (one) for HTML emails.
 	
 	$emailsubject = $subject;
 	$emailmessage = $message;
@@ -312,3 +316,59 @@ function generate_dummy_user($email, $name = '', $id = -99) {
 	return $emailuser;
 	}
 
+require_once($CFG->dirroot.'/lib/tcpdf/tcpdf.php');
+
+function prep_leihschein($borrowedid) {
+
+	global $DB;
+
+	$borrowedMeta = $DB->get_record('ausleihverwaltung_borrowed', array('id'=> $borrowedid));
+	$borrowedResource = $DB->get_record('ausleihverwaltung_resources', array('id'=>$borrowedMeta->resourceid));
+
+	$today = date("d-m-y");
+
+	$duedateepoch = $borrowedMeta->duedate;
+	$duedate = new DateTime("@$duedateepoch");
+	$duedate = $duedate->format('d-m-Y');
+
+	//Ressourcentabelle erstellen:
+	$table = "<table><tr><th>ID</th><th>Menge</th><th>Artikel</th><th>Anmerkungen</th></tr>";
+	$table .= "<tr><td>" . $borrowedResource->id. "</td><td><p>1</p></td><td>" . $borrowedResource->name. "</td><td>" . $borrowedResource->defect. "</td></tr></table>";
+
+
+    $ausleihantrag = array(
+    '%Name' => $borrowedMeta->studentname,
+	'%Matrikel' => $borrowedMeta->studentmatrikelnummer,
+	'%Email' => $borrowedMeta->studentmailaddress,
+	'%Tabelle' => $table,
+    '%Rückgabe' => $duedate,
+    '%Zweck' => $borrowedMeta->borrowreason,
+    '%Datum' => $today,
+    '%Bemerkung' => $borrowedMeta->comment
+	);
+
+    generate_pdf($ausleihantrag, $borrowedid);
+    }
+
+function generate_pdf($replacements, $id) {
+	ob_start();
+	$leihschein = new TCPDF('P', 'mm', 'A4', true, 'UTF-8', false, false);
+	$leihschein->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, 'DHBW Mannheim', 'Digitaler Leihschein');
+
+	$html = file_get_contents("leihschein.html");
+	$html = str_replace(array_keys($replacements), $replacements, $html);
+
+	$leihschein->AddPage();
+	
+	$leihschein->SetCreator('sWIm15');
+	$leihschein->SetAuthor('DHBW Mannheim');
+	$leihschein->SetTitle('Digitaler Leihschein');
+	$leihschein->SetSubject('');
+	$leihschein->writeHTML($html, true, 0, true, true);
+	$leihschein->setPrintHeader(false);
+	$leihschein->setPrintFooter(false);
+
+	ob_clean();
+	error_reporting(E_ALL);
+	$leihschein->Output('leihschein.pdf', 'D');
+}

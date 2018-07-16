@@ -28,8 +28,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'mod_ausleihverwaltung';
-$plugin->version = 2018071106;
-$plugin->release = 'v1.4';
+$plugin->version = 2018071508;
+$plugin->release = 'v1';
 $plugin->requires = 2014051200;
 $plugin->maturity = MATURITY_ALPHA;
 $plugin->cron = 0;

@@ -33,16 +33,16 @@ $id = optional_param('id', 0, PARAM_INT); // Course_module ID, or
 $n  = optional_param('n', 0, PARAM_INT);  // ... ausleihverwaltung instance ID - it should be named as the first character of the module.
 
 if ($id) {
-    $cm           = get_coursemodule_from_id('ausleihverwaltung', $id, 0, false, MUST_EXIST);
-    $course       = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
+    $cm         = get_coursemodule_from_id('ausleihverwaltung', $id, 0, false, MUST_EXIST);
+    $course     = $DB->get_record('course', array('id' => $cm->course), '*', MUST_EXIST);
     $ausleihverwaltung  = $DB->get_record('ausleihverwaltung', array('id' => $cm->instance), '*', MUST_EXIST);
 } else if ($n) {
     $ausleihverwaltung  = $DB->get_record('ausleihverwaltung', array('id' => $n), '*', MUST_EXIST);
-    $course       = $DB->get_record('course', array('id' => $ausleihverwaltung->course), '*', MUST_EXIST);
-    $cm           = get_coursemodule_from_instance('ausleihverwaltung', $ausleihverwaltung->id, $course->id, false, MUST_EXIST);
+    $course     = $DB->get_record('course', array('id' => $ausleihverwaltung->course), '*', MUST_EXIST);
+    $cm         = get_coursemodule_from_instance('ausleihverwaltung', $ausleihverwaltung->id, $course->id, false, MUST_EXIST);
 } else {
     error('You must specify a course_module ID or an instance ID');
-};
+}
 
 require_login($course, true, $cm);
 
@@ -79,12 +79,12 @@ require_once(dirname(__FILE__).'/forms/returnResource_form.php');
 if(strpos($strUrl, 'resourceid=')){
     // First run
     $resourceid = $_GET['resourceid'];
-    $resource = $DB->get_record('apeinsvier_resources', array('id'=>$resourceid));
+    $resource = $DB->get_record('ausleihverwaltung_resources', array('id'=>$resourceid));
     $resourcename = $resource->name;
     $resourcedefect = $resource->defect;
 
     echo 'Möchten Sie die Rückgabe für die Ressource mit dem Namen ' . $resourcename . ' und der Ressourcen-ID ' . $resourceid . ' verbuchen?';
-   
+
     // Initialize form and preallocate values
     require_once(dirname(__FILE__).'/forms/returnResource_form.php');
     $mform = new returnResource_form (null, array('resourceid'=>$resourceid, 'name'=>$resourcename, 'defect'=>$resourcedefect, 'status'=>''));
@@ -116,7 +116,6 @@ if(strpos($strUrl, 'resourceid=')){
         $record->maincategory       = $resource->maincategory;
         $record->subcategory        = $resource->subcategory;
         $record->defect             = $fm_resourcedefect;
-
     } else {
         $formdata = array('id'=>$id, 'resourceid'=>$resourceid);
         $mform->set_data($formdata);
@@ -133,7 +132,7 @@ if(strpos($strUrl, 'resourceid=')){
     if ($fromform = $mform->get_data()) {
         $fm_resourceid = $fromform->resourceid;
 
-        $resource = $DB->get_record('apeinsvier_resources', array('id'=>$fm_resourceid));
+        $resource = $DB->get_record('ausleihverwaltung_resources', array('id'=>$fm_resourceid));
 
         switch ($fromform->available) {
             case 0:
@@ -160,7 +159,24 @@ if(strpos($strUrl, 'resourceid=')){
         $record->subcategory        = $resource->subcategory;
         $record->defect             = $resource->defect;
 
-        $DB->update_record('apeinsvier_resources', $record, $bulk=false);
+        $DB->update_record('ausleihverwaltung_resources', $record, $bulk=false);
+
+        $ausleihantrag = $DB->get_record('ausleihverwaltung_borrowed', array('resourceid'=>$fm_resourceid));
+        $record = new stdClass();
+        $record->id                     = $ausleihantrag->id;
+        $record->duedate                = $ausleihantrag->duedate;
+        $record->resourceid             = $fm_resourceid;
+        $record->studentmatrikelnummer  = $ausleihantrag->studentmatrikelnummer;
+        $record->studentmailaddress     = $ausleihantrag->studentmailaddress;
+        $record->borrowdate             = $ausleihantrag->borrowdate;
+        $record->studentname            = $ausleihantrag->studentname;
+        $record->borrowreason           = $ausleihantrag->borrowreason;
+        $record->comment                = $ausleihantrag->borrowreason;
+        $record->accepted               = $ausleihantrag->accepted;
+        $record->returned               = true;
+
+        $DB->update_record('ausleihverwaltung_borrowed', array('id'=>$ausleihantrag->id));
+
         echo 'Die Rückgabe der Ressource wurde verbucht.';
         echo nl2br("\n");
     } else {
