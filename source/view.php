@@ -132,7 +132,7 @@ if ($mform->is_cancelled()) {
         break;
     };
 
-    switch ($fromform->Ressourcentyp) {
+    switch ($fromform['Ressourcentyp']) {
         case 0:
             $type = 0;
         break;
@@ -142,7 +142,7 @@ if ($mform->is_cancelled()) {
     };
     error_log($type);
 
-    $tagsarray = $fromform->tags;
+    $tagsarray = $fromform['tags'];
     foreach ($tagsarray as $tag)
         error_log($tag);
 
