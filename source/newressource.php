@@ -33,10 +33,10 @@ require_once(dirname(__FILE__).'/locallib.php');
 
 $id = optional_param('id', 0, PARAM_INT); // Course_module ID, or
 $n  = optional_param('n', 0, PARAM_INT);  // ... apeinsdrei instance ID - it should be named as the first character of the module.
-$ressourcename = required_param('ressourcename', PARAM_TEXT);
-$category = required_param('category', PARAM_TEXT);
-$tags = required_param('tags', PARAM_TEXT);
-$type = required_param('type', PARAM_INT);
+$ressourcename = optional_param('ressourcename', PARAM_TEXT);
+$category = optional_param('category', PARAM_TEXT);
+$tags = optional_param('tags', PARAM_TEXT);
+$type = optional_param('type', PARAM_INT);
 
 
 if ($id) {
@@ -115,6 +115,7 @@ if ($type == 1){
     require_once(dirname(__FILE__).'/forms/newresourceformsch.php');
     $mform = new newresourceschhtml_form(null);
 }
+$mform->display();
 
 if ($mform->is_cancelled()) {
     //Handle form cancel operation, if cancel button is present on form
@@ -166,16 +167,6 @@ if ($mform->is_cancelled()) {
     //redirect(new moodle_url('../apeinsdrei/view.php', array('id' => $cm->id)));
  
  } else {
-  // this branch is executed if the form is submitted but the data doesn't validate and the form should be redisplayed
-  // or on the first display of the form.
- 
-  // Set default data (if any)
-  // Required for module not to crash as a course id is always needed
-  $formdata = array('id' => $id);
-  $mform->set_data($formdata);
-  //displays the form
-  $mform->display();
- 
  }
 
 // Finish the page.
