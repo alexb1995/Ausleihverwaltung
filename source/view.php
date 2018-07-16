@@ -142,25 +142,25 @@ if ($mform->is_cancelled()) {
     };
 
     $tags = '';
-    if(!isset($fromform->iPhone) & $fromform->iPhone == 1){
+    if(isset($fromform->iPhone) & $fromform->iPhone == 1){
         $tags = $tags + 'iPhone';
     }
-    if(!isset($fromform->Convertible) & $fromform->Convertible == 1){
+    if(isset($fromform->Convertible) & $fromform->Convertible == 1){
         $tags = $tags + 'Convertible';
     }
-    if(!isset($fromform->Mac) & $fromform->Mac == 1){
+    if(isset($fromform->Mac) & $fromform->Mac == 1){
         $tags = $tags + 'Mac';
     }
-    if(!isset($fromform->Huawai) & $fromform->Huawai == 1){
+    if(isset($fromform->Huawai) & $fromform->Huawai == 1){
         $tags = $tags + 'Huawai';
     }
-    if(!isset($fromform->Samsung) & $fromform->Samsung == 1){
+    if(isset($fromform->Samsung) & $fromform->Samsung == 1){
         $tags = $tags + 'Samsung';
     }
-    if(!isset($fromform->Nexus) & $fromform->Nexus == 1){
+    if(isset($fromform->Nexus) & $fromform->Nexus == 1){
         $tags = $tags + 'Nexus';
     }
-    if(!isset($fromform->LTE) & $fromform->LTE == 1){
+    if(isset($fromform->LTE) & $fromform->LTE == 1){
         $tags = $tags + 'LTE';
     }
     
