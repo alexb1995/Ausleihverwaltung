@@ -149,8 +149,9 @@ function xmldb_ausleihverwaltung_upgrade($oldversion) {
         $table->add_field('studentname', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null);
         $table->add_field('borrowreason', XMLDB_TYPE_TEXT, null, null, null, null, null);
         $table->add_field('comment', XMLDB_TYPE_TEXT, null, null, null, null, null);
-        $table->add_field('accepted', XMLDB_TYPE_BINARY, null, null, XMLDB_NOTNULL, null, null);
+        $table->add_field('accepted', XMLDB_TYPE_INTEGER, null, null, XMLDB_NOTNULL, null, null);
         $table->add_field('returned', XMLDB_TYPE_BINARY, null, null, XMLDB_NOTNULL, null, null);
+        $table->add_field('abholort', XMLDB_TYPE_CHAR, '250', null, null, null, null);
 
         // Adding keys to table ausleihverwaltung_borrowed.
         $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
